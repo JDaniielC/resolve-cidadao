@@ -50,8 +50,6 @@ func _ready() -> void:
 	# Enable mouse interaction
 	get_tree().root.gui_embed_subwindows = true
 
-	print("[SettingsMenu] Ready - Press ESC to close")
-
 
 func _setup_animations() -> void:
 	# Reset panel to initial state

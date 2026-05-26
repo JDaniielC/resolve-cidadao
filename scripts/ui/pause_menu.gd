@@ -58,8 +58,6 @@ func _ready() -> void:
 	# Enable mouse interaction
 	get_tree().root.gui_embed_subwindows = true
 
-	print("[PauseMenu] Ready - Press ESC to resume")
-
 
 func _setup_animations() -> void:
 	# Reset panel to initial state
