@@ -8,6 +8,12 @@ class_name PauseMenu
 @export var scale_duration: float = 0.3
 @export var fade_out_duration: float = 0.2
 
+## Fade-out animation duration (used by _fade_out_and_execute helper)
+const FADE_OUT_DURATION: float = 0.5
+
+## Blur overlay alpha value
+@export var blur_alpha: float = 0.7
+
 ## Internal state
 var _panel: Panel
 var _color_rect: ColorRect
@@ -52,7 +58,7 @@ func _ready() -> void:
 	# Enable mouse interaction
 	get_tree().root.gui_embed_subwindows = true
 
-	push_log("PauseMenu ready - Press ESC to resume")
+	print("[PauseMenu] Ready - Press ESC to resume")
 
 
 func _setup_animations() -> void:
@@ -69,7 +75,7 @@ func _setup_animations() -> void:
 
 	tween.tween_property(_panel, "scale", Vector2(1.0, 1.0), scale_duration)
 	tween.tween_property(_panel, "modulate:a", 1.0, scale_duration)
-	tween.tween_property(_color_rect, "modulate:a", 0.7, scale_duration)
+	tween.tween_property(_color_rect, "modulate:a", blur_alpha, scale_duration)
 
 
 func _connect_buttons() -> void:
@@ -88,79 +94,38 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_resume_pressed() -> void:
-	_fade_out_and_resume()
+	_fade_out_and_execute(func(): MenuController.toggle_pause(); queue_free())
 
 
 func _on_settings_pressed() -> void:
 	# TODO: Open settings menu
-	push_log("Settings pressed - TODO")
+	print("[PauseMenu] Settings pressed - TODO")
 
 
 func _on_menu_pressed() -> void:
-	_fade_out_and_load_menu()
+	_fade_out_and_execute(func(): MenuController.load_scene("res://scenes/ui/menus/main_menu.tscn"))
 
 
 func _on_quit_pressed() -> void:
-	_fade_out_and_quit()
+	_fade_out_and_execute(func(): MenuController.quit_game())
 
 
-func _fade_out_and_resume() -> void:
+## Helper method to handle fade-out animation and execute callback
+func _fade_out_and_execute(callback: Callable) -> void:
 	if _animating:
 		return
 
 	_animating = true
 
-	# Fade out the UI
+	# Fade out the UI with parallel animations
 	var tween = create_tween()
+	tween.set_parallel(true)
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_QUAD)
 
-	tween.tween_property(_panel, "modulate:a", 0.0, fade_out_duration)
-	tween.tween_property(_color_rect, "modulate:a", 0.0, fade_out_duration)
+	tween.tween_property(_panel, "modulate:a", 0.0, FADE_OUT_DURATION)
+	tween.tween_property(_color_rect, "modulate:a", 0.0, FADE_OUT_DURATION)
 
-	# Resume game and remove menu
+	# Execute callback after animation finishes
 	await tween.finished
-	MenuController.toggle_pause()
-	queue_free()
-
-
-func _fade_out_and_load_menu() -> void:
-	if _animating:
-		return
-
-	_animating = true
-
-	# Fade out the UI
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_QUAD)
-
-	tween.tween_property(_panel, "modulate:a", 0.0, 0.5)
-	tween.tween_property(_color_rect, "modulate:a", 0.0, 0.5)
-
-	# Load main menu
-	await tween.finished
-	MenuController.load_scene("res://scenes/ui/menus/main_menu.tscn")
-
-
-func _fade_out_and_quit() -> void:
-	if _animating:
-		return
-
-	_animating = true
-
-	# Fade out the UI
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_QUAD)
-
-	tween.tween_property(_panel, "modulate:a", 0.0, 0.5)
-	tween.tween_property(_color_rect, "modulate:a", 0.0, 0.5)
-
-	# Quit game
-	await tween.finished
-	MenuController.quit_game()
-
-
-func push_log(message: String) -> void:
-	print("[PauseMenu] %s" % message)
+	callback.call()
