@@ -8,6 +8,14 @@ class_name MenuController
 signal menu_state_changed(paused: bool)
 signal settings_changed(setting_key: String, value: Variant)
 
+# Default settings constant
+const DEFAULT_SETTINGS: Dictionary = {
+	"sfx_volume": 1.0,
+	"music_volume": 1.0,
+	"brightness": 1.0,
+	"language": "pt"
+}
+
 # Settings storage
 var _settings: Dictionary = {}
 var _config: ConfigFile = ConfigFile.new()
@@ -27,19 +35,14 @@ func load_settings() -> void:
 
 	# Initialize default settings if file doesn't exist
 	if error != OK:
-		_settings = {
-			"sfx_volume": 1.0,
-			"music_volume": 1.0,
-			"brightness": 1.0,
-			"language": "pt"
-		}
+		_settings = DEFAULT_SETTINGS.duplicate()
 	else:
 		# Load from config file
 		_settings = {
-			"sfx_volume": _config.get_value("settings", "sfx_volume", 1.0),
-			"music_volume": _config.get_value("settings", "music_volume", 1.0),
-			"brightness": _config.get_value("settings", "brightness", 1.0),
-			"language": _config.get_value("settings", "language", "pt")
+			"sfx_volume": _config.get_value("settings", "sfx_volume", DEFAULT_SETTINGS["sfx_volume"]),
+			"music_volume": _config.get_value("settings", "music_volume", DEFAULT_SETTINGS["music_volume"]),
+			"brightness": _config.get_value("settings", "brightness", DEFAULT_SETTINGS["brightness"]),
+			"language": _config.get_value("settings", "language", DEFAULT_SETTINGS["language"])
 		}
 
 	push_log("MenuController: Loaded settings from %s" % _settings_path)
@@ -68,8 +71,12 @@ func is_paused() -> bool:
 
 ## Set pause state directly
 func set_paused(paused: bool) -> void:
-	if _is_paused != paused:
-		toggle_pause()
+	if _is_paused == paused:
+		return
+	_is_paused = paused
+	get_tree().paused = paused
+	menu_state_changed.emit(paused)
+	push_log("MenuController: Game %s" % ("paused" if _is_paused else "resumed"))
 
 ## Load a new scene (unpauses game if paused)
 func load_scene(scene_path: String) -> void:
@@ -95,12 +102,20 @@ func get_setting(key: String) -> Variant:
 
 ## Set a setting value by key
 func set_setting(key: String, value: Variant) -> void:
-	if _settings.has(key):
-		_settings[key] = value
-		settings_changed.emit(key, value)
-		push_log("MenuController: Setting '%s' updated to %s" % [key, value])
-	else:
+	if not _settings.has(key):
 		push_warning("MenuController: Setting key '%s' not found" % key)
+		return
+
+	# Validate and clamp numeric settings
+	if key in ["sfx_volume", "music_volume", "brightness"]:
+		if not value is float and not value is int:
+			push_warning("MenuController: Setting '%s' must be a number" % key)
+			return
+		value = float(clamp(float(value), 0.0, 1.0))
+
+	_settings[key] = value
+	settings_changed.emit(key, value)
+	push_log("MenuController: Setting '%s' updated to %s" % [key, value])
 
 ## Get all current settings
 func get_all_settings() -> Dictionary:
