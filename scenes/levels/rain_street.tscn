@@ -2,436 +2,514 @@
 
 [ext_resource type="Texture2D" uid="uid://ds5dnwpnvnpmq" path="res://assets/sprites/kenney/roads/grass.png" id="1_grass"]
 [ext_resource type="Texture2D" uid="uid://bwuh0784q6exc" path="res://assets/sprites/kenney/landscape/landscapeTiles_004.png" id="2_water"]
-[ext_resource type="PackedScene" uid="uid://bimm1uchs04n6" path="res://scenes/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" uid="uid://dq8j7m3byp5d6" path="res://scenes/npcs/dona_maria.tscn" id="4_dona_maria"]
 
-[node name="RainStreet" type="Node2D"]
+[node name="RainStreet" type="Node2D" unique_id=1873935651]
 y_sort_enabled = true
 
-[node name="Background" type="ColorRect" parent="."]
-offset_left = 0.0
-offset_top = 0.0
+[node name="Background" type="ColorRect" parent="." unique_id=713553092]
+z_index = -2
 offset_right = 720.0
 offset_bottom = 1280.0
-color = Color(0.5, 0.45, 0.4, 1.0)
-z_index = -2
+color = Color(0.5, 0.45, 0.4, 1)
 
-[node name="TileGrid" type="Node2D" parent="."]
+[node name="TileGrid" type="Node2D" parent="." unique_id=14646735]
 unique_name_in_owner = true
 z_index = -1
 
-[node name="Tile_0_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 32)
+[node name="Tile_0_0" type="Sprite2D" parent="TileGrid" unique_id=861995148]
+position = Vector2(360, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 32)
+[node name="Tile_1_0" type="Sprite2D" parent="TileGrid" unique_id=239674083]
+position = Vector2(374, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 32)
+[node name="Tile_2_0" type="Sprite2D" parent="TileGrid" unique_id=873576759]
+position = Vector2(388, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 32)
+[node name="Tile_3_0" type="Sprite2D" parent="TileGrid" unique_id=710198177]
+position = Vector2(402, 300)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_4_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 32)
+[node name="Tile_4_0" type="Sprite2D" parent="TileGrid" unique_id=246023955]
+position = Vector2(416, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_5_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 32)
+[node name="Tile_5_0" type="Sprite2D" parent="TileGrid" unique_id=1761702562]
+position = Vector2(430, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_6_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 32)
+[node name="Tile_6_0" type="Sprite2D" parent="TileGrid" unique_id=1756061256]
+position = Vector2(444, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_0" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 32)
+[node name="Tile_7_0" type="Sprite2D" parent="TileGrid" unique_id=1275561852]
+position = Vector2(458, 300)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_0_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 96)
+[node name="Tile_8_0" type="Sprite2D" parent="TileGrid" unique_id=14646736]
+position = Vector2(472, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 96)
+[node name="Tile_9_0" type="Sprite2D" parent="TileGrid" unique_id=14646737]
+position = Vector2(486, 300)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 96)
+[node name="Tile_0_1" type="Sprite2D" parent="TileGrid" unique_id=910808537]
+position = Vector2(346, 325)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 96)
+[node name="Tile_1_1" type="Sprite2D" parent="TileGrid" unique_id=1156648609]
+position = Vector2(360, 325)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_4_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 96)
+[node name="Tile_2_1" type="Sprite2D" parent="TileGrid" unique_id=1273494991]
+position = Vector2(374, 325)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_5_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 96)
+[node name="Tile_3_1" type="Sprite2D" parent="TileGrid" unique_id=1372318878]
+position = Vector2(388, 325)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_6_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 96)
+[node name="Tile_4_1" type="Sprite2D" parent="TileGrid" unique_id=2033309598]
+position = Vector2(402, 325)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_1" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 96)
+[node name="Tile_5_1" type="Sprite2D" parent="TileGrid" unique_id=1922151344]
+position = Vector2(416, 325)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_0_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 160)
+[node name="Tile_6_1" type="Sprite2D" parent="TileGrid" unique_id=969393879]
+position = Vector2(430, 325)
+texture = ExtResource("1_grass")
+
+[node name="Tile_7_1" type="Sprite2D" parent="TileGrid" unique_id=1562338280]
+position = Vector2(444, 325)
+texture = ExtResource("1_grass")
+
+[node name="Tile_8_1" type="Sprite2D" parent="TileGrid" unique_id=14646738]
+position = Vector2(458, 325)
+texture = ExtResource("1_grass")
+
+[node name="Tile_9_1" type="Sprite2D" parent="TileGrid" unique_id=14646739]
+position = Vector2(472, 325)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_1_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 160)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_2_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 160)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_3_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 160)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_4_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 160)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_5_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 160)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_6_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 160)
+[node name="Tile_0_2" type="Sprite2D" parent="TileGrid" unique_id=1159827264]
+position = Vector2(332, 350)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_7_2" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 160)
+[node name="Tile_1_2" type="Sprite2D" parent="TileGrid" unique_id=2016761543]
+position = Vector2(346, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_0_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 224)
+[node name="Tile_2_2" type="Sprite2D" parent="TileGrid" unique_id=2063716572]
+position = Vector2(360, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 224)
+[node name="Tile_3_2" type="Sprite2D" parent="TileGrid" unique_id=667081352]
+position = Vector2(374, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 224)
+[node name="Tile_4_2" type="Sprite2D" parent="TileGrid" unique_id=1782121382]
+position = Vector2(388, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 224)
+[node name="Tile_5_2" type="Sprite2D" parent="TileGrid" unique_id=516592882]
+position = Vector2(402, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_4_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 224)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_5_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 224)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_6_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 224)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_7_3" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 224)
+[node name="Tile_6_2" type="Sprite2D" parent="TileGrid" unique_id=195963387]
+position = Vector2(416, 350)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_0_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 288)
+[node name="Tile_7_2" type="Sprite2D" parent="TileGrid" unique_id=254379267]
+position = Vector2(430, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 288)
+[node name="Tile_8_2" type="Sprite2D" parent="TileGrid" unique_id=14646740]
+position = Vector2(444, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 288)
+[node name="Tile_9_2" type="Sprite2D" parent="TileGrid" unique_id=14646741]
+position = Vector2(458, 350)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 288)
+[node name="Tile_0_3" type="Sprite2D" parent="TileGrid" unique_id=928181710]
+position = Vector2(318, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_1_3" type="Sprite2D" parent="TileGrid" unique_id=1366469004]
+position = Vector2(332, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_2_3" type="Sprite2D" parent="TileGrid" unique_id=1881804454]
+position = Vector2(346, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_3_3" type="Sprite2D" parent="TileGrid" unique_id=1036253069]
+position = Vector2(360, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_4_3" type="Sprite2D" parent="TileGrid" unique_id=647254612]
+position = Vector2(374, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_5_3" type="Sprite2D" parent="TileGrid" unique_id=1559397351]
+position = Vector2(388, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_6_3" type="Sprite2D" parent="TileGrid" unique_id=2120630278]
+position = Vector2(402, 375)
+texture = ExtResource("1_grass")
+
+[node name="Tile_7_3" type="Sprite2D" parent="TileGrid" unique_id=471033473]
+position = Vector2(416, 375)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_4_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 288)
+[node name="Tile_8_3" type="Sprite2D" parent="TileGrid" unique_id=14646742]
+position = Vector2(430, 375)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_5_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 288)
+[node name="Tile_9_3" type="Sprite2D" parent="TileGrid" unique_id=14646743]
+position = Vector2(444, 375)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_6_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 288)
+[node name="Tile_0_4" type="Sprite2D" parent="TileGrid" unique_id=1364763736]
+position = Vector2(304, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_4" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 288)
+[node name="Tile_1_4" type="Sprite2D" parent="TileGrid" unique_id=264503126]
+position = Vector2(318, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_0_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 352)
+[node name="Tile_2_4" type="Sprite2D" parent="TileGrid" unique_id=569124750]
+position = Vector2(332, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 352)
+[node name="Tile_3_4" type="Sprite2D" parent="TileGrid" unique_id=398950935]
+position = Vector2(346, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 352)
+[node name="Tile_4_4" type="Sprite2D" parent="TileGrid" unique_id=1037938460]
+position = Vector2(360, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 352)
+[node name="Tile_5_4" type="Sprite2D" parent="TileGrid" unique_id=99772648]
+position = Vector2(374, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_4_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 352)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_5_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 352)
+[node name="Tile_6_4" type="Sprite2D" parent="TileGrid" unique_id=639056275]
+position = Vector2(388, 400)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_6_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 352)
+[node name="Tile_7_4" type="Sprite2D" parent="TileGrid" unique_id=406273549]
+position = Vector2(402, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_5" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 352)
+[node name="Tile_8_4" type="Sprite2D" parent="TileGrid" unique_id=14646744]
+position = Vector2(416, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_0_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 416)
+[node name="Tile_9_4" type="Sprite2D" parent="TileGrid" unique_id=14646745]
+position = Vector2(430, 400)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 416)
+[node name="Tile_0_5" type="Sprite2D" parent="TileGrid" unique_id=671749473]
+position = Vector2(290, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 416)
+[node name="Tile_1_5" type="Sprite2D" parent="TileGrid" unique_id=335101866]
+position = Vector2(304, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 416)
+[node name="Tile_2_5" type="Sprite2D" parent="TileGrid" unique_id=912463973]
+position = Vector2(318, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_4_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 416)
+[node name="Tile_3_5" type="Sprite2D" parent="TileGrid" unique_id=881960254]
+position = Vector2(332, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_5_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 416)
+[node name="Tile_4_5" type="Sprite2D" parent="TileGrid" unique_id=950932967]
+position = Vector2(346, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_6_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 416)
+[node name="Tile_5_5" type="Sprite2D" parent="TileGrid" unique_id=709419749]
+position = Vector2(360, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_6" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 416)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_0_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 480)
+[node name="Tile_6_5" type="Sprite2D" parent="TileGrid" unique_id=78873218]
+position = Vector2(374, 425)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_1_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 480)
+[node name="Tile_7_5" type="Sprite2D" parent="TileGrid" unique_id=1072222869]
+position = Vector2(388, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 480)
+[node name="Tile_8_5" type="Sprite2D" parent="TileGrid" unique_id=14646746]
+position = Vector2(402, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 480)
+[node name="Tile_9_5" type="Sprite2D" parent="TileGrid" unique_id=14646747]
+position = Vector2(416, 425)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_4_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 480)
+[node name="Tile_0_6" type="Sprite2D" parent="TileGrid" unique_id=1501137231]
+position = Vector2(276, 450)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_5_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 480)
+[node name="Tile_1_6" type="Sprite2D" parent="TileGrid" unique_id=325150105]
+position = Vector2(290, 450)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_6_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 480)
+[node name="Tile_2_6" type="Sprite2D" parent="TileGrid" unique_id=656370371]
+position = Vector2(304, 450)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_7" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 480)
+[node name="Tile_3_6" type="Sprite2D" parent="TileGrid" unique_id=1512602323]
+position = Vector2(318, 450)
+texture = ExtResource("1_grass")
+
+[node name="Tile_4_6" type="Sprite2D" parent="TileGrid" unique_id=1224236245]
+position = Vector2(332, 450)
+texture = ExtResource("1_grass")
+
+[node name="Tile_5_6" type="Sprite2D" parent="TileGrid" unique_id=1951317873]
+position = Vector2(346, 450)
+texture = ExtResource("1_grass")
+
+[node name="Tile_6_6" type="Sprite2D" parent="TileGrid" unique_id=1508167938]
+position = Vector2(360, 450)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_0_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 544)
+[node name="Tile_7_6" type="Sprite2D" parent="TileGrid" unique_id=2119700076]
+position = Vector2(374, 450)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_1_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 544)
+[node name="Tile_8_6" type="Sprite2D" parent="TileGrid" unique_id=14646748]
+position = Vector2(388, 450)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_2_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 544)
+[node name="Tile_9_6" type="Sprite2D" parent="TileGrid" unique_id=14646749]
+position = Vector2(402, 450)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_3_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 544)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_4_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 544)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_5_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 544)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_6_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 544)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_7_8" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 544)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_0_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(32, 608)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_1_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(96, 608)
-texture = ExtResource("1_grass")
-z_index = 0
-
-[node name="Tile_2_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(160, 608)
+[node name="Tile_0_7" type="Sprite2D" parent="TileGrid" unique_id=96875601]
+position = Vector2(262, 475)
 texture = ExtResource("2_water")
-z_index = 0
 
-[node name="Tile_3_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(224, 608)
+[node name="Tile_1_7" type="Sprite2D" parent="TileGrid" unique_id=607146763]
+position = Vector2(276, 475)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_4_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(288, 608)
+[node name="Tile_2_7" type="Sprite2D" parent="TileGrid" unique_id=669997134]
+position = Vector2(290, 475)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_5_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(352, 608)
+[node name="Tile_3_7" type="Sprite2D" parent="TileGrid" unique_id=355149085]
+position = Vector2(304, 475)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_6_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(416, 608)
+[node name="Tile_4_7" type="Sprite2D" parent="TileGrid" unique_id=1797033713]
+position = Vector2(318, 475)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Tile_7_9" type="Sprite2D" parent="TileGrid"]
-position = Vector2(480, 608)
+[node name="Tile_5_7" type="Sprite2D" parent="TileGrid" unique_id=103729171]
+position = Vector2(332, 475)
 texture = ExtResource("1_grass")
-z_index = 0
 
-[node name="Props" type="Node2D" parent="."]
-y_sort_enabled = true
+[node name="Tile_6_7" type="Sprite2D" parent="TileGrid" unique_id=507693541]
+position = Vector2(346, 475)
+texture = ExtResource("1_grass")
+
+[node name="Tile_7_7" type="Sprite2D" parent="TileGrid" unique_id=1368717882]
+position = Vector2(360, 475)
+texture = ExtResource("1_grass")
+
+[node name="Tile_8_7" type="Sprite2D" parent="TileGrid" unique_id=14646750]
+position = Vector2(374, 475)
+texture = ExtResource("2_water")
+
+[node name="Tile_9_7" type="Sprite2D" parent="TileGrid" unique_id=14646751]
+position = Vector2(388, 475)
+texture = ExtResource("1_grass")
+
+[node name="Tile_0_8" type="Sprite2D" parent="TileGrid" unique_id=1388103550]
+position = Vector2(248, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_1_8" type="Sprite2D" parent="TileGrid" unique_id=844793142]
+position = Vector2(262, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_2_8" type="Sprite2D" parent="TileGrid" unique_id=762424733]
+position = Vector2(276, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_3_8" type="Sprite2D" parent="TileGrid" unique_id=1362814318]
+position = Vector2(290, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_4_8" type="Sprite2D" parent="TileGrid" unique_id=1079188722]
+position = Vector2(304, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_5_8" type="Sprite2D" parent="TileGrid" unique_id=1679689261]
+position = Vector2(318, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_6_8" type="Sprite2D" parent="TileGrid" unique_id=924672844]
+position = Vector2(332, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_7_8" type="Sprite2D" parent="TileGrid" unique_id=127811647]
+position = Vector2(346, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_8_8" type="Sprite2D" parent="TileGrid" unique_id=14646752]
+position = Vector2(360, 500)
+texture = ExtResource("2_water")
+
+[node name="Tile_9_8" type="Sprite2D" parent="TileGrid" unique_id=14646753]
+position = Vector2(374, 500)
+texture = ExtResource("1_grass")
+
+[node name="Tile_0_9" type="Sprite2D" parent="TileGrid" unique_id=422411124]
+position = Vector2(234, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_1_9" type="Sprite2D" parent="TileGrid" unique_id=558812718]
+position = Vector2(248, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_2_9" type="Sprite2D" parent="TileGrid" unique_id=54171521]
+position = Vector2(262, 525)
+texture = ExtResource("2_water")
+
+[node name="Tile_3_9" type="Sprite2D" parent="TileGrid" unique_id=1425745390]
+position = Vector2(276, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_4_9" type="Sprite2D" parent="TileGrid" unique_id=2080172220]
+position = Vector2(290, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_5_9" type="Sprite2D" parent="TileGrid" unique_id=1078921597]
+position = Vector2(304, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_6_9" type="Sprite2D" parent="TileGrid" unique_id=1533067707]
+position = Vector2(318, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_7_9" type="Sprite2D" parent="TileGrid" unique_id=74764708]
+position = Vector2(332, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_8_9" type="Sprite2D" parent="TileGrid" unique_id=14646754]
+position = Vector2(346, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_9_9" type="Sprite2D" parent="TileGrid" unique_id=14646755]
+position = Vector2(360, 525)
+texture = ExtResource("1_grass")
+
+[node name="Tile_0_10" type="Sprite2D" parent="TileGrid" unique_id=14646756]
+position = Vector2(220, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_1_10" type="Sprite2D" parent="TileGrid" unique_id=14646757]
+position = Vector2(234, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_2_10" type="Sprite2D" parent="TileGrid" unique_id=14646758]
+position = Vector2(248, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_3_10" type="Sprite2D" parent="TileGrid" unique_id=14646759]
+position = Vector2(262, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_4_10" type="Sprite2D" parent="TileGrid" unique_id=14646760]
+position = Vector2(276, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_5_10" type="Sprite2D" parent="TileGrid" unique_id=14646761]
+position = Vector2(290, 550)
+texture = ExtResource("2_water")
+
+[node name="Tile_6_10" type="Sprite2D" parent="TileGrid" unique_id=14646762]
+position = Vector2(304, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_7_10" type="Sprite2D" parent="TileGrid" unique_id=14646763]
+position = Vector2(318, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_8_10" type="Sprite2D" parent="TileGrid" unique_id=14646764]
+position = Vector2(332, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_9_10" type="Sprite2D" parent="TileGrid" unique_id=14646765]
+position = Vector2(346, 550)
+texture = ExtResource("1_grass")
+
+[node name="Tile_0_11" type="Sprite2D" parent="TileGrid" unique_id=14646766]
+position = Vector2(206, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_1_11" type="Sprite2D" parent="TileGrid" unique_id=14646767]
+position = Vector2(220, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_2_11" type="Sprite2D" parent="TileGrid" unique_id=14646768]
+position = Vector2(234, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_3_11" type="Sprite2D" parent="TileGrid" unique_id=14646769]
+position = Vector2(248, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_4_11" type="Sprite2D" parent="TileGrid" unique_id=14646770]
+position = Vector2(262, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_5_11" type="Sprite2D" parent="TileGrid" unique_id=14646771]
+position = Vector2(276, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_6_11" type="Sprite2D" parent="TileGrid" unique_id=14646772]
+position = Vector2(290, 575)
+texture = ExtResource("2_water")
+
+[node name="Tile_7_11" type="Sprite2D" parent="TileGrid" unique_id=14646773]
+position = Vector2(304, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_8_11" type="Sprite2D" parent="TileGrid" unique_id=14646774]
+position = Vector2(318, 575)
+texture = ExtResource("1_grass")
+
+[node name="Tile_9_11" type="Sprite2D" parent="TileGrid" unique_id=14646775]
+position = Vector2(332, 575)
+texture = ExtResource("1_grass")
+
+[node name="Props" type="Node2D" parent="." unique_id=1879512111]
 z_index = 1
-
-[node name="Entities" type="Node2D" parent="."]
 y_sort_enabled = true
-z_index = 2
 
-[node name="Player" parent="Entities" instance=ExtResource("3_player")]
-position = Vector2(256, 400)
+[node name="Entities" type="Node2D" parent="." unique_id=875867314]
 z_index = 2
+y_sort_enabled = true
 
-[node name="DonaMariam" parent="Entities" instance=ExtResource("4_dona_maria")]
-position = Vector2(352, 352)
+[node name="Player" parent="Entities" unique_id=1869535011 instance=ExtResource("3_player")]
 z_index = 2
+position = Vector2(360, 400)
+
+[node name="DonaMariam" parent="Entities" unique_id=1869535012 instance=ExtResource("4_dona_maria")]
+z_index = 2
+position = Vector2(320, 300)
