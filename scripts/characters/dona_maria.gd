@@ -6,6 +6,7 @@ var can_interact = false
 
 func _ready():
 	DialogueSystem.dialogue_finished.connect(_on_dialogue_finished)
+	animated_sprite.play("Default")
 
 func _on_interaction_area_body_entered(body):
 	if body.name == "Player":

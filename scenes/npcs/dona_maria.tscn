@@ -1,26 +1,97 @@
 [gd_scene format=3 uid="uid://dq8j7m3byp5d6"]
 
-[ext_resource type="Script" path="res://scripts/characters/dona_maria.gd" id="1_47a2f"]
-[ext_resource type="Texture2D" path="res://entities/npcs/chara-forest.png" id="2_atn0e"]
+[ext_resource type="Script" uid="uid://dpaekcqg4mffn" path="res://scripts/characters/dona_maria.gd" id="1_47a2f"]
+[ext_resource type="Texture2D" uid="uid://bkw5lshn0ao8b" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_behindBack.png" id="2_7c4pd"]
+[ext_resource type="Texture2D" uid="uid://dp2ijwkuv8u0j" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_cheer0.png" id="3_5ngyf"]
+[ext_resource type="Texture2D" uid="uid://djhykre1mtk0u" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_cheer1.png" id="4_iibm2"]
+[ext_resource type="Texture2D" uid="uid://bmdywpscxlubv" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk0.png" id="5_6m82e"]
+[ext_resource type="Texture2D" uid="uid://cng4vfl4b7pjc" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk1.png" id="6_2mkqn"]
+[ext_resource type="Texture2D" uid="uid://bhsmhn3rkybao" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk2.png" id="7_e7sdw"]
+[ext_resource type="Texture2D" uid="uid://bkrfhsu2xhkd1" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk3.png" id="8_o43uh"]
+[ext_resource type="Texture2D" uid="uid://b6j7kw3sj1ai0" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk4.png" id="9_acsyr"]
+[ext_resource type="Texture2D" uid="uid://dbpfiry0xvg1h" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk5.png" id="10_lkx7m"]
+[ext_resource type="Texture2D" uid="uid://bmoswf15v7yus" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk6.png" id="11_cop2v"]
+[ext_resource type="Texture2D" uid="uid://b1xfm5l4mx0c0" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk7.png" id="12_lnmao"]
+[ext_resource type="Texture2D" uid="uid://byu4kryt1e4v2" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_wide.png" id="13_l0xpu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4sb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7c4pd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5ngyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iibm2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5ngyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7c4pd")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6m82e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2mkqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e7sdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_o43uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_acsyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lkx7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cop2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lnmao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_l0xpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lnmao")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="1_gsk0d"]
 radius = 16.0
 height = 48.0
 
-[node name="DonaMariam" type="CharacterBody2D"]
+[node name="DonaMariam" type="CharacterBody2D" unique_id=1925654727]
 script = ExtResource("1_47a2f")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture = ExtResource("2_atn0e")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=500550676]
+sprite_frames = SubResource("SpriteFrames_y4sb7")
+animation = &"Walking"
+frame_progress = 0.45202187
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363887923]
 shape = SubResource("1_gsk0d")
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=273116475]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-shape = SubResource("1_gsk0d")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=509530275]
 scale = Vector2(1.5, 1.5)
+shape = SubResource("1_gsk0d")
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]
