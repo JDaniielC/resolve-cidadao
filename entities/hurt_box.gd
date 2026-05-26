@@ -3,7 +3,6 @@
 class_name HurtBox
 extends Area2D
 
-#@export var health_controller: HealthController ## The HealthController that handles this entity hp.
 
 func _init() -> void:
 	monitorable = false

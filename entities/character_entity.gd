@@ -6,7 +6,6 @@ extends CharacterBody2D
 @export_group("Settings")
 @export var animation_tree: AnimationTree ## The AnimationTree attached to this entity, needed to manage animations.
 @export var sync_rotation: Array[Node2D] ## A list of nodes that update their rotation based on the direction the entity is facing.
-#@export var health_controller: HealthController ## The HealthController that handles this entity hp.
 @export var hit_box: HitBox ## The HitBox node that handles the entity's hit detection.
 @export var inventory: Inventory = null ## The inventory of the entity.
 @export var weapon: DataWeapon: set = _set_weapon ## The weapon equipped by the entity.
