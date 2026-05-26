@@ -3,7 +3,7 @@
 class_name HurtBox
 extends Area2D
 
-@export var health_controller: HealthController ## The HealthController that handles this entity hp.
+#@export var health_controller: HealthController ## The HealthController that handles this entity hp.
 
 func _init() -> void:
 	monitorable = false
@@ -15,9 +15,8 @@ func _ready() -> void:
 	area_entered.connect(_on_hitbox_entered)
 
 func _on_hitbox_entered(hitbox: HitBox):
-	if !hitbox or !health_controller:
+	if !hitbox:
 		return
-	health_controller.change_hp(hitbox.hp_change, hitbox.owner.name)
 
 func _on_entity_action_performed(action: String) -> void:
 	process_mode = PROCESS_MODE_DISABLED if action == "jump" else PROCESS_MODE_INHERIT

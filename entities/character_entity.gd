@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export_group("Settings")
 @export var animation_tree: AnimationTree ## The AnimationTree attached to this entity, needed to manage animations.
 @export var sync_rotation: Array[Node2D] ## A list of nodes that update their rotation based on the direction the entity is facing.
-@export var health_controller: HealthController ## The HealthController that handles this entity hp.
+#@export var health_controller: HealthController ## The HealthController that handles this entity hp.
 @export var hit_box: HitBox ## The HitBox node that handles the entity's hit detection.
 @export var inventory: Inventory = null ## The inventory of the entity.
 @export var weapon: DataWeapon: set = _set_weapon ## The weapon equipped by the entity.
@@ -229,7 +229,7 @@ func return_to_safe_position():
 		global_position = safe_position
 
 func enable_state(state: State):
-	if state and health_controller.hp > 0:
+	if state:
 		state.enable()
 
 ##Stops the entity, setting its velocity to 0.
