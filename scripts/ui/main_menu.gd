@@ -38,10 +38,9 @@ func _setup_animations() -> void:
 	for i: int in range(buttons.size()):
 		var button: Button = buttons[i]
 		var delay: float = i * BUTTON_STAGGER_DELAY
-		get_tree().create_timer(delay).timeout.connect(func() -> void:
-			var fade_tween: Tween = create_tween()
-			fade_tween.tween_property(button, "modulate:a", 1.0, BUTTON_FADE_DURATION)
-		)
+		await get_tree().create_timer(delay).timeout
+		var fade_tween: Tween = create_tween()
+		fade_tween.tween_property(button, "modulate:a", 1.0, BUTTON_FADE_DURATION)
 
 
 ## Connect button signals to their respective callbacks
@@ -59,12 +58,12 @@ func _on_play_pressed() -> void:
 
 ## Handle Settings button press
 func _on_settings_pressed() -> void:
-	print("TODO Settings")
+	pass
 
 
 ## Handle Credits button press
 func _on_credits_pressed() -> void:
-	print("TODO Credits")
+	pass
 
 
 ## Handle Quit button press
@@ -72,19 +71,23 @@ func _on_quit_pressed() -> void:
 	_fade_out_and_quit()
 
 
+## Helper: fade out and execute callback
+func _fade_out_and_do(callback: Callable) -> void:
+	var fade_tween: Tween = create_tween()
+	fade_tween.set_ease(Tween.EASE_IN)
+	fade_tween.tween_property(self, "modulate:a", 0.0, FADE_OUT_DURATION)
+	fade_tween.tween_callback(callback)
+
+
 ## Fade out and load a new scene
 func _fade_out_and_load(scene_path: String) -> void:
-	var fade_tween: Tween = create_tween()
-	fade_tween.tween_property(self, "modulate:a", 0.0, FADE_OUT_DURATION)
-	fade_tween.tween_callback(func() -> void:
+	_fade_out_and_do(func() -> void:
 		MenuController.load_scene(scene_path)
 	)
 
 
 ## Fade out and quit the game
 func _fade_out_and_quit() -> void:
-	var fade_tween: Tween = create_tween()
-	fade_tween.tween_property(self, "modulate:a", 0.0, FADE_OUT_DURATION)
-	fade_tween.tween_callback(func() -> void:
+	_fade_out_and_do(func() -> void:
 		MenuController.quit_game()
 	)
