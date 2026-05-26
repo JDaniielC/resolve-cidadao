@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dq8j7m3byp5d6"]
 
 [ext_resource type="Script" path="res://scripts/characters/dona_maria.gd" id="1_47a2f"]
-[ext_resource type="Texture2D" path="res://assets/sprites/kenney/buildings/buildingTiles_050.png" id="2_atn0e"]
+[ext_resource type="Texture2D" path="res://entities/npcs/chara-forest.png" id="2_atn0e"]
 
 [sub_resource type="CapsuleShape2D" id="1_gsk0d"]
 radius = 16.0
