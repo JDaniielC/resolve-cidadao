@@ -9,6 +9,7 @@ extends CharacterEntity
 
 var player_id: int = 1 ## A unique id that is assigned to the player on creation. Player 1 will have player_id = 1 and each additional player will have an incremental id, 2, 3, 4, and so on.
 var equipped = 0 ## The id of the weapon equipped by the player.
+var nearby_npc = null ## Reference to NPC in proximity for interaction
 
 func _ready():
 	super._ready()
@@ -62,3 +63,11 @@ func disable_entity(value: bool, delay = 0.0):
 	await get_tree().create_timer(delay).timeout
 	stop()
 	input_enabled = !value
+
+func set_npc_proximity(npc_ref = null):
+	nearby_npc = npc_ref if npc_ref else null
+
+func _process(_delta):
+	if Input.is_action_just_pressed("interact") and nearby_npc:
+		print("Player pressed E, triggering dialogue with NPC")
+		nearby_npc.trigger_dialogue()

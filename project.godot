@@ -23,7 +23,7 @@ config/description="Educational game about citizen rights and urban flooding"
 config/version="1.9.1"
 run/main_scene="res://scenes/main_game.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="uid://cvnvko43mnhfy"
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -169,7 +169,7 @@ inventory={
 [internationalization]
 
 locale/translations=PackedStringArray("res://local/translations.en.translation", "res://local/translations.it.translation")
-locale/translations_pot_files=PackedStringArray("res://dialogues/start.dialogue", "res://dialogues/commons.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/start.dialogue", "res://dialogues/commons.dialogue", "res://dialogues/missao_01/dona_maria.dialogue")
 
 [layer_names]
 

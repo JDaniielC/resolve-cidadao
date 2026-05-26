@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="4_8hp4k"]
 [ext_resource type="Script" uid="uid://b3ctbvwsexswi" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
 [ext_resource type="Script" uid="uid://igey4j36or78" path="res://components/health_controller.gd" id="5_gx6sm"]
-[ext_resource type="Texture2D" uid="uid://2us16ikdxggi" path="res://entities/player/chara-hero.png" id="6_afbqv"]
+[ext_resource type="Texture2D" uid="uid://h74y7kd7itkb" path="res://entities/player/chara-hero.png" id="6_afbqv"]
 [ext_resource type="PackedScene" uid="uid://bvi5a0lq3brjw" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_props_setter.gd" id="9_fvq3l"]
