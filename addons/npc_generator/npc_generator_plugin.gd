@@ -4,8 +4,7 @@ extends EditorPlugin
 var dock: Control
 
 func _enter_tree():
-	# Create and add the dock
-	dock = preload("res://scripts/editor/npc_generator_dock.gd").new()
+	dock = NPCGeneratorPanel.new()
 	add_control_to_dock(DOCK_SLOT_RIGHT_BL, dock)
 
 func _exit_tree():
