@@ -9,7 +9,7 @@ extends Button
 ## Internal state
 var original_scale: Vector2
 var original_color: Color
-var tween: Tween
+var tween: Tween = null
 
 
 func _ready() -> void:
@@ -29,10 +29,7 @@ func _on_mouse_entered() -> void:
 		tween.kill()
 
 	# Create a new tween for hover animation
-	tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_parallel(true)
+	tween = _create_animation_tween()
 
 	# Animate scale up and color change in parallel
 	tween.tween_property(self, "scale", original_scale * hover_scale, animation_speed)
@@ -45,16 +42,20 @@ func _on_mouse_exited() -> void:
 		tween.kill()
 
 	# Create a new tween for exit animation
-	tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_parallel(true)
+	tween = _create_animation_tween()
 
 	# Animate scale back and color back in parallel
 	tween.tween_property(self, "scale", original_scale, animation_speed)
 	tween.tween_property(self, "modulate", original_color, animation_speed)
 
 
+func _create_animation_tween() -> Tween:
+	var t = create_tween()
+	t.set_ease(Tween.EASE_OUT)
+	t.set_trans(Tween.TRANS_QUAD)
+	t.set_parallel(true)
+	return t
+
+
 func _on_pressed() -> void:
-	# Debug print when button is pressed
-	print("Button pressed: ", text)
+	pass
