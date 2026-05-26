@@ -7,7 +7,6 @@ var pause_menu_scene = preload("res://scenes/ui/menus/pause_menu.tscn")
 func _ready() -> void:
 	# Connect to MenuController pause state signal
 	MenuController.menu_state_changed.connect(_on_menu_state_changed)
-	print("[MainGameController] Ready - pause menu integrated")
 
 func _input(event: InputEvent) -> void:
 	# Only handle ESC if game is not already paused
