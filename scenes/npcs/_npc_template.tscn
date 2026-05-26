@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://npctemplate00001"]
+
+[ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="1_interact"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="2_statemach"]
+[ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="3_stateint"]
+[ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="4_statedial"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_template"]
+radius = 16.0
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_template"]
+radius = 40.0
+
+[node name="NPCTemplate" type="CharacterBody2D" unique_id=2000000001]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2000000002]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2000000003]
+shape = SubResource("CapsuleShape2D_template")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=2000000004]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_interact")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=2000000005]
+shape = SubResource("CircleShape2D_template")
+
+[node name="StateMachine" type="Node" parent="." unique_id=2000000006 node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_statemach")
+current_state = NodePath("interact")
+
+[node name="interact" type="Node" parent="StateMachine" unique_id=2000000007 node_paths=PackedStringArray("interaction_area", "on_completion")]
+script = ExtResource("3_stateint")
+interaction_area = NodePath("../../InteractionArea")
+action_trigger = "interact"
+one_shot = false
+on_completion = [NodePath("../start_dialogue")]
+
+[node name="start_dialogue" type="Node" parent="StateMachine" unique_id=2000000008 node_paths=PackedStringArray("on_completion")]
+script = ExtResource("4_statedial")
+dialogue = null
+title = "intro"
+on_completion = [NodePath("../interact")]
