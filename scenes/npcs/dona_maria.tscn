@@ -94,23 +94,27 @@ autoplay = "Default"
 shape = SubResource("1_gsk0d")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=273116475]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 script = ExtResource("6_js8n1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_dona")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1234567890]
+[node name="StateMachine" type="Node" parent="." unique_id=1234567890 node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_7ld0m")
-current_state = "interact"
+current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="StateMachine" unique_id=1234567891]
+[node name="interact" type="Node" parent="StateMachine" unique_id=1234567891 node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("8_wnv1r")
 interaction_area = NodePath("../../InteractionArea")
 action_trigger = "interact"
 one_shot = false
 on_completion = [NodePath("../start_dialogue")]
 
-[node name="start_dialogue" type="Node" parent="StateMachine" unique_id=1234567892]
+[node name="start_dialogue" type="Node" parent="StateMachine" unique_id=1234567892 node_paths=PackedStringArray("on_completion")]
 script = ExtResource("11_yfo47")
 dialogue = ExtResource("14_m2n4x")
 title = "intro"
