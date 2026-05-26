@@ -58,7 +58,8 @@ func _on_play_pressed() -> void:
 
 ## Handle Settings button press
 func _on_settings_pressed() -> void:
-	pass
+	var settings_menu = preload("res://scenes/ui/menus/settings_menu.tscn").instantiate()
+	add_child(settings_menu)
 
 
 ## Handle Credits button press

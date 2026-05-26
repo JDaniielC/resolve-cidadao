@@ -98,8 +98,8 @@ func _on_resume_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	# TODO: Open settings menu
-	print("[PauseMenu] Settings pressed - TODO")
+	var settings_menu = preload("res://scenes/ui/menus/settings_menu.tscn").instantiate()
+	add_child(settings_menu)
 
 
 func _on_menu_pressed() -> void:
