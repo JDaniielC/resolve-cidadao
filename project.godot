@@ -34,6 +34,7 @@ Debugger="*res://scripts/autoloads/debugger.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameManager="*res://scripts/autoloads/GameManager.gd"
 DialogueSystem="*res://scripts/systems/dialogue_system.gd"
+MenuController="*res://scripts/ui/menu_controller.gd"
 
 [dialogue_manager]
 
