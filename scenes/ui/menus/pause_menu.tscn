@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvmyby3d7krvs"]
+
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_g8ohx"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/menu_button.tscn" id="2_ryjvp"]
+[ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="3_swi3t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cov2t"]
+shader = ExtResource("3_swi3t")
+shader_parameter/blur_amount = 5.0
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_g8ohx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+material = SubResource("ShaderMaterial_cov2t")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_left = 0.5
+anchors_top = 0.5
+anchors_right = 0.5
+anchors_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+custom_minimum_size = Vector2(300, 400)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="PauseLabel" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "PAUSADO"
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+separation = 20
+
+[node name="ResumeButton" parent="Control/Panel/VBoxContainer/ButtonsContainer" instance=ExtResource("2_ryjvp")]
+custom_minimum_size = Vector2(260, 50)
+text = "Retomar"
+
+[node name="SettingsButton" parent="Control/Panel/VBoxContainer/ButtonsContainer" instance=ExtResource("2_ryjvp")]
+custom_minimum_size = Vector2(260, 50)
+text = "Configurações"
+
+[node name="MenuButton" parent="Control/Panel/VBoxContainer/ButtonsContainer" instance=ExtResource("2_ryjvp")]
+custom_minimum_size = Vector2(260, 50)
+text = "Menu Principal"
+
+[node name="QuitButton" parent="Control/Panel/VBoxContainer/ButtonsContainer" instance=ExtResource("2_ryjvp")]
+custom_minimum_size = Vector2(260, 50)
+text = "Sair"
