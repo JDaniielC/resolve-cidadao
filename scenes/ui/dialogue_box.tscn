@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ej5n1o0u7n7h"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_6b5xh"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 2
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+script = ExtResource("1_6b5xh")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_left = 0.0
+anchors_top = 0.6
+anchors_right = 1.0
+anchors_bottom = 1.0
+custom_minimum_size = Vector2(720, 200)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="CharacterLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Character Name"
+
+[node name="TextLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(700, 120)
+text = "Dialogue text here"
+autowrap_mode = 1
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(700, 40)
+text = "Continuar ➜"

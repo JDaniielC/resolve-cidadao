@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bvr7jfamd6mn2"]
+
+[ext_resource type="Texture2D" uid="uid://ds5dnwpnvnpmq" path="res://assets/sprites/kenney/roads/grass.png" id="1_fwkq8"]
+[ext_resource type="Texture2D" uid="uid://bwuh0784q6exc" path="res://assets/sprites/kenney/landscape/landscapeTiles_004.png" id="2_2lsgx"]
+
+[node name="RainStreet" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Layers" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+
+[node name="Ground" type="Sprite2D" parent="Layers"]
+position = Vector2(360, 640)
+scale = Vector2(5, 4)
+texture = ExtResource("1_fwkq8")
+z_index = 0
+
+[node name="Water" type="Sprite2D" parent="Layers"]
+position = Vector2(360, 200)
+scale = Vector2(5, 2)
+texture = ExtResource("2_2lsgx")
+z_index = 1
+
+[node name="Props" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true

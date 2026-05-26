@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dq8j7m3byp5d6"]
+
+[ext_resource type="Script" path="res://scripts/characters/dona_maria.gd" id="1_47a2f"]
+[ext_resource type="Texture2D" path="res://assets/sprites/kenney/buildings/buildingTiles_050.png" id="2_atn0e"]
+
+[sub_resource type="CapsuleShape2D" id="1_gsk0d"]
+radius = 16.0
+height = 48.0
+
+[node name="DonaMariam" type="CharacterBody2D"]
+script = ExtResource("1_47a2f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture = ExtResource("2_atn0e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_gsk0d")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("1_gsk0d")
+scale = Vector2(1.5, 1.5)
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

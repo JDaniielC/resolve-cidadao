@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bimm1uchs04n6"]
+
+[ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_fwkq8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/kenney/buildings/buildingTiles_001.png" id="2_p8o5l"]
+
+[sub_resource type="CapsuleShape2D" id="1_player"]
+radius = 16.0
+height = 48.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_fwkq8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture = ExtResource("2_p8o5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_player")

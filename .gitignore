@@ -1,0 +1,42 @@
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+*.import
+.godot/
+*.cache
+*.cache.tres
+
+# Mono-specific ignores
+.mono/
+data_*/
+addons/Todo_Manager/todo.cfg
+*.csproj
+*.sln
+
+# Editor and IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build and export
+build/
+export/
+dist/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+# OS-specific
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
