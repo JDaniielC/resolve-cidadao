@@ -21,7 +21,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Resolve Cidadão"
 config/description="Educational game about citizen rights and urban flooding"
 config/version="1.9.1"
-run/main_scene="res://scenes/main_game.tscn"
+run/main_scene="res://scenes/ui/menus/main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.png"
 
@@ -51,7 +51,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/npc_generator/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
 
 [filesystem]
 
