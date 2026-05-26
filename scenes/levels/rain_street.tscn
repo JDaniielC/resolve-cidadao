@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ds5dnwpnvnpmq" path="res://assets/sprites/kenney/roads/grass.png" id="1_grass"]
 [ext_resource type="Texture2D" uid="uid://bwuh0784q6exc" path="res://assets/sprites/kenney/landscape/landscapeTiles_004.png" id="2_water"]
 [ext_resource type="PackedScene" uid="uid://bimm1uchs04n6" path="res://scenes/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://dq8j7m3byp5d6" path="res://scenes/npcs/dona_maria.tscn" id="4_dona_maria"]
 
 [node name="RainStreet" type="Node2D"]
 y_sort_enabled = true
@@ -429,4 +430,8 @@ z_index = 2
 
 [node name="Player" parent="Entities" instance=ExtResource("3_player")]
 position = Vector2(256, 400)
+z_index = 2
+
+[node name="DonaMariam" parent="Entities" instance=ExtResource("4_dona_maria")]
+position = Vector2(352, 352)
 z_index = 2
