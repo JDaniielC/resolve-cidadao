@@ -12,10 +12,10 @@
 
 [node name="RainStreet" parent="." instance=ExtResource("1_fwkq8")]
 
-[node name="Player" parent="." instance=ExtResource("2_2lsgx")]
+[node name="Player" parent="RainStreet/Entities" instance=ExtResource("2_2lsgx")]
 position = Vector2(360, 640)
 
-[node name="DonaMariam" parent="." instance=ExtResource("3_gk1s0")]
+[node name="DonaMariam" parent="RainStreet/Entities" instance=ExtResource("3_gk1s0")]
 position = Vector2(360, 200)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
