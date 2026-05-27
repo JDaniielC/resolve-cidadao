@@ -553,3 +553,4 @@ position = Vector2(360, 350)
 [node name="DonaMariam" parent="Entities" unique_id=1869535012 instance=ExtResource("4_dona_maria")]
 z_index = 2
 position = Vector2(84, 327)
+scale = Vector2(0.5, 0.5)
