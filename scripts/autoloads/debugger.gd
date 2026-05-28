@@ -22,8 +22,6 @@ func _unhandled_key_input(event: InputEvent):
 				_toggle_screen_view()
 			KEY_0:
 				_reset_player_velocity()
-			KEY_3:
-				_restore_player_health()
 			KEY_5:
 				_stop_all_enemies()
 
@@ -37,12 +35,7 @@ func _set_player_ghost():
 func _toggle_screen_view():
 	for player: PlayerEntity in Globals.get_players():
 		player.visible = !player.visible
-		player.health_controller.hp_bar.visible = player.visible
 
-## Fully restore players health.
-func _restore_player_health():
-	for player: PlayerEntity in Globals.get_players():
-		player.health_controller.change_hp(player.health_controller.max_hp - player.health_controller.hp)
 
 ## Set players velocity to zero.
 func _reset_player_velocity():

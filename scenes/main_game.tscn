@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ej5n1o0u7n7h" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
 [ext_resource type="PackedScene" uid="uid://br0xct5m1j2p" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
 [ext_resource type="PackedScene" uid="uid://d3mwmt7oaf2k" path="res://scenes/ui/hud.tscn" id="6_hud01"]
+[ext_resource type="PackedScene" uid="uid://ccplymqnqr38d" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
 [ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
 
 [node name="MainGame" type="Node2D" unique_id=1698994676]
@@ -11,6 +12,7 @@
 [node name="RainStreet" parent="." unique_id=1226551111 instance=ExtResource("1_fwkq8")]
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=1472574192]
+visible = false
 
 [node name="DialogueBox" parent="UILayer" unique_id=1474923239 instance=ExtResource("4_7x9kj")]
 layout_mode = 3
@@ -19,8 +21,15 @@ anchors_preset = 0
 [node name="ChoicePanel" parent="UILayer" unique_id=2037069725 instance=ExtResource("5_m2k8p")]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 500.0
+offset_bottom = 400.0
 
 [node name="PhoneMenu" parent="UILayer" unique_id=1175254121 instance=ExtResource("7_phone")]
 anchors_preset = 0
 
 [node name="HUD" parent="." unique_id=477207030 instance=ExtResource("6_hud01")]
+visible = false
+
+[node name="RayScene" parent="." unique_id=378477655 instance=ExtResource("6_ygxny")]

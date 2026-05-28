@@ -1,4 +1,4 @@
-# Changelog - Resolve Cidadão
+	# Changelog - Resolve Cidadão
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 

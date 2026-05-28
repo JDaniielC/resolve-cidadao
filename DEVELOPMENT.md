@@ -120,10 +120,10 @@ F5 (ou Play button)
 
 ```
 título_diálogo:
-    speaker: Dona Maria
-    Fala da personagem aqui...
-    - [opção 1] -> próximo_nó
-    - [opção 2] -> outro_nó
+	speaker: Dona Maria
+	Fala da personagem aqui...
+	- [opção 1] -> próximo_nó
+	- [opção 2] -> outro_nó
 ```
 
 ### Integração com Código
@@ -188,7 +188,7 @@ class_name PlayerController
 
 # Funções/variáveis usam snake_case
 func move_player():
-    pass
+	pass
 
 # Constantes usam UPPER_SNAKE_CASE
 const SPEED_MULTIPLIER = 2.0
@@ -198,7 +198,7 @@ var _internal_state: int
 
 # Tipos sempre definidos
 func calculate_damage(base: int, modifier: float) -> int:
-    return int(base * modifier)
+	return int(base * modifier)
 ```
 
 ### Organização de Arquivos

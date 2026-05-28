@@ -78,8 +78,8 @@ Um jogo que simula situações reais de acesso a direitos sociais e serviços p�
 scenes/levels/
 ├── Level.tscn           # Template base
 └── missao_01/
-    ├── rain_street.tscn
-    └── shelter.tscn
+	├── rain_street.tscn
+	└── shelter.tscn
 
 dialogues/
 ├── missao_01/
@@ -172,7 +172,7 @@ assets/
 ```gdscript
 # Em scripts, iniciar dialogue
 DialogueManager.show_dialogue_balloon(
-    load("res://dialogues/missao_01/dona_maria.dialogue"),
+	load("res://dialogues/missao_01/dona_maria.dialogue"),
     "start"
 )
 ```

@@ -28,8 +28,6 @@ func get_data():
 		data = player_data
 	data.position = position
 	data.facing = facing
-	data.hp = health_controller.hp
-	data.max_hp = health_controller.max_hp
 	data.inventory = inventory.items if inventory else []
 	data.equipped = equipped
 	return data
@@ -39,8 +37,6 @@ func receive_data(data):
 	if data:
 		global_position = data.position
 		facing = data.facing
-		health_controller.hp = data.hp
-		health_controller.max_hp = data.max_hp
 		if inventory:
 			inventory.items = data.inventory
 		equipped = data.equipped
