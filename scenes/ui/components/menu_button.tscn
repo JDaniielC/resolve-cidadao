@@ -1,12 +1,8 @@
-[gd_scene format=3 uid="uid://cafesc3kbe2q1"]
+[gd_scene load_steps=2 format=3 uid="uid://cafesc3kbe2q1"]
 
 [ext_resource type="Script" path="res://scripts/ui/menu_button.gd" id="1_x5vjb"]
-
-[sub_resource type="Theme" id="Theme_1"]
-font_sizes/font_size = 24
 
 [node name="MenuButton" type="Button"]
 custom_minimum_size = Vector2(200, 50)
 script = ExtResource("1_x5vjb")
-theme = SubResource("Theme_1")
 text = "Button"

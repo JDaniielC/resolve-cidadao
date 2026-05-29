@@ -11,10 +11,6 @@ const PATH = {
 	FURY = "Entities/Fury"
 }
 
-const MENU = {
-	TITLE_SCREEN = "res://scenes/menus/start_screen.gd"
-}
-
 const TRANSITION = {
 	FADE_TO_BLACK = "fade_to_black",
 	FADE_FROM_BLACK = "fade_from_black",

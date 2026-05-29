@@ -1,21 +1,22 @@
 extends Button
+## Menu button: adds a subtle hover scale-up and a click sound on top of the
+## shared UI theme (assets/ui/theme.tres). Hover/pressed COLORS come from the
+## theme's Button styles, so this script only handles motion + audio.
 
 ## Exported properties for customization
 @export var hover_scale: float = 1.05
 @export var animation_speed: float = 0.2
-@export var color_normal: Color = Color.WHITE
-@export var color_hover: Color = Color.YELLOW
 
 ## Internal state
 var original_scale: Vector2
-var original_color: Color
 var tween: Tween = null
 
 
 func _ready() -> void:
-	# Store the original scale and color
+	# Store the original scale and pivot on the center so the scale looks even.
 	original_scale = scale
-	original_color = modulate
+	pivot_offset = size / 2.0
+	resized.connect(func() -> void: pivot_offset = size / 2.0)
 
 	# Connect signals for hover and click
 	mouse_entered.connect(_on_mouse_entered)
@@ -24,36 +25,23 @@ func _ready() -> void:
 
 
 func _on_mouse_entered() -> void:
-	# Kill previous tween if it exists
 	if tween:
 		tween.kill()
-
-	# Create a new tween for hover animation
 	tween = _create_animation_tween()
-
-	# Animate scale up and color change in parallel
 	tween.tween_property(self, "scale", original_scale * hover_scale, animation_speed)
-	tween.tween_property(self, "modulate", color_hover, animation_speed)
 
 
 func _on_mouse_exited() -> void:
-	# Kill previous tween if it exists
 	if tween:
 		tween.kill()
-
-	# Create a new tween for exit animation
 	tween = _create_animation_tween()
-
-	# Animate scale back and color back in parallel
 	tween.tween_property(self, "scale", original_scale, animation_speed)
-	tween.tween_property(self, "modulate", original_color, animation_speed)
 
 
 func _create_animation_tween() -> Tween:
 	var t = create_tween()
 	t.set_ease(Tween.EASE_OUT)
 	t.set_trans(Tween.TRANS_QUAD)
-	t.set_parallel(true)
 	return t
 
 

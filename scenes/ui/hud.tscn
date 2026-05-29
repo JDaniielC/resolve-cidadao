@@ -14,10 +14,9 @@ text = "Etapa 1/4"
 custom_minimum_size = Vector2(180, 40)
 
 [node name="ObjectiveLabel" type="Label" parent="."]
-anchors_left = 0.5
-anchors_top = 0.0
-anchors_right = 0.5
-anchors_bottom = 0.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
 offset_left = -360.0
 offset_top = 60.0
 offset_right = 360.0

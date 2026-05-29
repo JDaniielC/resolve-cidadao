@@ -60,7 +60,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
-text = "Settings"
+text = "Configurações"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer" unique_id=789202651]
@@ -77,7 +77,7 @@ columns = 2
 [node name="MusicVol" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer" unique_id=1246420616]
 custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
-text = "Music Volume"
+text = "Volume da Música"
 
 [node name="MusicSlider" type="HSlider" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer" unique_id=1234763504]
 unique_name_in_owner = true
@@ -93,7 +93,7 @@ value = 1.0
 [node name="SFXVol" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer" unique_id=1159578428]
 custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
-text = "SFX Volume"
+text = "Volume dos Efeitos"
 
 [node name="SFXSlider" type="HSlider" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer" unique_id=388654611]
 unique_name_in_owner = true
@@ -109,8 +109,7 @@ value = 1.0
 [node name="Language" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer" unique_id=8851199]
 custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
-text = "Language
-"
+text = "Idioma"
 
 [node name="LanguageDropdown" type="OptionButton" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer" unique_id=1221140461]
 unique_name_in_owner = true
@@ -131,7 +130,7 @@ custom_minimum_size = Vector2(100, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "Close"
+text = "Fechar"
 
 [connection signal="value_changed" from="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

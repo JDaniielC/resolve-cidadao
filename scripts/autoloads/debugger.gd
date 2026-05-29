@@ -1,7 +1,5 @@
 extends Node
 
-var start_screen: NodePath = "res://scenes/menus/start_screen.tscn"
-
 func _ready():
 	if not OS.is_debug_build():
 		set_process_unhandled_key_input(false)
@@ -13,9 +11,6 @@ func _unhandled_key_input(event: InputEvent):
 		match event.keycode:
 			KEY_F1:
 				DataManager.save_game()
-			KEY_F2:
-				var current_level = Globals.get_current_level()
-				SceneManager.swap_scenes(start_screen, get_tree().root, current_level, Const.TRANSITION.FADE_TO_BLACK)
 			KEY_CTRL:
 				_set_player_ghost()
 			KEY_TAB:
