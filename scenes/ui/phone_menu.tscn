@@ -11,6 +11,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6pj1p")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.470588)
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -18,52 +27,66 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -640.0
-offset_right = 360.0
-offset_bottom = 640.0
+offset_left = -180.0
+offset_top = -300.0
+offset_right = 180.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_minimum_size = Vector2(720, 1280)
+custom_minimum_size = Vector2(360, 600)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 offset_left = 20.0
 offset_top = 20.0
 offset_right = -20.0
 offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
 
 [node name="Title" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "📱 Celular da Cidade"
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
 
-[node name="Spacer1" type="Control" parent="Panel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-custom_minimum_size = Vector2(0, 40)
+theme_override_constants/separation = 10
 
-[node name="Description" type="Label" parent="Panel/VBoxContainer"]
+[node name="ProblemsButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
-text = "Funções:
-- Registro de Problemas
-- Contatos
-- Satisfação
-- Conceitos"
-theme_override_font_sizes/font_size = 18
+size_flags_vertical = 3
+text = "Registro de Problemas"
 
-[node name="Spacer2" type="Control" parent="Panel/VBoxContainer"]
+[node name="ContactsButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
-size_flags_vertical = 5
+size_flags_vertical = 3
+text = "Contatos Úteis"
+
+[node name="SatisfactionButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Satisfação da Cidade"
+
+[node name="ConceptsButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Base de Conhecimento"
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_vertical = 0
-custom_minimum_size = Vector2(0, 60)
 text = "Fechar"
-theme_override_font_sizes/font_size = 20
