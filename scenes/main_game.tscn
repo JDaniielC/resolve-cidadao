@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://d3mwmt7oaf2k" path="res://scenes/ui/hud.tscn" id="6_hud01"]
 [ext_resource type="PackedScene" uid="uid://ccplymqnqr38d" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
 [ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
+[ext_resource type="Script" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
 
 [node name="MainGame" type="Node2D" unique_id=1698994676]
+script = ExtResource("8_h3x7f")
 
 [node name="RainStreet" parent="." unique_id=1226551111 instance=ExtResource("1_fwkq8")]
 
