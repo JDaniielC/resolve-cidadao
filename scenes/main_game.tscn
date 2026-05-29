@@ -1,27 +1,32 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://b4lyjee0t0bo3"]
 
-[ext_resource type="PackedScene" path="res://scenes/levels/rain_street.tscn" id="1_fwkq8"]
-[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
-[ext_resource type="PackedScene" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
+[ext_resource type="PackedScene" uid="uid://bvr7jfamd6mn2" path="res://scenes/levels/rain_street.tscn" id="1_fwkq8"]
+[ext_resource type="PackedScene" uid="uid://ej5n1o0u7n7h" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
+[ext_resource type="PackedScene" uid="uid://br0xct5m1j2p" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud01"]
-[ext_resource type="PackedScene" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
-[ext_resource type="PackedScene" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
-[ext_resource type="Script" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
+[ext_resource type="PackedScene" uid="uid://ccplymqnqr38d" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
+[ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
+[ext_resource type="AudioStream" uid="uid://ooc5h2d72spu" path="res://sounds/rain.ogg" id="8_70vka"]
+[ext_resource type="Script" uid="uid://ct5nj742jxgbo" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
 
-[node name="MainGame" type="Node2D"]
+[node name="MainGame" type="Node2D" unique_id=324672207]
 script = ExtResource("8_h3x7f")
 
-[node name="RainStreet" parent="." instance=ExtResource("1_fwkq8")]
+[node name="RainStreet" parent="." unique_id=1304098393 instance=ExtResource("1_fwkq8")]
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=956007849]
 layer = 2
 
-[node name="DialogueBox" parent="UILayer" instance=ExtResource("4_7x9kj")]
+[node name="DialogueBox" parent="UILayer" unique_id=247599543 instance=ExtResource("4_7x9kj")]
 
-[node name="ChoicePanel" parent="UILayer" instance=ExtResource("5_m2k8p")]
+[node name="ChoicePanel" parent="UILayer" unique_id=286766128 instance=ExtResource("5_m2k8p")]
 
-[node name="PhoneMenu" parent="UILayer" instance=ExtResource("7_phone")]
+[node name="PhoneMenu" parent="UILayer" unique_id=1516174287 instance=ExtResource("7_phone")]
 
-[node name="HUD" parent="." instance=ExtResource("6_hud01")]
+[node name="HUD" parent="." unique_id=1437515677 instance=ExtResource("6_hud01")]
 
-[node name="RayScene" parent="." instance=ExtResource("6_ygxny")]
+[node name="RayScene" parent="." unique_id=1224219234 instance=ExtResource("6_ygxny")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1721135728]
+stream = ExtResource("8_70vka")
+autoplay = true
