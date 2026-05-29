@@ -101,36 +101,33 @@ func _ready():
 	sprite_file_dialog = FileDialog.new()
 	sprite_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	sprite_file_dialog.filters = PackedStringArray(["*.png ; PNG Images", "*.jpg ; JPEG Images"])
-	sprite_file_dialog.files_selected.connect(_on_sprite_file_selected)
+	# FILE_MODE_OPEN_FILE emits file_selected(path), NOT files_selected(paths)
+	# (the latter only fires in FILE_MODE_OPEN_FILES).
+	sprite_file_dialog.file_selected.connect(_on_sprite_file_selected)
 	add_child(sprite_file_dialog)
 
 	dialogue_file_dialog = FileDialog.new()
 	dialogue_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	dialogue_file_dialog.filters = PackedStringArray(["*.dialogue ; Dialogue Files"])
-	dialogue_file_dialog.files_selected.connect(_on_dialogue_file_selected)
+	dialogue_file_dialog.file_selected.connect(_on_dialogue_file_selected)
 	add_child(dialogue_file_dialog)
 
 	# Styling
 	custom_minimum_size = Vector2(400, 0)
-	var panel = PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", StyleBoxFlat.new())
-	move_child(panel, 0)
 
 func _on_sprite_button_pressed():
 	sprite_file_dialog.popup_centered_ratio(0.7)
 
-func _on_sprite_file_selected(paths: PackedStringArray):
-	if paths.size() > 0:
-		sprite_path = paths[0]
-		sprite_path_label.text = sprite_path
+func _on_sprite_file_selected(path: String):
+	sprite_path = path
+	sprite_path_label.text = sprite_path
 
 func _on_dialogue_button_pressed():
 	dialogue_file_dialog.popup_centered_ratio(0.7)
 
-func _on_dialogue_file_selected(paths: PackedStringArray):
-	if paths.size() > 0:
-		dialogue_path = paths[0]
-		dialogue_path_label.text = dialogue_path
+func _on_dialogue_file_selected(path: String):
+	dialogue_path = path
+	dialogue_path_label.text = dialogue_path
 
 func _on_generate_pressed():
 	var name = npc_name_input.text.strip_edges()
