@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7cyw6jv2ymf5"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/levels/rain_street.tscn" id="1_fwkq8"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]

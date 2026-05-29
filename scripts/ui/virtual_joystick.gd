@@ -16,7 +16,8 @@ var input_vector: Vector2 = Vector2.ZERO
 func _ready():
 	# Set translucent by default as per request
 	modulate.a = 0.5
-	stick.position = base.size / 2 - stick.size / 2
+	# Center stick in base
+	stick.position = (base.size / 2) - (stick.size / 2)
 
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton:
@@ -34,14 +35,14 @@ func _gui_input(event: InputEvent):
 		_update_stick(event.position)
 
 func _update_stick(pos: Vector2):
-	var center = base.global_position + base.size / 2
-	var dir = (get_global_mouse_position() - center)
+	var center = base.size / 2
+	var dir = (pos - center)
 	var dist = dir.length()
 	
 	if dist > max_distance:
 		dir = dir.normalized() * max_distance
 	
-	stick.global_position = center + dir - stick.size / 2
+	stick.position = center + dir - (stick.size / 2)
 	
 	# Calculate input vector for movement
 	input_vector = dir / max_distance
@@ -52,15 +53,15 @@ func _update_stick(pos: Vector2):
 
 func _reset_stick():
 	input_vector = Vector2.ZERO
-	stick.position = base.size / 2 - stick.size / 2
+	stick.position = (base.size / 2) - (stick.size / 2)
 	_handle_input_actions()
 
 func _handle_input_actions():
-	# Map the vector to Godot's built-in UI actions (or custom move_ actions)
-	_set_action("ui_right", input_vector.x > deadzone)
-	_set_action("ui_left", input_vector.x < -deadzone)
-	_set_action("ui_down", input_vector.y > deadzone)
-	_set_action("ui_up", input_vector.y < -deadzone)
+	# Map the vector to the game's actual move actions
+	_set_action("move_right", input_vector.x > deadzone)
+	_set_action("move_left", input_vector.x < -deadzone)
+	_set_action("move_down", input_vector.y > deadzone)
+	_set_action("move_up", input_vector.y < -deadzone)
 
 func _set_action(action: String, pressed: bool):
 	if pressed:
