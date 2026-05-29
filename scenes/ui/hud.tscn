@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3mwmt7oaf2k"]
+[gd_scene load_steps=12 format=3 uid="uid://d3mwmt7oaf2k"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_abc12"]
-[ext_resource type="Texture2D" uid="uid://blf5n67kkx04" path="res://assets/ui/cellphone.png" id="2_phone"]
+[ext_resource type="Texture2D" path="res://assets/ui/cellphone.png" id="2_phone"]
+[ext_resource type="Texture2D" path="res://joystick.png" id="3_joystick"]
+[ext_resource type="Script" path="res://scripts/ui/virtual_joystick.gd" id="4_vjoy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.14902, 0.14902, 0.14902, 0.705882)
@@ -22,18 +24,174 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="Animation" id="Animation_objective_update"]
+resource_name = "objective_update"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [0.0, -20.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hud_in"]
+resource_name = "hud_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopLeftContainer:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [-300.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopRightContainer:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [1580.0, 1280.0]
+}
+
+[sub_resource type="Animation" id="Animation_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TopLeftContainer:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TopRightContainer:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1280.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hud"]
+_data = {
+"RESET": SubResource("Animation_RESET"),
+"hud_in": SubResource("Animation_hud_in"),
+"objective_update": SubResource("Animation_objective_update")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.501961)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_abc12")
 
 [node name="TopLeftContainer" type="MarginContainer" parent="."]
 offset_right = 320.0
-offset_bottom = 200.0
+offset_bottom = 250.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 
 [node name="VBox" type="VBoxContainer" parent="TopLeftContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="TimeWeatherPanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Margin" type="MarginContainer" parent="TopLeftContainer/VBox/TimeWeatherPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBox" type="HBoxContainer" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WeatherIcon" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "⛈️"
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "08:30"
+vertical_alignment = 1
+
+[node name="WeatherLabel" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+theme_override_font_sizes/font_size = 14
+text = "Chuva Forte"
+vertical_alignment = 1
 
 [node name="StagePanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
 custom_minimum_size = Vector2(120, 0)
@@ -71,7 +229,8 @@ autowrap_mode = 2
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -400.0
+offset_left = 1280.0
+offset_right = 1660.0
 offset_bottom = 250.0
 grow_horizontal = 0
 theme_override_constants/margin_top = 20
@@ -145,3 +304,56 @@ tooltip_text = "Celular"
 texture_normal = ExtResource("2_phone")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="BottomLeftContainer" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_right = 200.0
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VirtualJoystick" type="Control" parent="BottomLeftContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+script = ExtResource("4_vjoy")
+
+[node name="Base" type="Panel" parent="BottomLeftContainer/VirtualJoystick"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_joy")
+
+[node name="Stick" type="TextureRect" parent="BottomLeftContainer/VirtualJoystick/Base"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_joystick")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hud")
+}
+autoplay = "hud_in"

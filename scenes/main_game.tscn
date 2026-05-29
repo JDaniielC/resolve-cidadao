@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://c7cyw6jv2ymf5"]
 
-[ext_resource type="PackedScene" uid="uid://bvr7jfamd6mn2" path="res://scenes/levels/rain_street.tscn" id="1_fwkq8"]
-[ext_resource type="PackedScene" uid="uid://ej5n1o0u7n7h" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
-[ext_resource type="PackedScene" uid="uid://br0xct5m1j2p" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
-[ext_resource type="PackedScene" uid="uid://d3mwmt7oaf2k" path="res://scenes/ui/hud.tscn" id="6_hud01"]
-[ext_resource type="PackedScene" uid="uid://c6p1w7x6e2n7r" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
-[ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
+[ext_resource type="PackedScene" path="res://scenes/levels/rain_street.tscn" id="1_fwkq8"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
+[ext_resource type="PackedScene" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud01"]
+[ext_resource type="PackedScene" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
+[ext_resource type="PackedScene" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
 [ext_resource type="Script" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
 
 [node name="MainGame" type="Node2D"]

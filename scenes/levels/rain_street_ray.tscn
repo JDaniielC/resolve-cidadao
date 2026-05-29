@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ccplymqnqr38d"]
 
-[ext_resource type="TileSet" uid="uid://c6kd6ha4x4h6w" path="res://tilesets/city_tileset.tres" id="1_wfxqf"]
+[ext_resource type="TileSet" path="res://tilesets/city_tileset.tres" id="1_wfxqf"]
 
 [node name="RayScene" type="Node2D" unique_id=378477655]
 
