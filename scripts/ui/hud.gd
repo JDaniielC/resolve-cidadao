@@ -1,14 +1,17 @@
 # scripts/ui/hud.gd
 extends CanvasLayer
 
-@onready var stage_label = $TopLeftContainer/StagePanel/StageLabel
-@onready var objective_label = $TopCenterContainer/ObjectivePanel/MarginContainer/ObjectiveLabel
-@onready var cellphone_button = $CellphoneButton
+@onready var stage_label = $TopLeftContainer/VBox/StagePanel/StageLabel
+@onready var objective_label = $TopLeftContainer/VBox/ObjectivePanel/Margin/ObjectiveLabel
+@onready var satisfaction_bar = $TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox/SatisfactionBar
+@onready var percentage_label = $TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/PercentageLabel
+@onready var cellphone_button = $TopRightContainer/VBox/Control/CellphoneButton
 
 var button_tween: Tween
 
 func _ready():
 	GameManager.stage_changed.connect(_on_stage_changed)
+	GameManager.satisfaction_changed.connect(_on_satisfaction_changed)
 	
 	# Basic button signal
 	cellphone_button.pressed.connect(_on_cellphone_pressed)
@@ -25,9 +28,22 @@ func _ready():
 func _update_display():
 	stage_label.text = "Etapa %d/4" % GameManager.current_stage
 	objective_label.text = GameManager.get_objective()
+	_update_satisfaction_ui(GameManager.satisfaction)
 
 func _on_stage_changed(new_stage: int):
 	_update_display()
+
+func _on_satisfaction_changed(new_value: float):
+	# Animate the progress bar for a smoother feel
+	var tween = create_tween()
+	tween.tween_property(satisfaction_bar, "value", new_value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	# Update percentage text immediately or via tween
+	percentage_label.text = "%d%%" % int(new_value)
+
+func _update_satisfaction_ui(value: float):
+	satisfaction_bar.value = value
+	percentage_label.text = "%d%%" % int(value)
 
 ## Open/close the phone menu.
 func _on_cellphone_pressed():

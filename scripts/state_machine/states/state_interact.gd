@@ -24,8 +24,12 @@ class_name StateInteract
 
 var entity: CharacterEntity
 var interacting := false
+var _prompt: Control
 
 func _ready() -> void:
+	if not Engine.is_editor_hint():
+		_setup_prompt()
+		
 	if interaction_area:
 		if check == 4 or check == 12:
 			interaction_area.area_entered.connect(func(_area): _set_entity(_area.get_parent()))
@@ -33,6 +37,16 @@ func _ready() -> void:
 		if check == 8 or check == 12:
 			interaction_area.body_entered.connect(func(_body): _set_entity(_body))
 			interaction_area.body_exited.connect(func(_body): _reset_entity())
+
+func _setup_prompt():
+	var prompt_scene = load("res://scenes/ui/components/interaction_prompt.tscn")
+	if prompt_scene:
+		_prompt = prompt_scene.instantiate()
+		# Add to the owner of the StateMachine (the NPC/Entity)
+		var owner_node = get_owner()
+		if owner_node:
+			owner_node.add_child.call_deferred(_prompt)
+			_prompt.position = Vector2(0, -60) # Position above head
 
 func enter():
 	_reset_interaction()
@@ -47,9 +61,13 @@ func exit():
 func _set_entity(node):
 	if node is CharacterEntity:
 		entity = node
+		if _prompt and not interacting:
+			_prompt.show_prompt()
 		_try_to_interact()
 
 func _reset_entity():
+	if _prompt:
+		_prompt.hide_prompt()
 	if active and not interacting:
 		_do_leaving()
 	entity = null
@@ -79,6 +97,8 @@ func _can_interact() -> bool:
 
 func _do_interaction():
 	interacting = true
+	if _prompt:
+		_prompt.hide_prompt()
 	if is_instance_valid(entity) and state_machine.debug:
 		print(entity.name, " interacted with ", get_path())
 	complete({"entity": entity})

@@ -1,66 +1,144 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3mwmt7oaf2k"]
+[gd_scene load_steps=5 format=3 uid="uid://d3mwmt7oaf2k"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_abc12"]
 [ext_resource type="Texture2D" uid="uid://blf5n67kkx04" path="res://assets/ui/cellphone.png" id="2_phone"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.14902, 0.14902, 0.14902, 0.705882)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
+bg_color = Color(0.258824, 0.643137, 0.941176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_abc12")
 
 [node name="TopLeftContainer" type="MarginContainer" parent="."]
-offset_right = 220.0
-offset_bottom = 80.0
+offset_right = 320.0
+offset_bottom = 200.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 
-[node name="StagePanel" type="PanelContainer" parent="TopLeftContainer"]
+[node name="VBox" type="VBoxContainer" parent="TopLeftContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="StageLabel" type="Label" parent="TopLeftContainer/StagePanel"]
+[node name="StagePanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+size_flags_horizontal = 0
+
+[node name="StageLabel" type="Label" parent="TopLeftContainer/VBox/StagePanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Etapa 1/4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TopCenterContainer" type="MarginContainer" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -380.0
-offset_right = 380.0
-offset_bottom = 100.0
-grow_horizontal = 2
-theme_override_constants/margin_top = 20
-
-[node name="ObjectivePanel" type="PanelContainer" parent="TopCenterContainer"]
-custom_minimum_size = Vector2(720, 0)
+[node name="ObjectivePanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="TopCenterContainer/ObjectivePanel"]
+[node name="Margin" type="MarginContainer" parent="TopLeftContainer/VBox/ObjectivePanel"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
 
-[node name="ObjectiveLabel" type="Label" parent="TopCenterContainer/ObjectivePanel/MarginContainer"]
-custom_minimum_size = Vector2(690, 40)
+[node name="ObjectiveLabel" type="Label" parent="TopLeftContainer/VBox/ObjectivePanel/Margin"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.945098, 0.458824, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Aproxime-se de Dona Maria"
-horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="CellphoneButton" type="TextureButton" parent="."]
+[node name="TopRightContainer" type="MarginContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -92.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 92.0
+offset_left = -400.0
+offset_bottom = 250.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBox" type="VBoxContainer" parent="TopRightContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="SatisfactionPanel" type="PanelContainer" parent="TopRightContainer/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Margin" type="MarginContainer" parent="TopRightContainer/VBox/SatisfactionPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="TopRightContainer/VBox/SatisfactionPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FaceIcon" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "😊"
+
+[node name="VBox" type="VBoxContainer" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Satisfação da Cidade"
+
+[node name="SatisfactionBar" type="ProgressBar" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox"]
+custom_minimum_size = Vector2(180, 14)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
+value = 50.0
+show_percentage = false
+
+[node name="PercentageLabel" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.643137, 0.941176, 1)
+theme_override_font_sizes/font_size = 16
+text = "50%"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="TopRightContainer/VBox"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="CellphoneButton" type="TextureButton" parent="TopRightContainer/VBox/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_right = 0.0
+offset_bottom = 72.0
 grow_horizontal = 0
 pivot_offset = Vector2(36, 36)
 tooltip_text = "Celular"

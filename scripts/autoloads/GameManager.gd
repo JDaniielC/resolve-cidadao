@@ -3,9 +3,15 @@ extends Node
 
 signal stage_changed(new_stage: int)
 signal choice_made(option_index: int, is_correct: bool)
+signal satisfaction_changed(new_value: float)
 
 var current_stage: int = 1
 var is_game_paused: bool = false
+
+var satisfaction: float = 50.0:
+	set(value):
+		satisfaction = clamp(value, 0.0, 100.0)
+		satisfaction_changed.emit(satisfaction)
 
 var stage_data = {
 	1: {"name": "Primeiro Controle", "objective": "Aproxime-se de Dona Maria"},
@@ -31,3 +37,9 @@ func pause_game():
 
 func resume_game():
 	is_game_paused = false
+
+func add_satisfaction(amount: float):
+	satisfaction += amount
+
+func remove_satisfaction(amount: float):
+	satisfaction -= amount
