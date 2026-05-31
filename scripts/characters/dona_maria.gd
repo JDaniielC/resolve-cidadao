@@ -17,8 +17,9 @@ func _ready():
 		interaction_area.area_exited.connect(func(area): _on_interaction_exited(area.get_parent()))
 		print("Dona Maria: InteractionArea signals successfully connected in code.")
 		
-	# Initialize dialogue title matching current stage
+	# Initialize dialogue title matching current stage and listen for subsequent stage changes
 	_update_dialogue_title()
+	GameManager.stage_changed.connect(func(_new_stage): _update_dialogue_title())
 
 func _on_interaction_entered(node):
 	if node and node.is_in_group("player"):

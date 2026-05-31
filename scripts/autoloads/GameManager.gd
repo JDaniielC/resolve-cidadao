@@ -11,7 +11,7 @@ var current_stage: int = 1
 var is_game_paused: bool = false
 
 # Satisfaction system
-var satisfaction: float = 50.0:
+var satisfaction: float = 90.0:
 	set(value):
 		satisfaction = clamp(value, 0.0, 100.0)
 		satisfaction_changed.emit(satisfaction)
