@@ -9,11 +9,11 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body):
-	if body is PlayerEntity:
+	if body.name == "Player":
 		player_inside = true
 
 func _on_body_exited(body):
-	if body is PlayerEntity:
+	if body.name == "Player":
 		player_inside = false
 
 func _process(_delta):

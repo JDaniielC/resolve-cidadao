@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_aw4y2"]
 [ext_resource type="Texture2D" uid="uid://dq50i3yao4p46" path="res://tilesets/casas-1.png" id="6_aw4y2"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="8_20akl"]
-[ext_resource type="Texture2D" uid="uid://dyhw4l23cpylg" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
+[ext_resource type="Texture2D" uid="uid://cng68lc5w7jxt" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_auckb"]
 texture = ExtResource("9_5l4fb")
@@ -8134,7 +8134,7 @@ size = Vector2(608.5, 435)
 size = Vector2(20, 762)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts5rs"]
-size = Vector2(102, 27)
+size = Vector2(95, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgy08"]
 size = Vector2(125, 170)
@@ -8207,7 +8207,7 @@ y_sort_enabled = true
 
 [node name="DonaMariam" parent="Entities" unique_id=1925654727 instance=ExtResource("5_aw4y2")]
 z_index = 2
-position = Vector2(434, 577)
+position = Vector2(516, 473)
 scale = Vector2(0.5, 0.5)
 
 [node name="Player" parent="Entities" unique_id=445539203 instance=ExtResource("4_0tg25")]
@@ -8238,18 +8238,19 @@ position = Vector2(532.9115, -258.16455)
 shape = SubResource("RectangleShape2D_5l4fb")
 
 [node name="Bottom" type="StaticBody2D" parent="Boundaries" unique_id=673661583]
-position = Vector2(1, 729)
+position = Vector2(18, 659)
 scale = Vector2(0.79, 0.79)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom" unique_id=45493225]
-position = Vector2(805.75946, 0)
+position = Vector2(808.8607, -59.49367)
 shape = SubResource("RectangleShape2D_fftkf")
 
 [node name="Top" type="StaticBody2D" parent="Boundaries" unique_id=122964176]
+position = Vector2(6, 70.00001)
 scale = Vector2(0.79, 0.79)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Top" unique_id=851159680]
-position = Vector2(805.75946, 0)
+position = Vector2(813.924, 82.27847)
 shape = SubResource("RectangleShape2D_fftkf")
 
 [node name="Park" type="StaticBody2D" parent="Boundaries" unique_id=1828162140]
@@ -8261,7 +8262,7 @@ shape = SubResource("RectangleShape2D_auckb")
 [node name="Left" type="StaticBody2D" parent="Boundaries" unique_id=1878480641]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left" unique_id=788118233]
-position = Vector2(1289, 352)
+position = Vector2(1053, 370)
 shape = SubResource("RectangleShape2D_sf8j4")
 
 [node name="School" type="StaticBody2D" parent="Boundaries" unique_id=1496250786]

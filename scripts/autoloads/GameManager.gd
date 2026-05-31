@@ -44,8 +44,18 @@ var stage_data = {
 	7: {"name": "Missão Concluída", "objective": "Parabéns! Você ajudou o Coque!"}
 }
 
+var time_accumulator: float = 0.0
+
 func _ready():
 	print("GameManager initialized at stage %d" % current_stage)
+
+func _process(delta: float):
+	if is_game_paused:
+		return
+	time_accumulator += delta
+	if time_accumulator >= 5.0: # Every 5 seconds, game time advances by 1 minute
+		time_accumulator = 0.0
+		advance_time(1)
 
 func advance_stage():
 	if current_stage < 7:
