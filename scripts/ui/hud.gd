@@ -13,7 +13,9 @@ extends CanvasLayer
 @onready var cellphone_button = $TopRightContainer/VBox/Control/CellphoneButton
 
 var button_tween: Tween
+var glow_tween: Tween
 var last_objective: String = ""
+var _phone_glowing: bool = false
 
 func _ready():
 	# Connect signals
@@ -54,8 +56,11 @@ func _animate_objective_change(new_text: String):
 		objective_label.text = new_text
 		last_objective = new_text
 
-func _on_stage_changed(_new_stage: int):
+func _on_stage_changed(new_stage: int):
 	_update_display()
+	# Stage 3 = player needs to open the phone → start glowing
+	if new_stage == 3:
+		_start_phone_glow()
 
 func _on_satisfaction_changed(new_value: float):
 	var tween = create_tween()
@@ -91,6 +96,9 @@ func _update_weather_ui(weather: String):
 
 ## Open/close the phone menu.
 func _on_cellphone_pressed():
+	# Stop glow when player opens the phone
+	_stop_phone_glow()
+	
 	var main_game = get_parent()
 	var phone = main_game.get_node_or_null("UILayer/PhoneMenu")
 	if not phone:
@@ -102,6 +110,8 @@ func _on_cellphone_pressed():
 		phone.toggle()
 
 func _on_cellphone_hover(is_hovering: bool):
+	if _phone_glowing:
+		return  # Don't override glow animation on hover
 	if button_tween:
 		button_tween.kill()
 	button_tween = create_tween()
@@ -110,3 +120,32 @@ func _on_cellphone_hover(is_hovering: bool):
 	button_tween.set_parallel(true)
 	button_tween.tween_property(cellphone_button, "scale", target_scale, 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	button_tween.tween_property(cellphone_button, "modulate", target_modulate, 0.15)
+
+## Starts a looping pulse animation on the cellphone button to attract attention.
+func _start_phone_glow():
+	if _phone_glowing:
+		return
+	_phone_glowing = true
+	cellphone_button.pivot_offset = cellphone_button.size / 2
+	
+	if glow_tween:
+		glow_tween.kill()
+	glow_tween = create_tween().set_loops()
+	glow_tween.set_parallel(true)
+	# Scale pulse: 1.0 → 1.25 → 1.0
+	glow_tween.tween_property(cellphone_button, "scale", Vector2(1.25, 1.25), 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	glow_tween.chain().tween_property(cellphone_button, "scale", Vector2(1.0, 1.0), 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# Color pulse: white → bright yellow → white
+	glow_tween.tween_property(cellphone_button, "modulate", Color(1.5, 1.4, 0.3, 1.0), 0.55).set_trans(Tween.TRANS_SINE)
+	glow_tween.chain().tween_property(cellphone_button, "modulate", Color.WHITE, 0.55).set_trans(Tween.TRANS_SINE)
+
+## Stops the glow animation and resets the button to its normal state.
+func _stop_phone_glow():
+	if not _phone_glowing:
+		return
+	_phone_glowing = false
+	if glow_tween:
+		glow_tween.kill()
+		glow_tween = null
+	cellphone_button.scale = Vector2.ONE
+	cellphone_button.modulate = Color.WHITE

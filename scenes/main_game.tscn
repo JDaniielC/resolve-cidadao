@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://ooc5h2d72spu" path="res://sounds/rain.ogg" id="8_70vka"]
 [ext_resource type="Script" uid="uid://ct5nj742jxgbo" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
 [ext_resource type="PackedScene" uid="uid://8vwu5i52l856" path="res://scenes/system/game_camera.tscn" id="9_camera"]
+[ext_resource type="PackedScene" uid="uid://mission_complete01" path="res://scenes/ui/menus/mission_complete.tscn" id="10_mc"]
 
 [node name="MainGame" type="Node2D" unique_id=324672207]
 script = ExtResource("8_h3x7f")
@@ -30,3 +31,5 @@ layer = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1721135728]
 stream = ExtResource("8_70vka")
 autoplay = true
+
+[node name="MissionComplete" parent="." unique_id=2030100200 instance=ExtResource("10_mc")]

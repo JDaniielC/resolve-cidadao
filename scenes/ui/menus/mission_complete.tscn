@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://mission_complete01"]
+
+[ext_resource type="Script" path="res://scripts/ui/mission_complete.gd" id="1_mc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.07, 0.07, 0.12, 0.97)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.8, 0.5, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar"]
+bg_color = Color(0.15, 0.8, 0.45, 1.0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.1, 0.1, 0.1, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_continue"]
+bg_color = Color(0.15, 0.75, 0.45, 1.0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_credits"]
+bg_color = Color(0.18, 0.18, 0.28, 1.0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.4, 0.6, 0.8)
+
+[node name="MissionComplete" type="CanvasLayer"]
+layer = 110
+script = ExtResource("1_mc")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -230.0
+offset_right = 240.0
+offset_bottom = 230.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+theme_override_constants/separation = 14
+
+[node name="BadgeLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "🏆"
+theme_override_font_sizes/font_size = 52
+horizontal_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "MISSÃO CONCLUÍDA!"
+theme_override_colors/font_color = Color(0.25, 1.0, 0.55, 1)
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Você ajudou o Coque!\nSua ação cidadã fez a diferença."
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSep" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/separator_color = Color(0.3, 0.3, 0.4, 0.6)
+
+[node name="LearningBox" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LearningTitle" type="Label" parent="Panel/VBox/LearningBox"]
+layout_mode = 2
+text = "📚 O que você aprendeu:"
+theme_override_colors/font_color = Color(0.4, 0.85, 1.0, 1)
+theme_override_font_sizes/font_size = 13
+
+[node name="LearningText" type="Label" parent="Panel/VBox/LearningBox"]
+layout_mode = 2
+text = "• A COMPESA é responsável pelo saneamento básico em Recife
+• Cidadãos podem e devem acionar os órgãos competentes
+• A participação cidadã melhora a qualidade de vida da cidade"
+theme_override_colors/font_color = Color(0.78, 0.78, 0.78, 1)
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 2
+
+[node name="HSep2" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/separator_color = Color(0.3, 0.3, 0.4, 0.6)
+
+[node name="StatsBox" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SatisfactionLabel" type="Label" parent="Panel/VBox/StatsBox"]
+layout_mode = 2
+text = "100% de Satisfação"
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="SatisfactionBar" type="ProgressBar" parent="Panel/VBox/StatsBox"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+max_value = 100.0
+value = 100.0
+show_percentage = false
+theme_override_styles/fill = SubResource("StyleBoxFlat_bar")
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+
+[node name="ButtonsBox" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="Panel/VBox/ButtonsBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 44)
+text = "Continuar"
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_continue")
+
+[node name="CreditsButton" type="Button" parent="Panel/VBox/ButtonsBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 44)
+text = "Ver Créditos"
+theme_override_colors/font_color = Color(0.88, 0.88, 0.88, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_credits")
+
+[node name="StarsParticles" type="CPUParticles2D" parent="."]
+position = Vector2(640, 360)
+amount = 40
+lifetime = 3.0
+explosiveness = 0.15
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(300, 200)
+gravity = Vector2(0, -20)
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+color = Color(1.0, 0.9, 0.3, 1.0)
+scale_amount_min = 2.0
+scale_amount_max = 5.0
