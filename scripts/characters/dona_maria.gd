@@ -26,14 +26,23 @@ func is_player_near() -> bool:
 	return can_interact
 
 func trigger_dialogue():
+	var dialogue_resource = load("res://dialogues/missao_01/dona_maria.dialogue")
 	if GameManager.current_stage == 2:
-		print("Dona Maria: Starting dialogue (Stage %d)" % GameManager.current_stage)
-		var dialogue_resource = load("res://dialogues/missao_01/dona_maria.dialogue")
+		print("Dona Maria: Starting initial dialogue (Stage %d)" % GameManager.current_stage)
 		DialogueManager.show_dialogue_balloon(dialogue_resource, "intro")
+	elif GameManager.current_stage in [3, 4, 5]:
+		print("Dona Maria: Starting waiting dialogue (Stage %d)" % GameManager.current_stage)
+		DialogueManager.show_dialogue_balloon(dialogue_resource, "espera")
+	elif GameManager.current_stage == 6:
+		print("Dona Maria: Starting post-resolution dialogue (Stage %d)" % GameManager.current_stage)
+		DialogueManager.show_dialogue_balloon(dialogue_resource, "pos_resolucao")
 	else:
-		print("Dona Maria: Cannot talk now. Current stage: %d (waiting for stage 2)" % GameManager.current_stage)
+		print("Dona Maria: Current stage: %d (no dialogue)" % GameManager.current_stage)
 
 func _on_dialogue_finished(_resource):
 	if GameManager.current_stage == 2:
-		print("Dialogue finished, advancing stage...")
+		print("Dona Maria: Initial dialogue finished, advancing stage...")
+		GameManager.advance_stage()
+	elif GameManager.current_stage == 6:
+		print("Dona Maria: Post-resolution dialogue finished, advancing stage to end...")
 		GameManager.advance_stage()
