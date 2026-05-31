@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var weather_icon = $TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox/WeatherIcon
 @onready var weather_label = $TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox/WeatherLabel
 
-@onready var stage_label = $TopLeftContainer/VBox/StagePanel/StageLabel
 @onready var objective_label = $TopLeftContainer/VBox/ObjectivePanel/Margin/ObjectiveLabel
 @onready var anim_player = $AnimationPlayer
 

@@ -7,9 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
 [ext_resource type="AudioStream" uid="uid://ooc5h2d72spu" path="res://sounds/rain.ogg" id="8_70vka"]
 [ext_resource type="Script" uid="uid://ct5nj742jxgbo" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
+[ext_resource type="PackedScene" uid="uid://8vwu5i52l856" path="res://scenes/system/game_camera.tscn" id="9_camera"]
 
 [node name="MainGame" type="Node2D" unique_id=324672207]
 script = ExtResource("8_h3x7f")
+
+[node name="GameCamera2D" parent="." unique_id=481754669 instance=ExtResource("9_camera")]
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=956007849]
 layer = 2

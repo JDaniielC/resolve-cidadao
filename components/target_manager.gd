@@ -52,11 +52,12 @@ func _process(_delta: float) -> void:
 func _init_target():
 	if Engine.is_editor_hint():
 		return
-	await get_tree().physics_frame
+	if not is_inside_tree():
+		await ready
+	if get_tree():
+		await get_tree().physics_frame
 	if target_player_id > 0:
 		target = Globals.get_player(target_player_id)
-	elif target:
-		target = target
 
 ## Checks if the node has reached the target position.
 func _is_target_reached():
