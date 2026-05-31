@@ -142,15 +142,15 @@ func _show_screen(screen_name: String):
 			back_button.hide()
 		"problems_list":
 			problems_list_view.show()
-			header_title.text = "REGISTRO DE PROBLEMAS"
+			header_title.text = "REGISTROS"
 			back_button.show()
 		"problem_detail":
 			problem_detail_view.show()
-			header_title.text = "REGISTRO DE PROBLEMAS"
+			header_title.text = "REGISTROS"
 			back_button.show()
 		"quiz":
 			quiz_view.show()
-			header_title.text = "QUEM É RESPONSÁVEL?"
+			header_title.text = "RESPONSÁVEIS"
 			back_button.show()
 			_select_quiz_option(0) # Clear previous selection
 		"compesa":
@@ -163,7 +163,7 @@ func _show_screen(screen_name: String):
 			back_button.hide()
 		"indicators":
 			indicators_view.show()
-			header_title.text = "SATISFAÇÃO DA CIDADE"
+			header_title.text = "SATISFAÇÃO"
 			back_button.show()
 			_update_indicators_screen()
 		"concepts":
