@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cxcredits0001"]
+
+[ext_resource type="Script" path="res://scripts/ui/credits_menu.gd" id="1_credits"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/menu_button.tscn" id="2_btn"]
+[ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="3_blur"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_credits"]
+shader = ExtResource("3_blur")
+shader_parameter/blur_amount = 4.5
+
+[node name="CreditsMenu" type="CanvasLayer"]
+layer = 102
+process_mode = 3
+script = ExtResource("1_credits")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+material = SubResource("ShaderMaterial_credits")
+
+[node name="Panel" type="Panel" parent="Control"]
+custom_minimum_size = Vector2(460, 520)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+	anchor_top = 0.5
+	anchor_right = 0.5
+	anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = 25.0
+offset_top = 20.0
+offset_right = -25.0
+offset_bottom = -20.0
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "CRÉDITOS"
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="DevTitle" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.668627, 0.688235, 1)
+theme_override_font_sizes/font_size = 16
+text = "💻 Desenvolvimento e Programação"
+horizontal_alignment = 1
+
+[node name="DevNames" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Isaac Dias (CC)
+Flavio Henrique (SI)
+Matheus Braga (CC)
+José Daniel (EC)
+Rayhene Ranúzia (EC)"
+horizontal_alignment = 1
+line_spacing = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreativeTitle" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.668627, 0.688235, 1)
+theme_override_font_sizes/font_size = 16
+text = "🎨 Sprites, Design & Roteiro"
+horizontal_alignment = 1
+
+[node name="CreativeNames" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Hannah Masri (Design)
+Paulo Carneiro (CC)
+Nicolas Cavalcanti (EC)"
+horizontal_alignment = 1
+line_spacing = 3
+
+[node name="Spacer" type="Control" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BackButton" parent="Control/Panel/VBoxContainer" instance=ExtResource("2_btn")]
+layout_mode = 2
+custom_minimum_size = Vector2(260, 50)
+text = "Voltar"

@@ -64,7 +64,8 @@ func _on_settings_pressed() -> void:
 
 ## Handle Credits button press
 func _on_credits_pressed() -> void:
-	pass
+	var credits_menu = preload("res://scenes/ui/menus/credits_menu.tscn").instantiate()
+	add_child(credits_menu)
 
 
 ## Handle Quit button press
