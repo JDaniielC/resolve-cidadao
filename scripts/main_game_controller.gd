@@ -7,6 +7,11 @@ var pause_menu_scene = preload("res://scenes/ui/menus/pause_menu.tscn")
 func _ready() -> void:
 	# Connect to MenuController pause state signal
 	MenuController.menu_state_changed.connect(_on_menu_state_changed)
+	await get_tree().create_timer(1.0).timeout
+	DialogueManager.show_dialogue_balloon(
+	load("res://dialogues/missao_01/radio.dialogue"),
+	"start"
+)
 
 func _input(event: InputEvent) -> void:
 	# Only handle ESC if game is not already paused
