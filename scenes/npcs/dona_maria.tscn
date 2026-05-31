@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://behlhet1n04mq" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk7.png" id="12_lnmao"]
 [ext_resource type="Texture2D" uid="uid://c772ncse4g8df" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_wide.png" id="13_l0xpu"]
 [ext_resource type="Resource" uid="uid://be2cflaiqr0qx" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
+[ext_resource type="Script" uid="uid://mission_marker_gd" path="res://scripts/ui/mission_marker.gd" id="15_marker"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iibm2"]
 atlas = ExtResource("4_e7sdw")
@@ -123,3 +124,21 @@ script = ExtResource("11_yfo47")
 dialogue = ExtResource("14_m2n4x")
 title = "intro"
 on_completion = [NodePath("../interact")]
+
+[node name="MissionMarker" type="Node2D" parent="." unique_id=7766554433]
+position = Vector2(0, -130)
+script = ExtResource("15_marker")
+visible_at_stage = 1
+hide_distance = 80.0
+
+[node name="Arrow" type="Label" parent="MissionMarker" unique_id=7766554434]
+text = "❗"
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+auto_translate_mode = 1
+offset_left = -16.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = 16.0
+
