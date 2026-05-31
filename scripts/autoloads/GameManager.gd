@@ -53,7 +53,7 @@ func _process(delta: float):
 	if is_game_paused:
 		return
 	time_accumulator += delta
-	if time_accumulator >= 5.0: # Every 5 seconds, game time advances by 1 minute
+	if time_accumulator >= 1.0: # Every 1 second, game time advances by 1 minute
 		time_accumulator = 0.0
 		advance_time(1)
 
@@ -62,6 +62,10 @@ func advance_stage():
 		current_stage += 1
 		stage_changed.emit(current_stage)
 		print("Advanced to stage %d: %s" % [current_stage, stage_data[current_stage]["name"]])
+		# Missão concluída: a chuva para imediatamente
+		# (narrativamente: o jogador resolveu o problema, a tempestade passa)
+		if current_stage == 7:
+			current_weather = "Nublado"
 
 func get_objective() -> String:
 	return stage_data[current_stage]["objective"]
@@ -87,3 +91,13 @@ func set_game_time(hour: int, minute: int):
 ## Advance time by a number of minutes
 func advance_time(minutes: int):
 	game_minute += minutes
+
+## Set the weather explicitly — use this in each new map/mission
+## to define the climate that fits the narrative context.
+## Examples:
+##   GameManager.set_weather("Chuva Forte")  # enchente em curso
+##   GameManager.set_weather("Nublado")      # pós-enchente, cinzento
+##   GameManager.set_weather("Limpo")        # bairro recuperado, sol voltando
+##   GameManager.set_weather("Estiagem")     # missão sobre seca
+func set_weather(weather: String) -> void:
+	current_weather = weather
