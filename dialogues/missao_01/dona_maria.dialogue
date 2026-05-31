@@ -1,18 +1,20 @@
 ~ intro
-DonaMaria: A água subiu muito rápido...
-DonaMaria: Eu tentei salvar algumas coisas...
-DonaMaria: Eu perdi quase tudo.
-DonaMaria: A Defesa Civil passou aqui mandando a gente sair.
-DonaMaria: Disseram que abriram um abrigo numa escola.
-~ pergunta
-Player : O que Dona maria precisa ?
-- Procurar emprego
-	Talvez isso seja importante depois.
-	=> pergunta
-- Procurar abrigo temporário
-	Correto.
-	=> END
-- Ir ao hospital
-	Ela não parece ferida.
-	=> pergunta
+DonaMaria: A água subiu muito rápido, meu filho...
+DonaMaria: Eu tentei salvar algumas coisas, mas perdi quase tudo.
+DonaMaria: A Defesa Civil passou mandando a gente sair e disseram que abriram um abrigo numa escola próxima.
+DonaMaria: E para piorar, desde que a chuva começou, a água aqui no Coque está falhando toda hora! Sem água limpa, a gente não consegue nem limpar a lama das casas.
+DonaMaria: Alguém precisa acionar o órgão responsável para consertar essa tubulação! Você pode me ajudar a ver isso no celular?
+=> END
+
+~ espera
+DonaMaria: Menino, você já conseguiu descobrir de quem é a responsabilidade por essa falta de água?
+DonaMaria: Dê uma olhada no seu celular, no Registro de Problemas! Talvez você ache quem a gente deve acionar.
+=> END
+
+~ pos_resolucao
+DonaMaria: Que excelente notícia, meu filho!
+DonaMaria: Eu já vi a equipe da COMPESA chegando aqui na rua para restabelecer a água!
+DonaMaria: Graças à sua iniciativa de registrar o problema e acionar quem de direito, vamos ter água limpa de novo para recomeçar.
+DonaMaria: Muito obrigada pela ajuda. Você mostrou o poder que um cidadão consciente tem!
+=> END
  

@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var weather_icon = $TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox/WeatherIcon
 @onready var weather_label = $TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox/WeatherLabel
 
-@onready var stage_label = $TopLeftContainer/VBox/StagePanel/StageLabel
 @onready var objective_label = $TopLeftContainer/VBox/ObjectivePanel/Margin/ObjectiveLabel
 @onready var anim_player = $AnimationPlayer
 
@@ -46,9 +45,12 @@ func _update_display():
 	_update_weather_ui(GameManager.current_weather)
 
 func _animate_objective_change(new_text: String):
-	if anim_player.has_animation("objective_update"):
+	if anim_player and anim_player.has_animation("objective_update"):
 		anim_player.play("objective_update")
 		await get_tree().create_timer(0.2).timeout # Mid-point of animation
+		objective_label.text = new_text
+		last_objective = new_text
+	else:
 		objective_label.text = new_text
 		last_objective = new_text
 

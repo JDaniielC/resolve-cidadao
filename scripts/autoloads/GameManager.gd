@@ -11,7 +11,7 @@ var current_stage: int = 1
 var is_game_paused: bool = false
 
 # Satisfaction system
-var satisfaction: float = 50.0:
+var satisfaction: float = 90.0:
 	set(value):
 		satisfaction = clamp(value, 0.0, 100.0)
 		satisfaction_changed.emit(satisfaction)
@@ -32,18 +32,33 @@ var current_weather: String = "Chuva Forte":
 		current_weather = value
 		weather_changed.emit(current_weather)
 
+var water_solved: bool = false
+
 var stage_data = {
 	1: {"name": "Primeiro Controle", "objective": "Aproxime-se de Dona Maria"},
 	2: {"name": "Primeiro NPC", "objective": "Converse com Dona Maria"},
-	3: {"name": "Identificar Necessidade", "objective": "Responda corretamente"},
-	4: {"name": "Desbloqueio do Celular", "objective": "Explore o celular da cidade"}
+	3: {"name": "Registro de Problemas", "objective": "Abra o celular e acesse o Registro de Problemas"},
+	4: {"name": "Identificar Responsável", "objective": "Descubra quem é responsável por resolver o problema da água"},
+	5: {"name": "Acionar Solução", "objective": "Entre em contato com a COMPESA no celular"},
+	6: {"name": "Retorno Narrativo", "objective": "Fale com Dona Maria novamente"},
+	7: {"name": "Missão Concluída", "objective": "Parabéns! Você ajudou o Coque!"}
 }
+
+var time_accumulator: float = 0.0
 
 func _ready():
 	print("GameManager initialized at stage %d" % current_stage)
 
+func _process(delta: float):
+	if is_game_paused:
+		return
+	time_accumulator += delta
+	if time_accumulator >= 5.0: # Every 5 seconds, game time advances by 1 minute
+		time_accumulator = 0.0
+		advance_time(1)
+
 func advance_stage():
-	if current_stage < 4:
+	if current_stage < 7:
 		current_stage += 1
 		stage_changed.emit(current_stage)
 		print("Advanced to stage %d: %s" % [current_stage, stage_data[current_stage]["name"]])

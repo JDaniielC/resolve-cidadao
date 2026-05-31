@@ -6,6 +6,7 @@ extends Camera2D
 
 func _ready() -> void:
 	_enable_smoothing(false)
+	zoom = Vector2(2.5, 2.5) # Focus closer to the character (2.5x)
 	target_manager.target_reached.connect(_init_camera)
 
 func _physics_process(_delta: float) -> void:
