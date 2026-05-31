@@ -1,44 +1,41 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dvgu4o1jl3twi"]
 
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_behindBack.png" id="2_7c4pd"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_cheer0.png" id="3_5ngyf"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_cheer1.png" id="4_iibm2"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk0.png" id="5_6m82e"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk1.png" id="6_2mkqn"]
-[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="6_js8n1"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="7_7ld0m"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk2.png" id="7_e7sdw"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk3.png" id="8_o43uh"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="8_wnv1r"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk4.png" id="9_acsyr"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk5.png" id="10_lkx7m"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk6.png" id="11_cop2v"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_yfo47"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk7.png" id="12_lnmao"]
-[ext_resource type="Texture2D" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_wide.png" id="13_l0xpu"]
-[ext_resource type="Resource" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
+[ext_resource type="Texture2D" uid="uid://dwyygjhidrms1" path="res://entities/npcs/dona-maria.png" id="4_e7sdw"]
+[ext_resource type="Texture2D" uid="uid://qjaixoy0hml3" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk0.png" id="5_6m82e"]
+[ext_resource type="Texture2D" uid="uid://c1md71tdqgbv4" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk1.png" id="6_2mkqn"]
+[ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="6_js8n1"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="7_7ld0m"]
+[ext_resource type="Texture2D" uid="uid://duxgiovqyv0a2" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk2.png" id="7_e7sdw"]
+[ext_resource type="Texture2D" uid="uid://2yu3hy2des24" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk3.png" id="8_o43uh"]
+[ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="8_wnv1r"]
+[ext_resource type="Texture2D" uid="uid://dkusxneui7jnx" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk4.png" id="9_acsyr"]
+[ext_resource type="Texture2D" uid="uid://c4clsrbnjjgs" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk5.png" id="10_lkx7m"]
+[ext_resource type="Texture2D" uid="uid://de2i1suyl2v8a" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk6.png" id="11_cop2v"]
+[ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_yfo47"]
+[ext_resource type="Texture2D" uid="uid://behlhet1n04mq" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk7.png" id="12_lnmao"]
+[ext_resource type="Texture2D" uid="uid://c772ncse4g8df" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_wide.png" id="13_l0xpu"]
+[ext_resource type="Resource" uid="uid://be2cflaiqr0qx" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iibm2"]
+atlas = ExtResource("4_e7sdw")
+region = Rect2(125, 577, 141, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m82e"]
+atlas = ExtResource("4_e7sdw")
+region = Rect2(125, 753, 141, 176)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y4sb7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_7c4pd")
+"texture": SubResource("AtlasTexture_iibm2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_5ngyf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_iibm2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_5ngyf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_7c4pd")
+"texture": SubResource("AtlasTexture_6m82e")
 }],
 "loop": true,
 "name": &"Default",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -84,8 +81,10 @@ height = 100.0
 radius = 43.104523
 
 [node name="DonaMariam" type="CharacterBody2D" unique_id=1925654727]
+scale = Vector2(0.49, 0.49)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=500550676]
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_y4sb7")
 animation = &"Default"
 autoplay = "Default"

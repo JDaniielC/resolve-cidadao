@@ -33,7 +33,7 @@ func _ready():
 	last_objective = GameManager.get_objective()
 
 func _update_display():
-	stage_label.text = "Etapa %d/4" % GameManager.current_stage
+	#stage_label.text = "Etapa %d/4" % GameManager.current_stage
 	
 	var new_objective = GameManager.get_objective()
 	if new_objective != last_objective:

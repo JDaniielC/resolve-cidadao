@@ -2,8 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://ds5dnwpnvnpmq" path="res://assets/sprites/kenney/roads/grass.png" id="1_grass"]
 [ext_resource type="Texture2D" uid="uid://bwuh0784q6exc" path="res://assets/sprites/kenney/landscape/landscapeTiles_004.png" id="2_water"]
-[ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="3_player"]
-[ext_resource type="PackedScene" uid="uid://dq8j7m3byp5d6" path="res://scenes/npcs/dona_maria.tscn" id="4_dona_maria"]
 
 [sub_resource type="RectangleShape2D" id="1_collider_top"]
 size = Vector2(800, 50)
@@ -541,16 +539,3 @@ shape = SubResource("4_collider_right")
 [node name="Props" type="Node2D" parent="." unique_id=1879512119]
 z_index = 1
 y_sort_enabled = true
-
-[node name="Entities" type="Node2D" parent="." unique_id=1879512120]
-z_index = 2
-y_sort_enabled = true
-
-[node name="Player" parent="Entities" unique_id=1869535011 instance=ExtResource("3_player")]
-z_index = 2
-position = Vector2(360, 350)
-
-[node name="DonaMariam" parent="Entities" unique_id=1869535012 instance=ExtResource("4_dona_maria")]
-z_index = 2
-position = Vector2(84, 327)
-scale = Vector2(0.5, 0.5)

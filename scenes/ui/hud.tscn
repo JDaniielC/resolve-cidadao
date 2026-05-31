@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene format=3 uid="uid://pp2i221w3x3r"]
 
-[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_abc12"]
-[ext_resource type="Texture2D" path="res://assets/ui/cellphone.png" id="2_phone"]
-[ext_resource type="Texture2D" path="res://assets/ui/joystick.png" id="3_joystick"]
-[ext_resource type="Script" path="res://scripts/ui/virtual_joystick.gd" id="4_vjoy"]
+[ext_resource type="Script" uid="uid://byydvhuprkirh" path="res://scripts/ui/hud.gd" id="1_abc12"]
+[ext_resource type="Texture2D" uid="uid://b0iglgj36kf5v" path="res://assets/ui/cellphone.png" id="2_phone"]
+[ext_resource type="Texture2D" uid="uid://b3oyp1si4mlab" path="res://assets/ui/joystick.png" id="3_joystick"]
+[ext_resource type="Script" uid="uid://bx6xx0rtn17tb" path="res://scripts/ui/virtual_joystick.gd" id="4_vjoy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.14902, 0.14902, 0.14902, 0.705882)
@@ -23,6 +23,40 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.501961)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="Animation" id="Animation_RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_objective_update"]
 resource_name = "objective_update"
@@ -52,68 +86,34 @@ tracks/1/keys = {
 "values": [0.0, -20.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_RESET"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:modulate:a")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TopLeftContainer/VBox/ObjectivePanel:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hud"]
 _data = {
-"RESET": SubResource("Animation_RESET"),
-"objective_update": SubResource("Animation_objective_update")
+&"RESET": SubResource("Animation_RESET"),
+&"objective_update": SubResource("Animation_objective_update")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy"]
-bg_color = Color(0.239216, 0.239216, 0.239216, 0.501961)
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1868146467]
 script = ExtResource("1_abc12")
 
-[node name="TopLeftContainer" type="MarginContainer" parent="."]
+[node name="TopLeftContainer" type="MarginContainer" parent="." unique_id=667794409]
 offset_right = 320.0
 offset_bottom = 250.0
 mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 
-[node name="VBox" type="VBoxContainer" parent="TopLeftContainer"]
+[node name="VBox" type="VBoxContainer" parent="TopLeftContainer" unique_id=1373618865]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="TimeWeatherPanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
+[node name="TimeWeatherPanel" type="PanelContainer" parent="TopLeftContainer/VBox" unique_id=509615505]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
-[node name="Margin" type="MarginContainer" parent="TopLeftContainer/VBox/TimeWeatherPanel"]
+[node name="Margin" type="MarginContainer" parent="TopLeftContainer/VBox/TimeWeatherPanel" unique_id=679675588]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
@@ -121,50 +121,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="HBox" type="HBoxContainer" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin"]
+[node name="HBox" type="HBoxContainer" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin" unique_id=1871909563]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="WeatherIcon" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox"]
+[node name="WeatherIcon" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox" unique_id=924811937]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "⛈️"
 horizontal_alignment = 1
 
-[node name="TimeLabel" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox"]
+[node name="TimeLabel" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox" unique_id=1682030794]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "08:30"
 vertical_alignment = 1
 
-[node name="WeatherLabel" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox"]
+[node name="WeatherLabel" type="Label" parent="TopLeftContainer/VBox/TimeWeatherPanel/Margin/HBox" unique_id=1636495105]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
 theme_override_font_sizes/font_size = 14
 text = "Chuva Forte"
 vertical_alignment = 1
 
-[node name="StagePanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-mouse_filter = 2
-
-[node name="StageLabel" type="Label" parent="TopLeftContainer/VBox/StagePanel"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Etapa 1/4"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ObjectivePanel" type="PanelContainer" parent="TopLeftContainer/VBox"]
+[node name="ObjectivePanel" type="PanelContainer" parent="TopLeftContainer/VBox" unique_id=938615954]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 
-[node name="Margin" type="MarginContainer" parent="TopLeftContainer/VBox/ObjectivePanel"]
+[node name="Margin" type="MarginContainer" parent="TopLeftContainer/VBox/ObjectivePanel" unique_id=1419198134]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
@@ -172,7 +159,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="ObjectiveLabel" type="Label" parent="TopLeftContainer/VBox/ObjectivePanel/Margin"]
+[node name="ObjectiveLabel" type="Label" parent="TopLeftContainer/VBox/ObjectivePanel/Margin" unique_id=1556534209]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.945098, 0.458824, 1)
 theme_override_font_sizes/font_size = 14
@@ -180,7 +167,7 @@ text = "Aproxime-se de Dona Maria"
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="TopRightContainer" type="MarginContainer" parent="."]
+[node name="TopRightContainer" type="MarginContainer" parent="." unique_id=800200673]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -191,17 +178,17 @@ mouse_filter = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
-[node name="VBox" type="VBoxContainer" parent="TopRightContainer"]
+[node name="VBox" type="VBoxContainer" parent="TopRightContainer" unique_id=1456327437]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 15
 
-[node name="SatisfactionPanel" type="PanelContainer" parent="TopRightContainer/VBox"]
+[node name="SatisfactionPanel" type="PanelContainer" parent="TopRightContainer/VBox" unique_id=215022919]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
-[node name="Margin" type="MarginContainer" parent="TopRightContainer/VBox/SatisfactionPanel"]
+[node name="Margin" type="MarginContainer" parent="TopRightContainer/VBox/SatisfactionPanel" unique_id=785521373]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
@@ -209,28 +196,28 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 8
 
-[node name="HBox" type="HBoxContainer" parent="TopRightContainer/VBox/SatisfactionPanel/Margin"]
+[node name="HBox" type="HBoxContainer" parent="TopRightContainer/VBox/SatisfactionPanel/Margin" unique_id=1276243348]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="FaceIcon" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox"]
+[node name="FaceIcon" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox" unique_id=57837268]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "😊"
 
-[node name="VBox" type="VBoxContainer" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox"]
+[node name="VBox" type="VBoxContainer" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox" unique_id=1372345220]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="Title" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox"]
+[node name="Title" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox" unique_id=864990497]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Satisfação da Cidade"
 
-[node name="SatisfactionBar" type="ProgressBar" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox"]
+[node name="SatisfactionBar" type="ProgressBar" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox" unique_id=13214323]
 custom_minimum_size = Vector2(180, 14)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_bg")
@@ -238,7 +225,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
 value = 50.0
 show_percentage = false
 
-[node name="PercentageLabel" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox"]
+[node name="PercentageLabel" type="Label" parent="TopRightContainer/VBox/SatisfactionPanel/Margin/HBox" unique_id=1420454180]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.258824, 0.643137, 0.941176, 1)
@@ -246,18 +233,17 @@ theme_override_font_sizes/font_size = 16
 text = "50%"
 horizontal_alignment = 2
 
-[node name="Control" type="Control" parent="TopRightContainer/VBox"]
+[node name="Control" type="Control" parent="TopRightContainer/VBox" unique_id=808878818]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CellphoneButton" type="TextureButton" parent="TopRightContainer/VBox/Control"]
+[node name="CellphoneButton" type="TextureButton" parent="TopRightContainer/VBox/Control" unique_id=668783586]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -72.0
-offset_right = 0.0
 offset_bottom = 72.0
 grow_horizontal = 0
 pivot_offset = Vector2(36, 36)
@@ -266,7 +252,7 @@ texture_normal = ExtResource("2_phone")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="BottomLeftContainer" type="MarginContainer" parent="."]
+[node name="BottomLeftContainer" type="MarginContainer" parent="." unique_id=231497011]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -277,12 +263,12 @@ mouse_filter = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="VirtualJoystick" type="Control" parent="BottomLeftContainer"]
+[node name="VirtualJoystick" type="Control" parent="BottomLeftContainer" unique_id=784927352]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 script = ExtResource("4_vjoy")
 
-[node name="Base" type="Panel" parent="BottomLeftContainer/VirtualJoystick"]
+[node name="Base" type="Panel" parent="BottomLeftContainer/VirtualJoystick" unique_id=1828580883]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -298,7 +284,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_joy")
 
-[node name="Stick" type="TextureRect" parent="BottomLeftContainer/VirtualJoystick/Base"]
+[node name="Stick" type="TextureRect" parent="BottomLeftContainer/VirtualJoystick/Base" unique_id=833118692]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -316,7 +302,5 @@ texture = ExtResource("3_joystick")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_hud")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=230853127]
+libraries/ = SubResource("AnimationLibrary_hud")
