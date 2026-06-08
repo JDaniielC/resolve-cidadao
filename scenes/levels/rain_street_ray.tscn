@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_aw4y2"]
 [ext_resource type="Texture2D" uid="uid://dq50i3yao4p46" path="res://tilesets/casas-1.png" id="6_aw4y2"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="8_20akl"]
-[ext_resource type="Texture2D" uid="uid://cng68lc5w7jxt" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
-[ext_resource type="Script" uid="uid://day_night_ctrl" path="res://scripts/systems/day_night_controller.gd" id="10_daynight"]
-[ext_resource type="Script" uid="uid://weather_ctrl" path="res://scripts/systems/weather_controller.gd" id="11_weather"]
+[ext_resource type="Texture2D" uid="uid://dyhw4l23cpylg" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
+[ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="10_daynight"]
+[ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="11_weather"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_auckb"]
 texture = ExtResource("9_5l4fb")
@@ -8216,7 +8216,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(656, 414)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2138660342]
-color = Color(0.6999771, 0.81180024, 0.9169156, 1)
+color = Color(0.9870936, 0.9919657, 0.99660796, 1)
 
 [node name="DayNightController" type="Node" parent="." unique_id=1111222333]
 script = ExtResource("10_daynight")
