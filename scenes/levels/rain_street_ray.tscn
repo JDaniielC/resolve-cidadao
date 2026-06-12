@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_aw4y2"]
 [ext_resource type="Texture2D" uid="uid://dq50i3yao4p46" path="res://tilesets/casas-1.png" id="6_aw4y2"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="8_20akl"]
+[ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="12_marker"]
 [ext_resource type="Texture2D" uid="uid://dyhw4l23cpylg" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
 [ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="10_daynight"]
 [ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="11_weather"]
@@ -8297,3 +8298,20 @@ script = ExtResource("8_20akl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=544660757]
 position = Vector2(934, 144)
 shape = SubResource("RectangleShape2D_utga4")
+
+[node name="MissionMarker" type="Node2D" parent="Area2D"]
+position = Vector2(934, 70)
+script = ExtResource("12_marker")
+visible_at_stage = 7
+hide_distance = 60.0
+
+[node name="Arrow" type="Label" parent="Area2D/MissionMarker"]
+text = "❗"
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+auto_translate_mode = 1
+offset_left = -16.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = 16.0

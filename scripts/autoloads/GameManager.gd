@@ -41,7 +41,7 @@ var stage_data = {
 	4: {"name": "Identificar Responsável", "objective": "Descubra quem é responsável por resolver o problema da água"},
 	5: {"name": "Acionar Solução", "objective": "Entre em contato com a COMPESA no celular"},
 	6: {"name": "Retorno Narrativo", "objective": "Fale com Dona Maria novamente"},
-	7: {"name": "Missão Concluída", "objective": "Parabéns! Você ajudou o Coque!"}
+	7: {"name": "Missão Concluída", "objective": "Encontre o abrigo"}
 }
 
 var time_accumulator: float = 0.0
