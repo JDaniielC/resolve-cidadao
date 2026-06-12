@@ -11,6 +11,7 @@ func _ready():
 
 func show_choice(choice_id: String):
 	current_choice_id = choice_id
+	GameManager.pause_game()
 	var dialogue_data = load("res://dialogues/dona_maria_data.gd").new()
 	var choice_data = dialogue_data.get_choice(choice_id)
 
@@ -40,4 +41,5 @@ func _on_choice_selected(option_index: int, is_correct: bool):
 		GameManager.advance_stage()
 	else:
 		print("Wrong choice, try again!")
+	GameManager.resume_game()
 	hide()

@@ -8302,7 +8302,7 @@ shape = SubResource("RectangleShape2D_utga4")
 [node name="MissionMarker" type="Node2D" parent="Area2D"]
 position = Vector2(934, 70)
 script = ExtResource("12_marker")
-visible_at_stage = 7
+visible_at_stage = 6
 hide_distance = 60.0
 
 [node name="Arrow" type="Label" parent="Area2D/MissionMarker"]

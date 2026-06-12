@@ -37,11 +37,11 @@ var water_solved: bool = false
 var stage_data = {
 	1: {"name": "Primeiro Controle", "objective": "Aproxime-se de Dona Maria"},
 	2: {"name": "Primeiro NPC", "objective": "Converse com Dona Maria"},
-	3: {"name": "Registro de Problemas", "objective": "Abra o celular e acesse o Registro de Problemas"},
-	4: {"name": "Identificar Responsável", "objective": "Descubra quem é responsável por resolver o problema da água"},
-	5: {"name": "Acionar Solução", "objective": "Entre em contato com a COMPESA no celular"},
-	6: {"name": "Retorno Narrativo", "objective": "Fale com Dona Maria novamente"},
-	7: {"name": "Missão Concluída", "objective": "Encontre o abrigo"}
+	3: {"name": "Identificar Necessidade", "objective": "O que Dona Maria precisa agora?"},
+	4: {"name": "Celular da Cidade", "objective": "Abra o celular e conheça os serviços da cidade"},
+	5: {"name": "Encontrar Abrigo", "objective": "Consulte o Registro de Problemas para localizar o abrigo"},
+	6: {"name": "Ir ao Abrigo", "objective": "Encontre o abrigo temporário na escola"},
+	7: {"name": "Missão Concluída", "objective": "Entre no abrigo"}
 }
 
 var time_accumulator: float = 0.0

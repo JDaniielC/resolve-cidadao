@@ -11,6 +11,9 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player") or _transition_started:
 		return
+	if GameManager.current_stage == 6:
+		print("[Area2D] Player reached shelter at stage 6, advancing to stage 7...")
+		GameManager.advance_stage()
 	if GameManager.current_stage < required_stage:
 		print("[Area2D] School door locked. Current stage: %d, required: %d" % [GameManager.current_stage, required_stage])
 		return
