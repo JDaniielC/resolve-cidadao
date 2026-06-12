@@ -1,20 +1,28 @@
 ~ intro
-DonaMaria: A água subiu muito rápido, meu filho...
-DonaMaria: Eu tentei salvar algumas coisas, mas perdi quase tudo.
-DonaMaria: A Defesa Civil passou mandando a gente sair e disseram que abriram um abrigo numa escola próxima.
-DonaMaria: E para piorar, desde que a chuva começou, a água aqui no Coque está falhando toda hora! Sem água limpa, a gente não consegue nem limpar a lama das casas.
-DonaMaria: Alguém precisa acionar o órgão responsável para consertar essa tubulação! Você pode me ajudar a ver isso no celular?
-=> END
+Dona Maria: Oxente, meu filho... ainda bem que apareceu alguém por aqui.
+- A senhora está bem?
+	Dona Maria: Eu tô tentando ficar, né? Mas essa chuva não dá trégua.
+	Dona Maria: Desde ontem a água só faz subir.
+	Dona Maria: Passei a manhã inteira levantando os móveis.
+	Dona Maria: O sofá já molhou todinho.
+	- A água entrou na sua casa?
+		Dona Maria: Entrou sim.
+		Dona Maria: Pouquinho primeiro... depois foi tomando conta de tudo.
+		- Alguém veio ajudar vocês?
+			Dona Maria: A Defesa Civil passou mais cedo.
+			Dona Maria: Disseram que algumas áreas podem alagar ainda mais.
+			Dona Maria: Também falaram que abriram um abrigo temporário numa escola aqui perto.
+			- E a senhora pretende ir?
+				Dona Maria: Acho que vou ter que ir.
+				Dona Maria: Ficar aqui tá ficando perigoso.
+				=> END
 
 ~ espera
-DonaMaria: Menino, você já conseguiu descobrir de quem é a responsabilidade por essa falta de água?
-DonaMaria: Dê uma olhada no seu celular, no Registro de Problemas! Talvez você ache quem a gente deve acionar.
+Dona Maria: Meu filho, dá uma olhada no celular da cidade.
+Dona Maria: Lá você encontra o registro de problemas e os serviços públicos disponíveis.
 => END
 
-~ pos_resolucao
-DonaMaria: Que excelente notícia, meu filho!
-DonaMaria: Eu já vi a equipe da COMPESA chegando aqui na rua para restabelecer a água!
-DonaMaria: Graças à sua iniciativa de registrar o problema e acionar quem de direito, vamos ter água limpa de novo para recomeçar.
-DonaMaria: Muito obrigada pela ajuda. Você mostrou o poder que um cidadão consciente tem!
+~ pos_abrigo
+Dona Maria: Vai com Deus, meu filho. A escola fica ali na esquina — é o abrigo que a Defesa Civil abriu.
+Dona Maria: Obrigada por ter parado pra me ouvir.
 => END
- 

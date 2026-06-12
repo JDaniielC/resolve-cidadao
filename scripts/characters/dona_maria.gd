@@ -8,7 +8,6 @@ func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_finished)
 	animated_sprite.play("Default")
 	
-	# Connect InteractionArea signals dynamically (both area and body to be bulletproof!)
 	var interaction_area = $InteractionArea
 	if interaction_area:
 		interaction_area.body_entered.connect(func(body): _on_interaction_entered(body))
@@ -17,7 +16,6 @@ func _ready():
 		interaction_area.area_exited.connect(func(area): _on_interaction_exited(area.get_parent()))
 		print("Dona Maria: InteractionArea signals successfully connected in code.")
 		
-	# Initialize dialogue title matching current stage and listen for subsequent stage changes
 	_update_dialogue_title()
 	GameManager.stage_changed.connect(func(_new_stage): _update_dialogue_title())
 
@@ -40,9 +38,6 @@ func is_player_near() -> bool:
 	return can_interact
 
 func trigger_dialogue():
-	# Interaction and dialogue execution are fully handled by the StateMachine's
-	# StateInteract and StateDialogue nodes in the scene. We dynamically update
-	# the 'title' property on those nodes to match our stages.
 	pass
 
 func _update_dialogue_title():
@@ -53,15 +48,21 @@ func _update_dialogue_title():
 		elif GameManager.current_stage in [3, 4, 5]:
 			dialogue_state.title = "espera"
 		elif GameManager.current_stage == 6:
-			dialogue_state.title = "pos_resolucao"
+			dialogue_state.title = "pos_abrigo"
 		print("Dona Maria: Updated StateMachine dialogue state title to: ", dialogue_state.title)
+
+func _show_need_choice() -> void:
+	var choice_panel = get_tree().root.get_node_or_null("MainGame/UILayer/ChoicePanel")
+	if choice_panel:
+		choice_panel.show_choice("choice_housing")
+	else:
+		push_error("Dona Maria: ChoicePanel not found after intro dialogue.")
 
 func _on_dialogue_finished(_resource):
 	if GameManager.current_stage == 2:
-		print("Dona Maria: Initial dialogue finished, advancing stage...")
+		print("Dona Maria: Intro dialogue finished, advancing to need identification...")
 		GameManager.advance_stage()
+		_show_need_choice()
 		_update_dialogue_title()
 	elif GameManager.current_stage == 6:
-		print("Dona Maria: Post-resolution dialogue finished, advancing stage to end...")
-		GameManager.advance_stage()
-		_update_dialogue_title()
+		print("Dona Maria: Pre-shelter hint dialogue finished.")

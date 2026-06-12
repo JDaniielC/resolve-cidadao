@@ -58,8 +58,8 @@ func _animate_objective_change(new_text: String):
 
 func _on_stage_changed(new_stage: int):
 	_update_display()
-	# Stage 3 = player needs to open the phone → start glowing
-	if new_stage == 3:
+	# Stage 4 = player needs to open the phone → start glowing
+	if new_stage == 4:
 		_start_phone_glow()
 
 func _on_satisfaction_changed(new_value: float):
@@ -96,7 +96,9 @@ func _update_weather_ui(weather: String):
 
 ## Open/close the phone menu.
 func _on_cellphone_pressed():
-	# Stop glow when player opens the phone
+	if GameManager.current_stage < 4:
+		return
+
 	_stop_phone_glow()
 	
 	var main_game = get_parent()

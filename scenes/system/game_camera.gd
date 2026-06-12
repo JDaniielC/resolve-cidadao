@@ -1,4 +1,4 @@
-## Handle main camera movement and target following.  
+## Handle main camera movement and target following.
 class_name GameCamera
 extends Camera2D
 
@@ -18,8 +18,13 @@ func _init_camera():
 
 func _enable_smoothing(value):
 	position_smoothing_enabled = value
-		
+
 ##internal - Manages camera tracking of the assigned target.
 func _follow_target():
 	if target_manager:
 		global_position = target_manager.get_target_position()
+
+func refresh_target() -> void:
+	if target_manager:
+		target_manager.target = null
+		target_manager.target_player_id = 1

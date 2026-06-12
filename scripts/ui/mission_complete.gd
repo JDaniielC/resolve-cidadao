@@ -14,11 +14,6 @@ func _ready() -> void:
 	hide()
 	continue_button.pressed.connect(_on_continue_pressed)
 	credits_button.pressed.connect(_on_credits_pressed)
-	GameManager.stage_changed.connect(_on_stage_changed)
-
-func _on_stage_changed(new_stage: int) -> void:
-	if new_stage == 7:
-		show_mission_complete()
 
 func show_mission_complete() -> void:
 	GameManager.pause_game()

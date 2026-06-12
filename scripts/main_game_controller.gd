@@ -7,6 +7,7 @@ var pause_menu_scene = preload("res://scenes/ui/menus/pause_menu.tscn")
 func _ready() -> void:
 	# Connect to MenuController pause state signal
 	MenuController.menu_state_changed.connect(_on_menu_state_changed)
+	SceneManager.load_complete.connect(_on_level_loaded)
 	await get_tree().create_timer(1.0).timeout
 	DialogueManager.show_dialogue_balloon(
 	load("res://dialogues/missao_01/radio.dialogue"),
@@ -23,6 +24,21 @@ func _open_pause_menu() -> void:
 	## Open pause menu by toggling pause state and instantiating pause menu
 	MenuController.toggle_pause()
 	add_child(pause_menu_scene.instantiate())
+
+func swap_level(scene_path: String, outgoing: Node) -> void:
+	var incoming: Node = load(scene_path).instantiate()
+	add_child(incoming)
+	if outgoing and is_instance_valid(outgoing):
+		outgoing.queue_free()
+	await get_tree().process_frame
+	var camera: GameCamera = $GameCamera2D
+	if camera:
+		camera.refresh_target()
+
+func _on_level_loaded(_loaded_scene: Node) -> void:
+	var camera: GameCamera = $GameCamera2D
+	if camera:
+		camera.refresh_target()
 
 func _on_menu_state_changed(_is_paused: bool) -> void:
 	## Handle menu state changes (pause/resume).
