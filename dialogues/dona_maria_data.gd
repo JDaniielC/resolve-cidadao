@@ -10,9 +10,21 @@ var dialogues = {
 	"choice_housing": {
 		"question": "O que Dona Maria precisa agora?",
 		"options": [
-			{"text": "Encontrar emprego", "correct": false},
-			{"text": "Procurar abrigo temporário", "correct": true},
-			{"text": "Ir ao hospital", "correct": false}
+			{
+				"text": "Encontrar emprego",
+				"correct": false,
+				"feedback": "Ela não falou sobre trabalho. Repense o que ela contou sobre a chuva e a casa."
+			},
+			{
+				"text": "Procurar abrigo temporário",
+				"correct": true,
+				"feedback": "Isso mesmo! A Defesa Civil abriu um abrigo e ficar em casa está ficando perigoso."
+			},
+			{
+				"text": "Ir ao hospital",
+				"correct": false,
+				"feedback": "Ela não parece ferida ou doente. O problema agora é a enchente dentro de casa."
+			}
 		]
 	}
 }

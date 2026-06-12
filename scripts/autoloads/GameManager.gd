@@ -41,7 +41,7 @@ var stage_data = {
 	4: {"name": "Celular da Cidade", "objective": "Abra o celular e conheça os serviços da cidade"},
 	5: {"name": "Encontrar Abrigo", "objective": "Consulte o Registro de Problemas para localizar o abrigo"},
 	6: {"name": "Ir ao Abrigo", "objective": "Encontre o abrigo temporário na escola"},
-	7: {"name": "Missão Concluída", "objective": "Entre no abrigo"}
+	7: {"name": "Abrigo Temporário", "objective": "Explore o abrigo"}
 }
 
 var time_accumulator: float = 0.0
@@ -62,10 +62,6 @@ func advance_stage():
 		current_stage += 1
 		stage_changed.emit(current_stage)
 		print("Advanced to stage %d: %s" % [current_stage, stage_data[current_stage]["name"]])
-		# Missão concluída: a chuva para imediatamente
-		# (narrativamente: o jogador resolveu o problema, a tempestade passa)
-		if current_stage == 7:
-			current_weather = "Nublado"
 
 func get_objective() -> String:
 	return stage_data[current_stage]["objective"]

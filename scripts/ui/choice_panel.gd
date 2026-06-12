@@ -3,8 +3,11 @@ extends Control
 
 @onready var question_label = $PanelContainer/VBoxContainer/QuestionLabel
 @onready var options_container = $PanelContainer/VBoxContainer/OptionsContainer
-var choice_buttons = []
+@onready var feedback_label = $PanelContainer/VBoxContainer/FeedbackLabel
+
+var choice_buttons: Array[Button] = []
 var current_choice_id: String = ""
+var _choice_data: Dictionary = {}
 
 func _ready():
 	hide()
@@ -13,33 +16,51 @@ func show_choice(choice_id: String):
 	current_choice_id = choice_id
 	GameManager.pause_game()
 	var dialogue_data = load("res://dialogues/dona_maria_data.gd").new()
-	var choice_data = dialogue_data.get_choice(choice_id)
+	_choice_data = dialogue_data.get_choice(choice_id)
 
-	question_label.text = choice_data["question"]
+	question_label.text = _choice_data["question"]
+	feedback_label.text = ""
+	feedback_label.hide()
 
-	# Clear previous buttons
 	for btn in choice_buttons:
 		btn.queue_free()
 	choice_buttons.clear()
 
-	# Create buttons for each option
-	for idx in range(choice_data["options"].size()):
-		var option = choice_data["options"][idx]
-		var btn = Button.new()
+	for idx in range(_choice_data["options"].size()):
+		var option: Dictionary = _choice_data["options"][idx]
+		var btn := Button.new()
 		btn.text = option["text"]
 		btn.custom_minimum_size = Vector2(0, 60)
-		btn.pressed.connect(_on_choice_selected.bindv([idx, option["correct"]]))
+		btn.pressed.connect(_on_choice_selected.bind(idx))
 		options_container.add_child(btn)
 		choice_buttons.append(btn)
 
 	show()
 
-func _on_choice_selected(option_index: int, is_correct: bool):
+func _on_choice_selected(option_index: int):
+	var option: Dictionary = _choice_data["options"][option_index]
+	var is_correct: bool = option.get("correct", false)
 	GameManager.choice_made.emit(option_index, is_correct)
+
 	if is_correct:
-		print("Correct choice!")
+		_show_feedback(option.get("feedback", "Resposta correta!"), true)
+		await get_tree().create_timer(1.2).timeout
 		GameManager.advance_stage()
+		GameManager.resume_game()
+		hide()
 	else:
-		print("Wrong choice, try again!")
-	GameManager.resume_game()
-	hide()
+		_show_feedback(option.get("feedback", "Não é essa. Tente outra opção."), false)
+		_flash_button(choice_buttons[option_index])
+
+func _show_feedback(message: String, is_correct: bool) -> void:
+	feedback_label.text = message
+	feedback_label.show()
+	if is_correct:
+		feedback_label.add_theme_color_override("font_color", Color(0.15, 0.45, 0.25))
+	else:
+		feedback_label.add_theme_color_override("font_color", Color(0.65, 0.2, 0.2))
+
+func _flash_button(btn: Button) -> void:
+	var tween := create_tween()
+	tween.tween_property(btn, "modulate", Color(1.0, 0.5, 0.5), 0.12)
+	tween.tween_property(btn, "modulate", Color.WHITE, 0.25)
