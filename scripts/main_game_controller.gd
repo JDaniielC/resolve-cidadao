@@ -47,10 +47,15 @@ func _on_dialogue_ended(resource: DialogueResource) -> void:
 		if is_instance_valid(intro_layer):
 			intro_layer.queue_free()
 		
-		# Re-enable player input
-		for player in Globals.get_players():
-			if player is PlayerEntity:
-				player.input_enabled = true
+		# Start the interactive HUD tutorial
+		var hud = $HUD
+		if hud and hud.has_method("start_tutorial"):
+			hud.start_tutorial()
+		else:
+			# Fallback if no tutorial is found
+			for player in Globals.get_players():
+				if player is PlayerEntity:
+					player.input_enabled = true
 
 func _input(event: InputEvent) -> void:
 	# Only handle ESC if game is not already paused
