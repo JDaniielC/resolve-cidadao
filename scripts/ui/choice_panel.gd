@@ -48,15 +48,24 @@ func _on_choice_selected(option_index: int):
 
 	if is_correct:
 		_show_feedback(option.get("feedback", "Resposta correta!"), true)
-		await get_tree().create_timer(1.2).timeout
-		GameManager.advance_stage()
-		GameManager.resume_game()
-		hide()
-		if current_choice_id == "choice_moradia_comprometida":
-			DialogueManager.show_dialogue_balloon(
-				load("res://dialogues/missao_01/dona_maria.dialogue"),
-				"pos_quiz_moradia"
-			)
+		for btn in choice_buttons:
+			btn.disabled = true
+		
+		var continue_btn := Button.new()
+		continue_btn.text = "Confirmar e Continuar"
+		continue_btn.custom_minimum_size = Vector2(0, 60)
+		continue_btn.pressed.connect(func():
+			GameManager.advance_stage()
+			GameManager.resume_game()
+			hide()
+			if current_choice_id == "choice_moradia_comprometida":
+				DialogueManager.show_dialogue_balloon(
+					load("res://dialogues/missao_01/dona_maria.dialogue"),
+					"pos_quiz_moradia"
+				)
+		)
+		options_container.add_child(continue_btn)
+		choice_buttons.append(continue_btn)
 	elif option.has("lesson"):
 		# Opção com lição (ex.: lição de empatia): modal bloqueante com um botão
 		# tipo "Pedir Desculpas" e o painel continua aberto para nova tentativa.

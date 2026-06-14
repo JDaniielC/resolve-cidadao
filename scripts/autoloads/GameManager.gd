@@ -59,6 +59,8 @@ func _ready():
 	print("GameManager initialized at stage %d" % current_stage)
 	# Auto-save do progresso sempre que o stage avança.
 	stage_changed.connect(func(_new_stage): save_progress())
+	if current_stage >= 9:
+		current_weather = "Nublado"
 
 func _process(delta: float):
 	if is_game_paused:
@@ -71,6 +73,8 @@ func _process(delta: float):
 func advance_stage():
 	if current_stage < stage_data.size():
 		current_stage += 1
+		if current_stage >= 9:
+			set_weather("Nublado")
 		stage_changed.emit(current_stage)
 		print("Advanced to stage %d: %s" % [current_stage, stage_data[current_stage]["name"]])
 
@@ -135,6 +139,8 @@ func load_progress() -> void:
 	current_weather = cfg.get_value("progress", "weather", "Chuva Forte")
 	water_solved = cfg.get_value("progress", "water_solved", false)
 	current_level_path = cfg.get_value("progress", "level", current_level_path)
+	if current_stage >= 9:
+		current_weather = "Nublado"
 
 ## Existe um save de progresso?
 func has_save() -> bool:

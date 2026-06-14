@@ -446,12 +446,14 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
 theme_override_font_sizes/font_size = 15
 text = "📍 Rua da Aurora, Coque"
+autowrap_mode = 2
 
 [node name="DateLabel" type="Label" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox" unique_id=534056094]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 13
 text = "📅 Registrado em: 15/03/2026 - 10:35"
+autowrap_mode = 2
 
 [node name="UpdateLabel" type="Label" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox" unique_id=178359091]
 layout_mode = 2
@@ -511,6 +513,8 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 20
 text = "Falta de água"
+autowrap_mode = 2
+
 
 [node name="StatusTag" type="PanelContainer" parent="Panel/VBoxContainer/ContentView/ProblemDetailView/VBox/Card/Margin/VBox/HBox" unique_id=1567223075]
 self_modulate = Color(0.65098, 0.247059, 0.247059, 1)
@@ -528,12 +532,14 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
 theme_override_font_sizes/font_size = 16
 text = "📍 Rua da Aurora, Coque"
+autowrap_mode = 2
 
 [node name="DateLabel" type="Label" parent="Panel/VBoxContainer/ContentView/ProblemDetailView/VBox/Card/Margin/VBox" unique_id=27429735]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 14
 text = "📅 Registrado em: 15/03/2026 - 10:35"
+autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/ContentView/ProblemDetailView/VBox/Card/Margin/VBox" unique_id=573998319]
 layout_mode = 2
@@ -562,6 +568,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.65098, 0.247059, 0.247059, 1)
 theme_override_font_sizes/font_size = 16
 text = "☹️ -10% de satisfação da cidade"
+autowrap_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/ContentView/ProblemDetailView/VBox" unique_id=1600737483]
 layout_mode = 2

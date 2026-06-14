@@ -120,9 +120,9 @@ theme_override_font_sizes/font_size = 13
 
 [node name="LearningText" type="Label" parent="Panel/VBox/LearningBox"]
 layout_mode = 2
-text = "• A COMPESA é responsável pelo saneamento básico em Recife
-• Cidadãos podem e devem acionar os órgãos competentes
-• A participação cidadã melhora a qualidade de vida da cidade"
+text = "• Famílias afetadas por calamidades têm direito à moradia segura
+• O Aluguel Social é um auxílio financeiro mensal temporário
+• Defesa Civil e Assistência Social atuam juntos nestes casos"
 theme_override_colors/font_color = Color(0.78, 0.78, 0.78, 1)
 theme_override_font_sizes/font_size = 12
 autowrap_mode = 2

@@ -81,11 +81,7 @@ signal action_performed(action: String)
 
 func _ready():
 	_init_screen_notifier()
-	_init_attack_cooldown_timer()
-	_init_inventory()
 	animation_tree.active = true
-	hit.connect(func(): if on_hit: enable_state(on_hit))
-	weapon = weapon ## Initialize the weapon.
 	if initial_facing:
 		facing = initial_facing.to_vector
 
@@ -109,20 +105,12 @@ func _init_screen_notifier():
 
 func _set_weapon(_weapon: DataWeapon):
 	weapon = _weapon
-	if hit_box and weapon:
-		print_debug("%s equipped weapon: %s" % [name, weapon.resource_name])
-		if attack_cooldown_timer:
-			attack_cooldown_timer.stop()
-		hit_box.hp_change = -weapon.power
 
 func _init_attack_cooldown_timer():
-	attack_cooldown_timer = Timer.new()
-	attack_cooldown_timer.one_shot = true
-	add_child(attack_cooldown_timer)
+	pass
 
 func _init_inventory():
-	if inventory:
-		inventory.equip_weapon.connect(func(_weapon: DataWeapon): weapon = _weapon)
+	pass
 
 ##internal - Used to emit the action performed.
 func _emit_action(action: String, value: bool):
@@ -198,12 +186,7 @@ func end_jump():
 
 ##Starts an attack.
 func attack():
-	if !weapon or is_attacking or is_jumping or attack_cooldown_timer.time_left > 0:
-		return
-	else:
-		attack_cooldown_timer.start(weapon.speed)
-		if on_attack:
-			enable_state(on_attack)
+	pass
 
 ##Applies a flash to all children Sprite2D nodes found in group "flash" of the entity. 
 func flash(power := 0.0, duration := 0.15, color := Color.TRANSPARENT):
