@@ -11,6 +11,8 @@ func _ready() -> void:
 	# Connect to MenuController pause state signal
 	MenuController.menu_state_changed.connect(_on_menu_state_changed)
 	SceneManager.load_complete.connect(_on_level_loaded)
+	await get_tree().process_frame
+	_apply_camera_bounds()
 
 	# Continuando de um save: pula a intro e restaura o nível salvo.
 	if GameManager.current_stage > 1:
@@ -90,6 +92,7 @@ func swap_level(scene_path: String, outgoing: Node) -> void:
 	var camera: GameCamera = $GameCamera2D
 	if camera:
 		camera.refresh_target()
+		_apply_camera_bounds()
 	GameManager.current_level_path = scene_path
 	GameManager.save_progress()
 
@@ -109,6 +112,28 @@ func _on_level_loaded(_loaded_scene: Node) -> void:
 	var camera: GameCamera = $GameCamera2D
 	if camera:
 		camera.refresh_target()
+		_apply_camera_bounds()
+
+func _apply_camera_bounds() -> void:
+	var camera: GameCamera = $GameCamera2D
+	if not camera:
+		return
+
+	var level := _get_active_level()
+	if level:
+		camera.apply_level_bounds(level)
+	else:
+		camera.clear_limits()
+
+func _get_active_level() -> Node:
+	for child in get_children():
+		if child is CanvasLayer or child is AudioStreamPlayer:
+			continue
+		if child.name in ["HUD", "MissionComplete", "GameCamera2D"]:
+			continue
+		if child is Node2D:
+			return child
+	return null
 
 func _on_menu_state_changed(_is_paused: bool) -> void:
 	## Handle menu state changes (pause/resume).

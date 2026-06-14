@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="7_0h2ul"]
 [ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="8_tupta"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="9_076d1"]
+[ext_resource type="PackedScene" uid="uid://cambounds01" path="res://scenes/levels/camera_bounds.tscn" id="10_cambounds"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6g0qd"]
 texture = ExtResource("1_fyc8u")
@@ -16373,6 +16374,8 @@ size = Vector2(56, 63)
 [node name="destructed_street" type="Node2D" unique_id=1873935651]
 y_sort_enabled = true
 
+[node name="CameraBounds" parent="." unique_id=1595654723 instance=ExtResource("10_cambounds")]
+
 [node name="Background" type="TileMapLayer" parent="." unique_id=40883614]
 z_index = -1
 position = Vector2(351, 147)
@@ -16472,7 +16475,7 @@ position = Vector2(18, 659)
 scale = Vector2(0.79, 0.79)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom" unique_id=1229465980]
-position = Vector2(808.8607, -102.53165)
+position = Vector2(803.7974, 78.481)
 shape = SubResource("RectangleShape2D_fsmu6")
 
 [node name="Top" type="StaticBody2D" parent="Boundaries" unique_id=357032303]
@@ -16480,7 +16483,7 @@ position = Vector2(6, 70.00001)
 scale = Vector2(0.79, 0.79)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Top" unique_id=2026919536]
-position = Vector2(815.1898, 132.91138)
+position = Vector2(783.5443, -44.303802)
 shape = SubResource("RectangleShape2D_fsmu6")
 
 [node name="Park" type="StaticBody2D" parent="Boundaries" unique_id=521635459]
@@ -16492,7 +16495,7 @@ shape = SubResource("RectangleShape2D_ks7g1")
 [node name="Left" type="StaticBody2D" parent="Boundaries" unique_id=656217745]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left" unique_id=143066014]
-position = Vector2(1053, 370)
+position = Vector2(1292, 377)
 shape = SubResource("RectangleShape2D_qqmwa")
 
 [node name="School" type="StaticBody2D" parent="Boundaries" unique_id=998835628]

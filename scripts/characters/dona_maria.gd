@@ -111,5 +111,3 @@ func _on_dialogue_finished(_resource):
 			var mission_complete = main_game.get_node_or_null("MissionComplete")
 			if mission_complete and mission_complete.has_method("show_mission_complete"):
 				mission_complete.show_mission_complete()
-
-
