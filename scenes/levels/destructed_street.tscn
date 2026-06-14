@@ -16396,7 +16396,10 @@ b = Vector2(17, 1)
 size = Vector2(455.75, 98)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gate"]
-size = Vector2(229, 57)
+size = Vector2(59.25, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g6q3"]
+size = Vector2(97.625, 57)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_sf8j4"]
 a = Vector2(-11, 0)
@@ -16454,7 +16457,13 @@ radius = 20.024984
 radius = 10.049875
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_br_house"]
-size = Vector2(93, 83)
+size = Vector2(93, 89.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h2ul"]
+size = Vector2(99.5, 99.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ix6g7"]
+size = Vector2(93, 86.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bench_wall"]
 size = Vector2(163.5, 39)
@@ -16665,8 +16674,12 @@ shape = SubResource("RectangleShape2D_shops")
 [node name="BottomLeft" type="StaticBody2D" parent="Boundaries" unique_id=1760583119]
 
 [node name="GateWall" type="CollisionShape2D" parent="Boundaries/BottomLeft" unique_id=347154468]
-position = Vector2(386.5, 681.5)
+position = Vector2(490.625, 658)
 shape = SubResource("RectangleShape2D_gate")
+
+[node name="GateWall2" type="CollisionShape2D" parent="Boundaries/BottomLeft" unique_id=2067371858]
+position = Vector2(349.1875, 664)
+shape = SubResource("RectangleShape2D_3g6q3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomLeft" unique_id=1202609490]
 position = Vector2(316, 614)
@@ -16773,16 +16786,16 @@ shape = SubResource("CircleShape2D_qgy08")
 [node name="BottomRight" type="StaticBody2D" parent="Boundaries" unique_id=1828162141]
 
 [node name="House9" type="CollisionShape2D" parent="Boundaries/BottomRight" unique_id=137072092]
-position = Vector2(758, 673)
+position = Vector2(762, 663.625)
 shape = SubResource("RectangleShape2D_br_house")
 
 [node name="House10" type="CollisionShape2D" parent="Boundaries/BottomRight" unique_id=137072093]
-position = Vector2(864, 668)
-shape = SubResource("RectangleShape2D_br_house")
+position = Vector2(866.75, 661.8125)
+shape = SubResource("RectangleShape2D_0h2ul")
 
 [node name="House11" type="CollisionShape2D" parent="Boundaries/BottomRight" unique_id=137072094]
-position = Vector2(977.5, 676.5)
-shape = SubResource("RectangleShape2D_br_house")
+position = Vector2(970, 657.25)
+shape = SubResource("RectangleShape2D_ix6g7")
 
 [node name="BenchWall" type="CollisionShape2D" parent="Boundaries/BottomRight" unique_id=137072095]
 position = Vector2(1211, 683)
