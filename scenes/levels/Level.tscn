@@ -3,12 +3,15 @@
 [ext_resource type="Script" uid="uid://dte41yq56gi4u" path="res://scenes/levels/level.gd" id="1_cq0rv"]
 [ext_resource type="PackedScene" uid="uid://8vwu5i52l856" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="PackedScene" uid="uid://bjahstm66rjpf" path="res://entities/player/player_instantiator.tscn" id="7_a3ws7"]
+[ext_resource type="PackedScene" uid="uid://cambounds01" path="res://scenes/levels/camera_bounds.tscn" id="8_cambounds"]
 
 [node name="Level" type="Node2D" unique_id=2023799494 groups=["level"]]
 y_sort_enabled = true
 position = Vector2(-4.82253e-07, 2.05796e-08)
 script = ExtResource("1_cq0rv")
 metadata/_edit_lock_ = true
+
+[node name="CameraBounds" parent="." instance=ExtResource("8_cambounds")]
 
 [node name="GameCamera2D" parent="." unique_id=481754669 instance=ExtResource("2_d25mt")]
 position = Vector2(320, 180)

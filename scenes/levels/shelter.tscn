@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="3_33ox6"]
 [ext_resource type="Script" uid="uid://dpaekcqg4mffn" path="res://scripts/characters/dona_maria.gd" id="3_i0r10"]
 [ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="4_s7mkf"]
+[ext_resource type="PackedScene" uid="uid://cambounds01" path="res://scenes/levels/camera_bounds.tscn" id="5_cambounds"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_07pi2"]
 texture = ExtResource("1_1cgom")
@@ -12116,6 +12117,8 @@ size = Vector2(481.29364, 81.88187)
 size = Vector2(56, 63)
 
 [node name="Shelter" type="Node2D" unique_id=1273472289]
+
+[node name="CameraBounds" parent="." instance=ExtResource("5_cambounds")]
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=627914919]
 position = Vector2(-1.1920929e-07, 1)
