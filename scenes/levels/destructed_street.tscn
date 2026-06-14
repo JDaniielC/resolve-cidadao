@@ -16432,6 +16432,18 @@ size = Vector2(127, 55)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utga4"]
 size = Vector2(88.5, 21)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyc8u"]
+size = Vector2(38, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g0qd"]
+size = Vector2(54, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alykg"]
+size = Vector2(14, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lo8a"]
+size = Vector2(14, 26)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sf8j4"]
 radius = 20.0
 
@@ -16440,9 +16452,6 @@ radius = 20.024984
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qgy08"]
 radius = 10.049875
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_86wt1"]
-size = Vector2(151, 123)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_br_house"]
 size = Vector2(93, 83)
@@ -16461,6 +16470,24 @@ radius = 11.045361
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4lo8a"]
 radius = 11.045361
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3g6q3"]
+b = Vector2(0, 289)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0h2ul"]
+b = Vector2(0, 289)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tupta"]
+size = Vector2(86, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_076d1"]
+size = Vector2(114, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71erq"]
+size = Vector2(139, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88f0p"]
+size = Vector2(14, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_school_door"]
 size = Vector2(56, 63)
@@ -16689,6 +16716,22 @@ shape = SubResource("RectangleShape2D_playground")
 position = Vector2(803.75, 206.5)
 shape = SubResource("RectangleShape2D_utga4")
 
+[node name="Playground3" type="CollisionShape2D" parent="Boundaries/School" unique_id=2025740100]
+position = Vector2(1150, 214)
+shape = SubResource("RectangleShape2D_fyc8u")
+
+[node name="Playground4" type="CollisionShape2D" parent="Boundaries/School" unique_id=454875818]
+position = Vector2(1172, 615)
+shape = SubResource("RectangleShape2D_6g0qd")
+
+[node name="Playground5" type="CollisionShape2D" parent="Boundaries/School" unique_id=477850210]
+position = Vector2(1241, 560.5)
+shape = SubResource("RectangleShape2D_alykg")
+
+[node name="Playground6" type="CollisionShape2D" parent="Boundaries/School" unique_id=2121356323]
+position = Vector2(1241, 467)
+shape = SubResource("RectangleShape2D_4lo8a")
+
 [node name="ParkProps" type="StaticBody2D" parent="Boundaries" unique_id=1828162140]
 
 [node name="Tree1" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=868424226]
@@ -16696,11 +16739,11 @@ position = Vector2(803, 361)
 shape = SubResource("CircleShape2D_sf8j4")
 
 [node name="Tree6" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1856748306]
-position = Vector2(1163, 363)
+position = Vector2(1147, 359)
 shape = SubResource("CircleShape2D_sf8j4")
 
 [node name="Tree2" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1347312780]
-position = Vector2(801, 434)
+position = Vector2(803, 430)
 shape = SubResource("CircleShape2D_ts5rs")
 
 [node name="Tree3" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=60058123]
@@ -16711,13 +16754,21 @@ shape = SubResource("CircleShape2D_qgy08")
 position = Vector2(859, 452)
 shape = SubResource("CircleShape2D_qgy08")
 
-[node name="Tree4" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1188237538]
-position = Vector2(795, 554)
+[node name="Tree7" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1643248139]
+position = Vector2(914, 428)
 shape = SubResource("CircleShape2D_qgy08")
 
-[node name="Lake" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1969005844]
-position = Vector2(955.5, 447.5)
-shape = SubResource("RectangleShape2D_86wt1")
+[node name="Tree8" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1839783950]
+position = Vector2(932, 489)
+shape = SubResource("CircleShape2D_qgy08")
+
+[node name="Tree9" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1974535658]
+position = Vector2(911, 397)
+shape = SubResource("CircleShape2D_qgy08")
+
+[node name="Tree4" type="CollisionShape2D" parent="Boundaries/ParkProps" unique_id=1188237538]
+position = Vector2(797, 539)
+shape = SubResource("CircleShape2D_qgy08")
 
 [node name="BottomRight" type="StaticBody2D" parent="Boundaries" unique_id=1828162141]
 
@@ -16761,6 +16812,44 @@ shape = SubResource("CircleShape2D_4lo8a")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundaries/Trash" unique_id=1013921724]
 polygon = PackedVector2Array(689, 167, 713, 160, 714, 170, 719, 174, 719, 185, 721, 199, 700, 208, 689, 204)
+
+[node name="Gates" type="StaticBody2D" parent="Boundaries" unique_id=200729545]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=1039461627]
+position = Vector2(727, 301)
+shape = SubResource("SegmentShape2D_3g6q3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=2089609852]
+position = Vector2(1214, 301)
+shape = SubResource("SegmentShape2D_0h2ul")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=1401725545]
+position = Vector2(1170, 314)
+shape = SubResource("RectangleShape2D_tupta")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=1019239895]
+position = Vector2(1031, 316)
+shape = SubResource("RectangleShape2D_076d1")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=1320247919]
+position = Vector2(789, 317)
+shape = SubResource("RectangleShape2D_71erq")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=1021485153]
+position = Vector2(776, 579)
+shape = SubResource("RectangleShape2D_71erq")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=166412299]
+position = Vector2(1010, 579)
+shape = SubResource("RectangleShape2D_71erq")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=1736393521]
+position = Vector2(1142.5, 579)
+shape = SubResource("RectangleShape2D_71erq")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Boundaries/Gates" unique_id=606122664]
+position = Vector2(859, 318)
+shape = SubResource("RectangleShape2D_88f0p")
 
 [node name="SchoolDoor" type="Node2D" parent="." unique_id=1394848881]
 
