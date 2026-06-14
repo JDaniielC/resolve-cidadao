@@ -26,26 +26,6 @@ var dialogues = {
 				"feedback": "Ela não parece ferida ou doente. O problema agora é a enchente dentro de casa."
 			}
 		]
-	},
-	"choice_moradia_comprometida": {
-		"question": "Que programa pode ajudar famílias que perderam a moradia?",
-		"options": [
-			{
-				"text": "Vale transporte",
-				"correct": false,
-				"feedback": "O vale transporte ajuda com custos de locomoção, não com moradia."
-			},
-			{
-				"text": "Aluguel social",
-				"correct": true,
-				"feedback": "Isso mesmo! O aluguel social é um auxílio oferecido em situações emergenciais para moradia."
-			},
-			{
-				"text": "Tarifa social",
-				"correct": false,
-				"feedback": "A tarifa social dá descontos na conta de luz ou água, mas não resolve a falta de moradia."
-			}
-		]
 	}
 }
 

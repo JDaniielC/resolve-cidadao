@@ -26,31 +26,3 @@ Dona Maria: Lá você encontra o registro de problemas e os serviços públicos 
 Dona Maria: Vai com Deus, meu filho. A escola fica ali na esquina — é o abrigo que a Defesa Civil abriu.
 Dona Maria: Obrigada por ter parado pra me ouvir.
 => END
-
-~ rua_destruida
-Dona Maria: Ainda bem que a chuva passou...
-Dona Maria: Mas agora apareceu outro problema.
-- O que aconteceu?
-	Dona Maria: Minha casa ficou muito danificada.
-	Dona Maria: Tem parede rachada e o piso levantou em vários lugares.
-	- A senhora consegue continuar morando aqui?
-		Dona Maria: Sinceramente?
-		Dona Maria: Tenho medo.
-		Dona Maria: E também não tenho dinheiro pra alugar outro lugar.
-		=> END
-
-~ pos_quiz_moradia
-Assistente Social: Dona Maria, pelo que você me contou, talvez você tenha direito ao aluguel social.
-Jogador: Aluguel social?
-Assistente Social: É um auxílio oferecido em situações como essa.
-Assistente Social: Principalmente quando a moradia fica sem condições de uso.
-Jogador: Como alguém consegue participar?
-Assistente Social: Primeiro acontece uma avaliação da situação da família.
-Assistente Social: Depois são feitos os encaminhamentos necessários.
-=> END
-
-~ final
-Dona Maria: Ainda vai ser difícil… mas agora eu sei por onde começar.
-=> END
-
-

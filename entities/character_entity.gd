@@ -164,21 +164,21 @@ func move_towards(_position):
 	move(direction)
 
 ## Handles entity movement, applying the right velocity to the body.
+## Handles entity movement, applying the right velocity to the body.
 func move(direction: Vector2):
 	if is_attacking:
 		return
-	var delta = get_process_delta_time()
-	var target_velocity = Vector2.ZERO
 	var moving_direction := direction.normalized()
-	var new_friction = friction
 	moving_direction *= 1 if not invert_moving_direction else -1
+
 	if moving_direction != Vector2.ZERO:
 		if update_facing_with_movement:
 			facing = moving_direction
 		speed = max_speed * speed_multiplier
-		new_friction = friction * friction_multiplier
-		target_velocity = moving_direction * speed
-	velocity = velocity.move_toward(target_velocity, new_friction * delta)
+		velocity = moving_direction * speed   
+	else:
+		velocity = Vector2.ZERO           
+
 
 ##Starts a jump.
 func jump():

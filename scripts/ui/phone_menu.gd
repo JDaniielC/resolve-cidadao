@@ -15,18 +15,6 @@ extends Control
 @onready var indicators_view = $Panel/VBoxContainer/ContentView/IndicatorsView
 @onready var concepts_view = $Panel/VBoxContainer/ContentView/ConceptsView
 
-@onready var concepts_aluguel_social_container = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer4
-@onready var aluguel_social_card = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer4/AluguelSocialCard
-
-var aluguel_social_detail_view: Control
-var step_title_label: Label
-var step_desc_label: Label
-var step_icon_label: Label
-var step_indicators: Array[PanelContainer] = []
-var step_indicator_labels: Array[Label] = []
-var current_step_idx: int = 0
-
-
 # Bottom Navigation Buttons
 @onready var nav_home = $Panel/VBoxContainer/BottomNav/HBox/HomeButton
 @onready var nav_problems = $Panel/VBoxContainer/BottomNav/HBox/ProblemsButton
@@ -109,7 +97,6 @@ var selected_quiz_option: int = 0
 var phone_glowing: bool = false
 
 var shelter_problem_card: Button
-var housing_problem_card: Button
 var _tutorial_overlay: ColorRect
 var _tutorial_panel: PanelContainer
 var _tutorial_title: Label
@@ -121,7 +108,6 @@ var _tutorial_completed: bool = false
 func _ready():
 	hide()
 	_setup_shelter_card()
-	_setup_housing_card()
 	_build_tutorial_overlay()
 	
 	back_button.pressed.connect(_on_back_pressed)
@@ -151,13 +137,6 @@ func _ready():
 	calling_ok_button.pressed.connect(_on_calling_ok_pressed)
 	
 	GameManager.stage_changed.connect(_on_stage_changed)
-	
-	_setup_aluguel_social_detail_view()
-	if aluguel_social_card:
-		aluguel_social_card.gui_input.connect(func(event):
-			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				_show_aluguel_social_detail()
-		)
 	
 	_update_phone_ui_state()
 	_show_screen("home")
@@ -192,29 +171,6 @@ func _setup_shelter_card() -> void:
 	update_label.text = "Vagas disponíveis para famílias afetadas pela chuva."
 	
 	shelter_problem_card.pressed.connect(func(): _show_problem_detail("shelter"))
-
-func _setup_housing_card() -> void:
-	housing_problem_card = water_problem_card.duplicate(DUPLICATE_USE_INSTANTIATION) as Button
-	water_problem_card.get_parent().add_child(housing_problem_card)
-	housing_problem_card.name = "HousingProblemCard"
-	
-	var icon := housing_problem_card.get_node("Margin/VBox/HBox/Icon") as Label
-	var title := housing_problem_card.get_node("Margin/VBox/HBox/Title") as Label
-	var status_tag := housing_problem_card.get_node("Margin/VBox/HBox/StatusTag") as PanelContainer
-	var status_label := housing_problem_card.get_node("Margin/VBox/HBox/StatusTag/Label") as Label
-	var loc_label := housing_problem_card.get_node("Margin/VBox/LocLabel") as Label
-	var date_label := housing_problem_card.get_node("Margin/VBox/DateLabel") as Label
-	var update_label := housing_problem_card.get_node("Margin/VBox/UpdateLabel") as Label
-	
-	icon.text = "🏠"
-	title.text = "Moradia comprometida"
-	status_tag.self_modulate = Color("A63F3F")
-	status_label.text = "Não Resolvido"
-	loc_label.text = "📍 Rua da Dona Maria"
-	date_label.text = "📅 Identificado após enchente"
-	update_label.text = "Parede rachada e risco estrutural na residência."
-	
-	housing_problem_card.pressed.connect(func(): _show_problem_detail("housing"))
 
 func _build_tutorial_overlay() -> void:
 	_tutorial_overlay = ColorRect.new()
@@ -298,17 +254,6 @@ func _show_problem_detail(problem_id: String) -> void:
 		detail_impact_title.text = "Como chegar:"
 		detail_impact_text.text = "📍 Siga em direção à escola marcada no mapa da rua. A entrada fica na lateral do prédio."
 		detail_resolve_button.hide()
-	elif problem_id == "housing":
-		detail_icon.text = "🏠"
-		detail_title.text = "Moradia comprometida"
-		detail_status_tag.self_modulate = Color("4E8C50") if GameManager.housing_solved else Color("A63F3F")
-		detail_status_label.text = " Resolvido " if GameManager.housing_solved else " Não resolvido "
-		detail_loc_label.text = "📍 Rua da Dona Maria"
-		detail_desc_title.text = "Resumo da situação:"
-		detail_desc_text.text = "A residência de Dona Maria ficou com paredes rachadas e piso levantado após a enchente, gerando risco estrutural e perigo de desabamento."
-		detail_impact_title.text = "Impacto:"
-		detail_impact_text.text = "Família desabrigada e com medo de retornar para casa sem auxílio ou moradia segura."
-		detail_resolve_button.hide() # Resolvida automaticamente por diálogo/pergunta na rua
 	else:
 		_apply_water_detail_view()
 	_show_screen("problem_detail")
@@ -338,8 +283,6 @@ func _show_screen(screen_name: String):
 	indicators_view.hide()
 	concepts_view.hide()
 	feedback_overlay.hide()
-	if aluguel_social_detail_view:
-		aluguel_social_detail_view.hide()
 	
 	match screen_name:
 		"home":
@@ -376,11 +319,6 @@ func _show_screen(screen_name: String):
 			concepts_view.show()
 			header_title.text = "APRENDIZADOS"
 			back_button.show()
-		"aluguel_social_detail":
-			if aluguel_social_detail_view:
-				aluguel_social_detail_view.show()
-			header_title.text = "ALUGUEL SOCIAL"
-			back_button.show()
 			
 	_update_phone_ui_state()
 
@@ -388,8 +326,6 @@ func _on_back_pressed():
 	match current_screen:
 		"problems_list", "indicators", "concepts":
 			_show_screen("home")
-		"aluguel_social_detail":
-			_show_screen("concepts")
 		"problem_detail":
 			_show_screen("problems_list")
 		"quiz":
@@ -460,15 +396,10 @@ func _on_calling_ok_pressed():
 func _update_phone_ui_state():
 	var phone_unlocked := GameManager.current_stage >= 4
 	
-	if concepts_aluguel_social_container:
-		concepts_aluguel_social_container.visible = GameManager.housing_solved or GameManager.current_stage >= 10
-	
 	if not phone_unlocked:
 		water_problem_card.hide()
 		if shelter_problem_card:
 			shelter_problem_card.hide()
-		if housing_problem_card:
-			housing_problem_card.hide()
 		home_problems_card.disabled = true
 		home_contacts_card.disabled = true
 		nav_problems.disabled = true
@@ -477,11 +408,6 @@ func _update_phone_ui_state():
 		water_problem_card.show()
 		if shelter_problem_card:
 			shelter_problem_card.show()
-		if housing_problem_card:
-			if GameManager.current_stage >= 9:
-				housing_problem_card.show()
-			else:
-				housing_problem_card.hide()
 		home_problems_card.disabled = false
 		home_contacts_card.disabled = false
 		nav_problems.disabled = false
@@ -507,20 +433,6 @@ func _update_phone_ui_state():
 			detail_resolve_button.text = "Ver como resolver"
 			detail_resolve_button.disabled = false
 
-	if housing_problem_card:
-		var status_tag := housing_problem_card.get_node("Margin/VBox/HBox/StatusTag") as PanelContainer
-		var status_label := housing_problem_card.get_node("Margin/VBox/HBox/StatusTag/Label") as Label
-		var update_label := housing_problem_card.get_node("Margin/VBox/UpdateLabel") as Label
-		
-		if GameManager.housing_solved:
-			status_tag.self_modulate = Color("4E8C50")
-			status_label.text = "Resolvido"
-			update_label.text = "Última atualização: Encaminhado para o Aluguel Social."
-		else:
-			status_tag.self_modulate = Color("A63F3F")
-			status_label.text = "Não resolvido"
-			update_label.text = "Última atualização: Moradia estruturalmente comprometida."
-
 func _update_indicators_screen():
 	ind_satisfacao_bar.value = GameManager.satisfaction
 	ind_satisfacao_val.text = "%d%%" % int(GameManager.satisfaction)
@@ -530,216 +442,3 @@ func _on_stage_changed(new_stage: int):
 	if new_stage == 4:
 		phone_glowing = true
 		print("[PhoneMenu] Phone is glowing! Player needs to open phone.")
-
-func _setup_aluguel_social_detail_view():
-	aluguel_social_detail_view = Control.new()
-	aluguel_social_detail_view.name = "AluguelSocialDetailView"
-	aluguel_social_detail_view.set_anchors_preset(Control.PRESET_FULL_RECT)
-	aluguel_social_detail_view.hide()
-	$Panel/VBoxContainer/ContentView.add_child(aluguel_social_detail_view)
-	
-	var margin = MarginContainer.new()
-	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
-	margin.add_theme_constant_override("margin_left", 20)
-	margin.add_theme_constant_override("margin_right", 20)
-	margin.add_theme_constant_override("margin_top", 15)
-	margin.add_theme_constant_override("margin_bottom", 15)
-	aluguel_social_detail_view.add_child(margin)
-	
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 14)
-	margin.add_child(vbox)
-	
-	var subtitle = Label.new()
-	subtitle.text = "Entenda o benefício passo a passo:"
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.add_theme_font_size_override("font_size", 12)
-	subtitle.add_theme_color_override("font_color", Color("8E8E8E"))
-	vbox.add_child(subtitle)
-	
-	var steps_hbox = HBoxContainer.new()
-	steps_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	steps_hbox.add_theme_constant_override("separation", 15)
-	vbox.add_child(steps_hbox)
-	
-	for i in range(4):
-		var step_circle = PanelContainer.new()
-		step_circle.custom_minimum_size = Vector2(32, 32)
-		step_circle.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		
-		var style = StyleBoxFlat.new()
-		style.corner_radius_top_left = 16
-		style.corner_radius_top_right = 16
-		style.corner_radius_bottom_right = 16
-		style.corner_radius_bottom_left = 16
-		style.bg_color = Color("2E6B8A") if i == 0 else Color("404040")
-		step_circle.add_theme_stylebox_override("panel", style)
-		
-		var num_label = Label.new()
-		num_label.text = str(i + 1)
-		num_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		num_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		num_label.add_theme_font_size_override("font_size", 13)
-		step_circle.add_child(num_label)
-		
-		steps_hbox.add_child(step_circle)
-		step_indicators.append(step_circle)
-		step_indicator_labels.append(num_label)
-		
-		step_circle.gui_input.connect(func(event):
-			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				_set_active_step(i)
-		)
-	
-	var detail_card = PanelContainer.new()
-	detail_card.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	var card_style = StyleBoxFlat.new()
-	card_style.bg_color = Color("1A2421")
-	card_style.border_width_left = 2
-	card_style.border_width_top = 2
-	card_style.border_width_right = 2
-	card_style.border_width_bottom = 2
-	card_style.border_color = Color("2E6B8A")
-	card_style.corner_radius_top_left = 12
-	card_style.corner_radius_top_right = 12
-	card_style.corner_radius_bottom_right = 12
-	card_style.corner_radius_bottom_left = 12
-	detail_card.add_theme_stylebox_override("panel", card_style)
-	vbox.add_child(detail_card)
-	
-	var card_margin = MarginContainer.new()
-	card_margin.add_theme_constant_override("margin_left", 15)
-	card_margin.add_theme_constant_override("margin_right", 15)
-	card_margin.add_theme_constant_override("margin_top", 15)
-	card_margin.add_theme_constant_override("margin_bottom", 15)
-	detail_card.add_child(card_margin)
-	
-	var card_vbox = VBoxContainer.new()
-	card_vbox.add_theme_constant_override("separation", 10)
-	card_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	card_margin.add_child(card_vbox)
-	
-	step_icon_label = Label.new()
-	step_icon_label.text = "🤝"
-	step_icon_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	step_icon_label.add_theme_font_size_override("font_size", 42)
-	card_vbox.add_child(step_icon_label)
-	
-	step_title_label = Label.new()
-	step_title_label.text = "1. Assistência Social"
-	step_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	step_title_label.add_theme_font_size_override("font_size", 15)
-	step_title_label.add_theme_color_override("font_color", Color("F4F1DE"))
-	card_vbox.add_child(step_title_label)
-	
-	step_desc_label = Label.new()
-	step_desc_label.text = ""
-	step_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	step_desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	step_desc_label.add_theme_font_size_override("font_size", 12)
-	step_desc_label.add_theme_color_override("font_color", Color("D0D0D0"))
-	card_vbox.add_child(step_desc_label)
-	
-	var btn_hbox = HBoxContainer.new()
-	btn_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	btn_hbox.add_theme_constant_override("separation", 20)
-	vbox.add_child(btn_hbox)
-	
-	var prev_btn = Button.new()
-	prev_btn.name = "PrevButton"
-	prev_btn.text = "Anterior"
-	prev_btn.custom_minimum_size = Vector2(90, 36)
-	prev_btn.pressed.connect(func():
-		if current_step_idx > 0:
-			_set_active_step(current_step_idx - 1)
-	)
-	btn_hbox.add_child(prev_btn)
-	
-	var next_btn = Button.new()
-	next_btn.name = "NextButton"
-	next_btn.text = "Próximo"
-	next_btn.custom_minimum_size = Vector2(90, 36)
-	next_btn.pressed.connect(func():
-		if current_step_idx < 3:
-			_set_active_step(current_step_idx + 1)
-		else:
-			_on_aluguel_social_read_finished()
-	)
-	btn_hbox.add_child(next_btn)
-
-func _show_aluguel_social_detail():
-	_show_screen("aluguel_social_detail")
-	_set_active_step(0)
-
-func _set_active_step(idx: int):
-	current_step_idx = idx
-	var step_data = [
-		{
-			"title": "1. Assistência Social",
-			"desc": "O cidadão procura o CRAS (Centro de Referência de Assistência Social) para relatar a situação e receber o primeiro atendimento das equipes de assistência social.",
-			"icon": "🤝"
-		},
-		{
-			"title": "2. Cadastro",
-			"desc": "É realizado o cadastramento da família no banco de dados de habitação e programas sociais do município, coletando documentos e comprovantes.",
-			"icon": "📝"
-		},
-		{
-			"title": "3. Vistoria Técnica",
-			"desc": "Profissionais da Defesa Civil e engenheiros vistoriam a residência danificada para atestar o risco estrutural e emitir o laudo oficial de interdição.",
-			"icon": "🔎"
-		},
-		{
-			"title": "4. Encaminhamento",
-			"desc": "Com o laudo técnico aprovado, a família é encaminhada para receber a liberação do auxílio financeiro mensal para alugar uma moradia provisória segura.",
-			"icon": "🔑"
-		}
-	]
-	
-	var step = step_data[idx]
-	if step_title_label:
-		step_title_label.text = step["title"]
-	if step_desc_label:
-		step_desc_label.text = step["desc"]
-	if step_icon_label:
-		step_icon_label.text = step["icon"]
-		
-	for i in range(step_indicators.size()):
-		var indicator = step_indicators[i]
-		var style = indicator.get_theme_stylebox("panel") as StyleBoxFlat
-		if style:
-			style = style.duplicate() as StyleBoxFlat
-			if i == idx:
-				style.bg_color = Color("2E6B8A")
-				style.border_color = Color("E07A5F")
-				style.border_width_left = 2
-				style.border_width_top = 2
-				style.border_width_right = 2
-				style.border_width_bottom = 2
-			elif i < idx:
-				style.bg_color = Color("4E8C50")
-				style.border_width_left = 0
-				style.border_width_top = 0
-				style.border_width_right = 0
-				style.border_width_bottom = 0
-			else:
-				style.bg_color = Color("404040")
-				style.border_width_left = 0
-				style.border_width_top = 0
-				style.border_width_right = 0
-				style.border_width_bottom = 0
-			indicator.add_theme_stylebox_override("panel", style)
-			
-	var next_btn = aluguel_social_detail_view.find_child("NextButton", true, false) as Button
-	if next_btn:
-		if idx == 3:
-			next_btn.text = "Concluir"
-		else:
-			next_btn.text = "Próximo"
-
-func _on_aluguel_social_read_finished():
-	hide()
-	if GameManager.current_stage == 10:
-		GameManager.advance_stage()
-		print("[PhoneMenu] Concept read complete, advancing to Stage 11: Final da Missão")
-

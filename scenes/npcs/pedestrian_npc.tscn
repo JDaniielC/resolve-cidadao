@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://pedestrian_npc_tscn"]
+
+[ext_resource type="Script" path="res://scenes/npcs/pedestrian_npc.gd" id="1_script"]
+
+[ext_resource type="Texture2D" uid="uid://bmdywpscxlubv" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk0.png" id="2_walk0"]
+[ext_resource type="Texture2D" uid="uid://cng4vfl4b7pjc" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk1.png" id="3_walk1"]
+[ext_resource type="Texture2D" uid="uid://bhsmhn3rkybao" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk2.png" id="4_walk2"]
+[ext_resource type="Texture2D" uid="uid://bkrfhsu2xhkd1" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk3.png" id="5_walk3"]
+[ext_resource type="Texture2D" uid="uid://b6j7kw3sj1ai0" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk4.png" id="6_walk4"]
+[ext_resource type="Texture2D" uid="uid://dbpfiry0xvg1h" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk5.png" id="7_walk5"]
+[ext_resource type="Texture2D" uid="uid://bmoswf15v7yus" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk6.png" id="8_walk6"]
+[ext_resource type="Texture2D" uid="uid://b1xfm5l4mx0c0" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk7.png" id="9_walk7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ped"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_walk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_walk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_walk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_walk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_walk4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_walk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_walk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_walk7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ped"]
+radius = 18.0
+height = 60.0
+
+[node name="PedestrianNPC" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ped")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_ped")

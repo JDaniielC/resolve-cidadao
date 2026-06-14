@@ -33,7 +33,6 @@ var current_weather: String = "Chuva Forte":
 		weather_changed.emit(current_weather)
 
 var water_solved: bool = false
-var housing_solved: bool = false
 
 var stage_data = {
 	1: {"name": "Primeiro Controle", "objective": "Aproxime-se de Dona Maria"},
@@ -42,11 +41,7 @@ var stage_data = {
 	4: {"name": "Celular da Cidade", "objective": "Abra o celular e conheça os serviços da cidade"},
 	5: {"name": "Encontrar Abrigo", "objective": "Consulte o Registro de Problemas para localizar o abrigo"},
 	6: {"name": "Ir ao Abrigo", "objective": "Encontre o abrigo temporário na escola"},
-	7: {"name": "Abrigo Temporário", "objective": "Converse com o funcionário do abrigo"},
-	8: {"name": "Próximo Passo", "objective": "Saia do abrigo para ver os estragos no bairro"},
-	9: {"name": "Rua Destruída", "objective": "Converse com Dona Maria sobre a casa dela"},
-	10: {"name": "Direito à Moradia", "objective": "Acompanhe a orientação sobre o Aluguel Social"},
-	11: {"name": "Final da Missão", "objective": "Fale com Dona Maria"}
+	7: {"name": "Abrigo Temporário", "objective": "Explore o abrigo"}
 }
 
 var time_accumulator: float = 0.0
@@ -63,7 +58,7 @@ func _process(delta: float):
 		advance_time(1)
 
 func advance_stage():
-	if current_stage < stage_data.size():
+	if current_stage < 7:
 		current_stage += 1
 		stage_changed.emit(current_stage)
 		print("Advanced to stage %d: %s" % [current_stage, stage_data[current_stage]["name"]])

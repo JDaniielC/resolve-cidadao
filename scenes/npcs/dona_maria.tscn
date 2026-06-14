@@ -1,13 +1,23 @@
 [gd_scene format=3 uid="uid://dvgu4o1jl3twi"]
 
-[ext_resource type="Script" uid="uid://dpaekcqg4mffn" path="res://scripts/characters/dona_maria.gd" id="1_dona_maria"]
+[ext_resource type="Script" path="res://scripts/characters/dona_maria.gd" id="1_dona_maria"]
+
 [ext_resource type="Texture2D" uid="uid://dwyygjhidrms1" path="res://entities/npcs/dona-maria.png" id="4_e7sdw"]
+[ext_resource type="Texture2D" uid="uid://qjaixoy0hml3" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk0.png" id="5_6m82e"]
+[ext_resource type="Texture2D" uid="uid://c1md71tdqgbv4" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk1.png" id="6_2mkqn"]
 [ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="6_js8n1"]
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="7_7ld0m"]
+[ext_resource type="Texture2D" uid="uid://duxgiovqyv0a2" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk2.png" id="7_e7sdw"]
+[ext_resource type="Texture2D" uid="uid://2yu3hy2des24" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk3.png" id="8_o43uh"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="8_wnv1r"]
+[ext_resource type="Texture2D" uid="uid://dkusxneui7jnx" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk4.png" id="9_acsyr"]
+[ext_resource type="Texture2D" uid="uid://c4clsrbnjjgs" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk5.png" id="10_lkx7m"]
+[ext_resource type="Texture2D" uid="uid://de2i1suyl2v8a" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk6.png" id="11_cop2v"]
 [ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_yfo47"]
-[ext_resource type="Resource" uid="uid://bncjc6qbgrnbr" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
-[ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="15_marker"]
+[ext_resource type="Texture2D" uid="uid://behlhet1n04mq" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_walk7.png" id="12_lnmao"]
+[ext_resource type="Texture2D" uid="uid://c772ncse4g8df" path="res://entities/npcs/dona_maria/individual_poses/Poses/character_femalePerson_wide.png" id="13_l0xpu"]
+[ext_resource type="Resource" uid="uid://be2cflaiqr0qx" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
+[ext_resource type="Script" uid="uid://mission_marker_gd" path="res://scripts/ui/mission_marker.gd" id="15_marker"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iibm2"]
 atlas = ExtResource("4_e7sdw")
@@ -29,6 +39,41 @@ animations = [{
 "loop": true,
 "name": &"Default",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6m82e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2mkqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e7sdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_o43uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_acsyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lkx7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cop2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lnmao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_l0xpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lnmao")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="1_gsk0d"]
@@ -47,10 +92,9 @@ scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_y4sb7")
 animation = &"Default"
 autoplay = "Default"
-frame_progress = 0.5015757
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363887923]
-position = Vector2(-2.0408163, 0)
+position = Vector2(2, 21)
 shape = SubResource("1_gsk0d")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=273116475]
@@ -81,17 +125,20 @@ dialogue = ExtResource("14_m2n4x")
 title = "intro"
 on_completion = [NodePath("../interact")]
 
-[node name="MissionMarker" type="Node2D" parent="." unique_id=-823380159]
+[node name="MissionMarker" type="Node2D" parent="." unique_id=7766554433]
 position = Vector2(0, -130)
 script = ExtResource("15_marker")
+visible_at_stage = 1
+hide_distance = 80.0
 
-[node name="Arrow" type="Label" parent="MissionMarker" unique_id=-823380158]
+[node name="Arrow" type="Label" parent="MissionMarker" unique_id=7766554434]
+text = "❗"
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
 auto_translate_mode = 1
 offset_left = -16.0
 offset_top = -20.0
 offset_right = 16.0
 offset_bottom = 16.0
-theme_override_font_sizes/font_size = 32
-text = "❗"
-horizontal_alignment = 1
-vertical_alignment = 1
+

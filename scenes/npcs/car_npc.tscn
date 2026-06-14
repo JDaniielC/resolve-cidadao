@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bpp7hmdl4thh4"]
+
+[ext_resource type="Texture2D" uid="uid://cfbha3pa7y8hv" path="res://assets/sprites/car_blue_side.png" id="1_1ffmo"]
+[ext_resource type="Script" uid="uid://fejnf2150qxq" path="res://scenes/npcs/car_npc.gd" id="1_nt5kd"]
+
+[node name="carNPC" type="Node2D" unique_id=1081007025]
+script = ExtResource("1_nt5kd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=122880665]
+texture = ExtResource("1_1ffmo")

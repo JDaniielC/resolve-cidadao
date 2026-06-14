@@ -7,6 +7,10 @@ extends CharacterEntity
 @export var on_transfer_start: State ## State to enable when player starts transfering.
 @export var on_transfer_end: State ## State to enable when player ends transfering.
 
+# === KNOCKBACK ===
+const KNOCKBACK_FORCE_RECOVERY := 800.0 ## Quão rápido o empurrão "desliga".
+var knockback_velocity: Vector2 = Vector2.ZERO
+
 var player_id: int = 1 ## A unique id that is assigned to the player on creation. Player 1 will have player_id = 1 and each additional player will have an incremental id, 2, 3, 4, and so on.
 var equipped = 0 ## The id of the weapon equipped by the player.
 var nearby_npc = null ## Reference to NPC in proximity for interaction
@@ -69,6 +73,11 @@ func disable_entity(value: bool, delay = 0.0):
 func set_npc_proximity(npc_ref = null):
 	nearby_npc = npc_ref if npc_ref else null
 
+## 🚗 Chamado pelo carro quando atropela o player.
+func apply_knockback(push_direction: Vector2, force: float) -> void:
+	knockback_velocity = push_direction.normalized() * force
+	print("💥 Player levou knockback! força: ", force)
+
 func _process(delta):
 	super._process(delta)
 	if Input.is_action_just_pressed("interact") and nearby_npc:
@@ -108,9 +117,17 @@ func _facing_to_suffix(dir: Vector2) -> String:
 		return "down" if dir.y >= 0 else "up"
 	else:
 		return "right" if dir.x > 0 else "left"
-		
+
 func _physics_process(delta):
 	super._physics_process(delta)
+
+	# 🚗 Aplica o empurrão POR CIMA do movimento do pai
+	if knockback_velocity.length() > 1.0:
+		velocity = knockback_velocity
+		move_and_slide()
+		knockback_velocity = knockback_velocity.move_toward(
+			Vector2.ZERO, KNOCKBACK_FORCE_RECOVERY * delta
+		)
 
 	if Input.is_action_just_pressed("interact"):
 		print("Player Layer:", collision_layer)
