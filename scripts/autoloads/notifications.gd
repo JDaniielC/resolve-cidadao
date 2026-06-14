@@ -98,6 +98,18 @@ func notify_concept(concept_name: String) -> void:
 func notify_sms(sender: String, message: String) -> void:
 	show_toast(message, sender, "✉️", DEFAULT_DURATION + 2.0, "sms")
 
+## Toast de "registro resolvido": mostra o problema e o ganho de satisfação.
+func notify_resolved(problem_label: String, satisfaction_gain: float) -> void:
+	var msg := "%s  ·  +%d%% de satisfação" % [problem_label, int(round(satisfaction_gain))]
+	show_toast(msg, "Registro resolvido", "✅", DEFAULT_DURATION + 1.0, "success")
+
+## Toast de penalidade: avisa que a satisfação caiu (usado nas escolhas negativas).
+func notify_penalty(satisfaction_loss: float, reason := "") -> void:
+	var msg := "-%d%% de satisfação" % int(round(satisfaction_loss))
+	if reason != "":
+		msg = "%s  ·  %s" % [reason, msg]
+	show_toast(msg, "Satisfação caiu", "📉", DEFAULT_DURATION, "warning")
+
 func _make_stylebox(accent: Color) -> StyleBoxFlat:
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color(0.09, 0.11, 0.15, 0.96)

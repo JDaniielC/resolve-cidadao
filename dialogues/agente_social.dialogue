@@ -8,15 +8,27 @@ Jogador: Qual seria esse auxílio?
 - Vale Transporte => wrong_choice
 - Aluguel Social => correct_choice
 - Cesta Básica => wrong_choice
+- A senhora que resolva, não é o seu trabalho? => rude_choice
 
 ~ wrong_choice
+do GameManager.penalize_satisfaction(5.0)
 Agente Social: Na verdade, esse auxílio não resolveria o problema de moradia da Dona Maria agora. Pense bem nas opções de habitação.
+=> start
+
+~ rude_choice
+do GameManager.penalize_satisfaction(5.0)
+Agente Social: É o meu trabalho, sim — mas ela é a sua vizinha. Quando a comunidade se importa, a ajuda chega mais rápido.
 => start
 
 ~ correct_choice
 set GameManager.add_satisfaction(15.0)
 Agente Social: Exatamente! O **Aluguel Social** é o benefício destinado a famílias que precisam sair de suas casas por risco iminente ou desastres.
 Agente Social: Vou iniciar o cadastro dela agora mesmo. Ela precisará passar por uma vistoria técnica e social.
+- Quais documentos ela vai precisar separar?
+	Agente Social: Geralmente, documentos de identificação de todos que moram na casa, comprovante de residência e o laudo da Defesa Civil condenando o imóvel.
+	Agente Social: Mas não se preocupe, orientaremos ela em cada passo.
+	do Notifications.notify_concept("Documentação Social")
+- Entendido. Vou avisar a ela.
 Agente Social: Obrigado por ajudar a identificar esse caso! A satisfação da comunidade aumentou.
 set GameManager.advance_stage()
 => END

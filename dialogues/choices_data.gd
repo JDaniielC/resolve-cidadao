@@ -79,13 +79,15 @@ var choices := {
 				"text": "\"Se não sair agora, vou ter que chamar a polícia para te tirar à força.\"",
 				"correct": false,
 				"lesson": "Seu Severino (indignado): \"Chamar a polícia para um velho na própria casa?! Eu não sou criminoso, rapaz! Trabalhei honestamente a vida inteira para construir este teto com o meu suor. Vocês mais novos acham que tudo se resolve na base da força, sem nenhum respeito pela história de quem mora aqui.\"",
-				"lesson_button": "Pedir Desculpas"
+				"satisfaction": -8.0,
+					"lesson_button": "Pedir Desculpas"
 			},
 			{
 				"text": "\"O risco aqui é de deslizamento do morro. Bens materiais a gente recupera, sua vida não.\"",
 				"correct": true,
-				"feedback": "Ele entende a gravidade da situação e aceita sair."
+				"feedback": "Correto! Priorizar a vida e explicar o risco técnico (deslizamento) é a forma mais eficaz e respeitosa de agir."
 			}
+
 		]
 	}
 }

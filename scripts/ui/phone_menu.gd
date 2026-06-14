@@ -508,7 +508,7 @@ func _on_call_compesa_pressed():
 	
 	if not GameManager.water_solved:
 		GameManager.water_solved = true
-		GameManager.add_satisfaction(10.0)
+		GameManager.resolve_problem("Abastecimento de água", 10.0)
 		_update_phone_ui_state()
 
 func _on_calling_ok_pressed():

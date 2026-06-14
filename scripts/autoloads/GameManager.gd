@@ -93,6 +93,20 @@ func add_satisfaction(amount: float):
 func remove_satisfaction(amount: float):
 	satisfaction -= amount
 
+## Resolve um registro de problema: aumenta a satisfação da cidade e dispara a
+## notificação correspondente. Use em cada ponto de resolução para manter o
+## comportamento consistente (a satisfação sobe e o jogador é avisado).
+func resolve_problem(label: String, amount: float) -> void:
+	add_satisfaction(amount)
+	Notifications.notify_resolved(label, amount)
+
+## Penaliza a satisfação por uma escolha negativa: baixa a satisfação E avisa o
+## jogador com um toast. O decaimento passivo por tempo continua usando
+## remove_satisfaction() direto, de propósito, para NÃO notificar a cada segundo.
+func penalize_satisfaction(amount: float, reason := "") -> void:
+	remove_satisfaction(amount)
+	Notifications.notify_penalty(amount, reason)
+
 ## Set a specific time (useful for mission transitions)
 func set_game_time(hour: int, minute: int):
 	game_hour = hour

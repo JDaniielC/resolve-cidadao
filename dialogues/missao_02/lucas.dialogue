@@ -3,13 +3,26 @@ Lucas: Não adianta… ele não quer sair de jeito nenhum! A água tá subindo�
 Jogador: Ei, calma, pequeno! O que houve? Por que você tá aqui sozinho no meio dessa tempestade?
 Lucas: É o meu avô, Seu Severino. A Defesa Civil avisou no rádio pra todo mundo sair por causa do risco de deslizamento do morro…
 Lucas: Mas ele diz que a casa dele aguentou 40 anos de chuva e se trancou lá dentro.
+=> intro_perguntas
+
+~ intro_perguntas
+Lucas: (segurando o choro) Você vai ajudar a gente, moço?
 - Você está sozinho? Onde estão seus pais?
 	Lucas: Minha mãe está trabalhando no centro, ela não conseguiu voltar por causa dos alagamentos.
 	Lucas: Eu estava cuidando do vovô, mas ele ficou teimoso quando a água começou a chegar na calçada.
+	=> intro_fim
 - Não tenha medo, eu vou convencer ele. Onde ele está?
 	Lucas: Ele está ali na subida da rua, na casa de porta azul. Por favor, tira ele de lá!
+	=> intro_fim
 - Por que ele não quer sair?
 	Lucas: Ele diz que não pode deixar as lembranças dele pra trás. Ele tem medo de perder tudo o que construiu.
 	Lucas: Mas se o morro deslizar, ele vai perder muito mais que isso...
+	=> intro_fim
+- Para de chorar, menino. Isso não é problema meu.
+	do GameManager.penalize_satisfaction(6.0)
+	Lucas: (chora mais forte) Mas... é só o meu vô que eu tenho aqui agora...
+	=> intro_perguntas
+
+~ intro_fim
 Lucas: Por favor, me ajuda! A casa de porta azul, no final da subida. Eu vou ficar aqui esperando a mamãe chegar.
 => END
