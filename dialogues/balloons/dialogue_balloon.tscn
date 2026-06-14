@@ -51,7 +51,8 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="Theme" id="Theme_vnod2"]
-default_font_size = 20
+default_font_size = 22
+Button/font_sizes/font_size = 24
 Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
 Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
 Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
@@ -155,7 +156,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = -120.0
-offset_right = -10.0
+offset_right = -150.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -204,6 +205,23 @@ polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
 libraries/ = SubResource("AnimationLibrary_th60n")
 autoplay = &"progress"
 
+[node name="NextButton" type="Button" parent="Balloon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -120.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "E"
+
 [node name="Responses" type="MarginContainer" parent="Balloon" unique_id=1896913694]
 layout_mode = 1
 anchors_preset = 7
@@ -211,10 +229,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = -357.0
-offset_right = 337.0
-offset_bottom = -116.0
+offset_left = -400.0
+offset_top = -550.0
+offset_right = 400.0
+offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -222,7 +240,7 @@ grow_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_constants/separation = 2
+theme_override_constants/separation = 10
 script = ExtResource("3_u7mce")
 response_template = NodePath("ResponseExample")
 

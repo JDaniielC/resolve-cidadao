@@ -113,6 +113,15 @@ func _build_interact_button() -> void:
 	interact_button.pressed.connect(_on_interact_pressed)
 	bottom_right_container.add_child(interact_button)
 
+func set_interact_button_visible(is_visible: bool) -> void:
+	if is_instance_valid(bottom_right_container):
+		bottom_right_container.visible = is_visible
+
+func set_joystick_visible(is_visible: bool) -> void:
+	var joystick_container = get_node_or_null("BottomLeftContainer")
+	if is_instance_valid(joystick_container):
+		joystick_container.visible = is_visible
+
 func _build_tutorial_ui() -> void:
 	tutorial_overlay = ColorRect.new()
 	tutorial_overlay.name = "TutorialOverlay"

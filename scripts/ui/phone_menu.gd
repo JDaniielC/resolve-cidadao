@@ -977,4 +977,3 @@ func _on_aluguel_social_read_finished():
 	if GameManager.current_stage == 10:
 		GameManager.advance_stage()
 		print("[PhoneMenu] Concept read complete, advancing to Stage 11: Final da Missão")
-

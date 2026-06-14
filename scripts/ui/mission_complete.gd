@@ -16,6 +16,7 @@ func _ready() -> void:
 	credits_button.pressed.connect(_on_credits_pressed)
 
 func show_mission_complete() -> void:
+	GameManager.complete_game()
 	GameManager.pause_game()
 	show()
 	
