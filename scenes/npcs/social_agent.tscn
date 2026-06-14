@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bssilsmw2w3ht"]
+
+[ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="1_fti2w"]
+[ext_resource type="Script" uid="uid://dytpg86xo26ct" path="res://scripts/characters/social_agent.gd" id="1_j5nxs"]
+[ext_resource type="Texture2D" uid="uid://w04ukmi871tk" path="res://entities/npcs/agente_social.png" id="2_uwm5c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5nxs"]
+atlas = ExtResource("2_uwm5c")
+region = Rect2(225, 41, 103, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwm5c"]
+atlas = ExtResource("2_uwm5c")
+region = Rect2(19, 41, 103, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjyye"]
+atlas = ExtResource("2_uwm5c")
+region = Rect2(122, 41, 103, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hq0vx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5nxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwm5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjyye")
+}],
+"loop": true,
+"name": &"idle-down",
+"speed": 1.0
+}]
+
+[node name="SocialAgent" type="CharacterBody2D" unique_id=32817527]
+script = ExtResource("1_j5nxs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1690907296]
+sprite_frames = SubResource("SpriteFrames_hq0vx")
+animation = &"idle-down"
+frame_progress = 0.5058728
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1772686187]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1779046208]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_fti2w")
+metadata/_custom_type_script = "uid://bgm8n3pwwbymt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1770420969]

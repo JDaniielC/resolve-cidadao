@@ -19,6 +19,11 @@ func _ready():
 	_update_dialogue_title()
 	GameManager.stage_changed.connect(func(_new_stage): _update_dialogue_title())
 
+	# Ao continuar de um save parado no stage 3, reexibe a escolha (que normalmente
+	# aparece na transição 2->3).
+	if GameManager.current_stage == 3:
+		_show_need_choice.call_deferred()
+
 func _on_interaction_entered(node):
 	if node and node.is_in_group("player"):
 		can_interact = true

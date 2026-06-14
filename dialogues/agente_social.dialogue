@@ -1,0 +1,22 @@
+# dialogues/agente_social.dialogue
+
+~ start
+Agente Social: Olá! Sou assistente social da prefeitura. Estamos aqui para ajudar as famílias afetadas pela enchente.
+Jogador: Olá. A Dona Maria perdeu quase tudo e a casa dela está com rachaduras. Ela não tem para onde ir.
+Agente Social: Entendo. É uma situação prioritária. Em casos onde a moradia é condenada ou fica em área de risco, o município oferece um auxílio específico.
+Jogador: Qual seria esse auxílio?
+- Vale Transporte => wrong_choice
+- Aluguel Social => correct_choice
+- Cesta Básica => wrong_choice
+
+~ wrong_choice
+Agente Social: Na verdade, esse auxílio não resolveria o problema de moradia da Dona Maria agora. Pense bem nas opções de habitação.
+=> start
+
+~ correct_choice
+set GameManager.add_satisfaction(15.0)
+Agente Social: Exatamente! O **Aluguel Social** é o benefício destinado a famílias que precisam sair de suas casas por risco iminente ou desastres.
+Agente Social: Vou iniciar o cadastro dela agora mesmo. Ela precisará passar por uma vistoria técnica e social.
+Agente Social: Obrigado por ajudar a identificar esse caso! A satisfação da comunidade aumentou.
+set GameManager.advance_stage()
+=> END

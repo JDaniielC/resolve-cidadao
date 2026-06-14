@@ -1,6 +1,8 @@
 # scripts/ui/phone_menu.gd
 extends Control
 
+signal contact_challenge_succeeded
+
 # View Containers
 @onready var header_title = $Panel/VBoxContainer/Header/HBox/Title
 @onready var back_button = $Panel/VBoxContainer/Header/HBox/BackButton
@@ -14,6 +16,11 @@ extends Control
 @onready var calling_view = $Panel/VBoxContainer/ContentView/CallingView
 @onready var indicators_view = $Panel/VBoxContainer/ContentView/IndicatorsView
 @onready var concepts_view = $Panel/VBoxContainer/ContentView/ConceptsView
+@onready var content_view = $Panel/VBoxContainer/ContentView
+@onready var concepts_vbox = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox
+@onready var concept_card_compesa = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer2
+@onready var concept_card_defesa = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer3
+@onready var concept_card_aluguel = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer4
 
 @onready var concepts_aluguel_social_container = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer4
 @onready var aluguel_social_card = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer4/AluguelSocialCard
@@ -118,22 +125,42 @@ var _tutorial_button: Button
 var _tutorial_index: int = 0
 var _tutorial_completed: bool = false
 
+# Conceitos desbloqueáveis
+var _unlocked_concepts := {}
+var _concept_nodes := {}
+var _concepts_empty_label: Label
+
+# Contatos (lista + modo desafio)
+const CONTACTS := [
+	{"id": "defesa_civil", "icon": "🛡️", "name": "Defesa Civil", "phone": "199", "role": "Gestão de desastres, mapeamento de áreas de risco, evacuações e socorro a desalojados."},
+	{"id": "compesa", "icon": "💧", "name": "COMPESA", "phone": "0800 081 0195", "role": "Companhia estadual de saneamento: abastecimento de água e coleta de esgoto."},
+	{"id": "guarda", "icon": "👮", "name": "Guarda Municipal", "phone": "153", "role": "Segurança patrimonial, mediação de conflitos urbanos e proteção de bens públicos."},
+	{"id": "procon", "icon": "⚖️", "name": "PROCON", "phone": "151", "role": "Proteção, orientação e defesa dos direitos do consumidor."},
+]
+var _contacts_list_view: Control
+var _contacts_vbox: VBoxContainer
+var _contacts_instruction: Label
+var _challenge_active := false
+var _challenge_correct_id := ""
+
 func _ready():
 	hide()
 	_setup_shelter_card()
 	_setup_housing_card()
 	_build_tutorial_overlay()
-	
+	_build_contacts_list()
+	_setup_concepts()
+
 	back_button.pressed.connect(_on_back_pressed)
 	close_button.pressed.connect(_on_close_pressed)
 	
 	nav_home.pressed.connect(func(): _show_screen("home"))
 	nav_problems.pressed.connect(func(): _show_screen("problems_list"))
-	nav_contacts.pressed.connect(func(): _show_screen("compesa"))
+	nav_contacts.pressed.connect(func(): _show_screen("contacts_list"))
 	nav_indicators.pressed.connect(func(): _show_screen("indicators"))
 	
 	home_problems_card.pressed.connect(func(): _show_screen("problems_list"))
-	home_contacts_card.pressed.connect(func(): _show_screen("compesa"))
+	home_contacts_card.pressed.connect(func(): _show_screen("contacts_list"))
 	home_satisfaction_card.pressed.connect(func(): _show_screen("indicators"))
 	home_concepts_card.pressed.connect(func(): _show_screen("concepts"))
 	
@@ -327,53 +354,70 @@ func _apply_water_detail_view() -> void:
 	_update_phone_ui_state()
 
 func _show_screen(screen_name: String):
+	var previous_screen = current_screen
 	current_screen = screen_name
 	
-	home_view.hide()
-	problems_list_view.hide()
-	problem_detail_view.hide()
-	quiz_view.hide()
-	compesa_view.hide()
-	calling_view.hide()
-	indicators_view.hide()
-	concepts_view.hide()
+	# Prepare for transition
+	var target_view: Control = null
+	match screen_name:
+		"home": target_view = home_view
+		"problems_list": target_view = problems_list_view
+		"problem_detail": target_view = problem_detail_view
+		"quiz": target_view = quiz_view
+		"contacts_list": target_view = _contacts_list_view
+		"compesa": target_view = compesa_view
+		"calling": target_view = calling_view
+		"indicators": target_view = indicators_view
+		"concepts": target_view = concepts_view
+
+	# Hide all views (instantly for now, or fade out if you want)
+	for view in [home_view, problems_list_view, problem_detail_view, quiz_view, compesa_view, calling_view, indicators_view, concepts_view]:
+		if view: view.hide()
+	if _contacts_list_view: _contacts_list_view.hide()
 	feedback_overlay.hide()
+
+	# Update Headers
 	if aluguel_social_detail_view:
 		aluguel_social_detail_view.hide()
+
+	if target_view:
+		target_view.show()
+		target_view.modulate.a = 0
+		var tween = create_tween()
+		tween.tween_property(target_view, "modulate:a", 1.0, 0.2).set_trans(Tween.TRANS_SINE)
+		
+		# Small scale pop for effect
+		target_view.scale = Vector2(0.98, 0.98)
+		tween.parallel().tween_property(target_view, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	
 	match screen_name:
 		"home":
-			home_view.show()
 			header_title.text = "GESTÃO DA CIDADE"
 			back_button.hide()
 		"problems_list":
-			problems_list_view.show()
 			header_title.text = "REGISTROS"
 			back_button.show()
 		"problem_detail":
-			problem_detail_view.show()
 			header_title.text = "REGISTROS"
 			back_button.show()
 		"quiz":
-			quiz_view.show()
 			header_title.text = "RESPONSÁVEIS"
 			back_button.show()
 			_select_quiz_option(0)
+		"contacts_list":
+			header_title.text = "CONTATOS"
+			back_button.show()
 		"compesa":
-			compesa_view.show()
 			header_title.text = "CONTATO"
 			back_button.show()
 		"calling":
-			calling_view.show()
 			header_title.text = "LIGANDO..."
 			back_button.hide()
 		"indicators":
-			indicators_view.show()
 			header_title.text = "SATISFAÇÃO"
 			back_button.show()
 			_update_indicators_screen()
 		"concepts":
-			concepts_view.show()
 			header_title.text = "APRENDIZADOS"
 			back_button.show()
 		"aluguel_social_detail":
@@ -382,11 +426,24 @@ func _show_screen(screen_name: String):
 			header_title.text = "ALUGUEL SOCIAL"
 			back_button.show()
 			
+	_update_nav_highlight()
 	_update_phone_ui_state()
+
+func _update_nav_highlight():
+	# Define active and inactive colors
+	var active_color = Color(0.1, 0.37, 0.39) # Teal
+	var inactive_color = Color(0.6, 0.6, 0.6) # Gray
+	
+	nav_home.add_theme_color_override("font_color", active_color if current_screen == "home" else inactive_color)
+	nav_problems.add_theme_color_override("font_color", active_color if current_screen in ["problems_list", "problem_detail"] else inactive_color)
+	nav_contacts.add_theme_color_override("font_color", active_color if current_screen in ["contacts_list", "compesa", "quiz"] else inactive_color)
+	nav_indicators.add_theme_color_override("font_color", active_color if current_screen == "indicators" else inactive_color)
+	
+	# Small animated indicator (optional, but let's stick to color for now for stability)
 
 func _on_back_pressed():
 	match current_screen:
-		"problems_list", "indicators", "concepts":
+		"problems_list", "indicators", "concepts", "contacts_list":
 			_show_screen("home")
 		"aluguel_social_detail":
 			_show_screen("concepts")
@@ -395,7 +452,7 @@ func _on_back_pressed():
 		"quiz":
 			_show_screen("problem_detail")
 		"compesa":
-			_show_screen("home")
+			_show_screen("contacts_list")
 
 func _on_close_pressed():
 	if _tutorial_overlay.visible:
@@ -530,6 +587,184 @@ func _on_stage_changed(new_stage: int):
 	if new_stage == 4:
 		phone_glowing = true
 		print("[PhoneMenu] Phone is glowing! Player needs to open phone.")
+	if new_stage >= 4:
+		_ensure_base_concepts()
+
+# --- Conceitos desbloqueáveis ---
+
+func _setup_concepts() -> void:
+	_concept_nodes = {
+		"compesa": {"node": concept_card_compesa, "title": "COMPESA"},
+		"defesa_civil": {"node": concept_card_defesa, "title": "Defesa Civil"},
+		"aluguel_social": {"node": concept_card_aluguel, "title": "Aluguel Social"},
+	}
+
+	_concepts_empty_label = Label.new()
+	_concepts_empty_label.text = "Nenhum conceito desbloqueado ainda.\nExplore a cidade e converse com as pessoas."
+	_concepts_empty_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_concepts_empty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_concepts_empty_label.add_theme_color_override("font_color", Color(0.45, 0.45, 0.45))
+	concepts_vbox.add_child(_concepts_empty_label)
+
+	_ensure_base_concepts()
+	_refresh_concepts_view()
+
+## Libera um conceito pelo id ("compesa", "defesa_civil", "aluguel_social").
+## Mostra um toast de "Conceito desbloqueado" (a menos que silent = true).
+func unlock_concept(concept_id: String, silent := false) -> void:
+	if not _concept_nodes.has(concept_id) or _unlocked_concepts.has(concept_id):
+		return
+	_unlocked_concepts[concept_id] = true
+	_refresh_concepts_view()
+	if not silent:
+		Notifications.notify_concept(_concept_nodes[concept_id]["title"])
+
+## Conceitos básicos ficam disponíveis assim que o celular é destravado (stage >= 4).
+func _ensure_base_concepts() -> void:
+	if GameManager.current_stage >= 4:
+		unlock_concept("compesa", true)
+		unlock_concept("defesa_civil", true)
+
+func _refresh_concepts_view() -> void:
+	for concept_id in _concept_nodes:
+		_concept_nodes[concept_id]["node"].visible = _unlocked_concepts.has(concept_id)
+	if _concepts_empty_label:
+		_concepts_empty_label.visible = _unlocked_concepts.is_empty()
+
+# --- Contatos (lista + modo desafio) ---
+
+func _build_contacts_list() -> void:
+	_contacts_list_view = Control.new()
+	_contacts_list_view.name = "ContactsListView"
+	_contacts_list_view.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_contacts_list_view.hide()
+	content_view.add_child(_contacts_list_view)
+
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_contacts_list_view.add_child(scroll)
+
+	_contacts_vbox = VBoxContainer.new()
+	_contacts_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_contacts_vbox.add_theme_constant_override("separation", 12)
+	scroll.add_child(_contacts_vbox)
+
+	var top_spacer := Control.new()
+	top_spacer.custom_minimum_size = Vector2(0, 12)
+	_contacts_vbox.add_child(top_spacer)
+
+	_contacts_instruction = Label.new()
+	_contacts_instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_contacts_instruction.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_contacts_instruction.add_theme_color_override("font_color", Color(0.1, 0.37, 0.39)) # Teal dark
+	_contacts_instruction.add_theme_font_size_override("font_size", 16)
+	_contacts_instruction.hide()
+	_contacts_vbox.add_child(_contacts_instruction)
+
+	# Reutiliza os estilos de cartão de um botão que já existe na cena
+	# (sem load() da própria cena, que causaria dependência cíclica e impediria
+	# o editor de abrir o phone_menu.tscn).
+	var card_style : StyleBox = home_problems_card.get_theme_stylebox("normal")
+	var hover_style : StyleBox = home_problems_card.get_theme_stylebox("hover")
+
+	for c in CONTACTS:
+		var card := Button.new()
+		card.custom_minimum_size = Vector2(0, 80)
+		card.add_theme_stylebox_override("normal", card_style)
+		card.add_theme_stylebox_override("hover", hover_style)
+		card.add_theme_stylebox_override("pressed", card_style)
+		
+		var margin := MarginContainer.new()
+		margin.set_anchors_preset(Control.PRESET_FULL_RECT)
+		margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		margin.add_theme_constant_override("margin_left", 16)
+		margin.add_theme_constant_override("margin_right", 16)
+		card.add_child(margin)
+		
+		var hbox := HBoxContainer.new()
+		hbox.add_theme_constant_override("separation", 14)
+		hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		margin.add_child(hbox)
+		
+		var icon := Label.new()
+		icon.text = c["icon"]
+		icon.add_theme_font_size_override("font_size", 28)
+		hbox.add_child(icon)
+		
+		var vbox := VBoxContainer.new()
+		vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		vbox.alignment = VBoxContainer.ALIGNMENT_CENTER
+		vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		hbox.add_child(vbox)
+		
+		var name_label := Label.new()
+		name_label.text = c["name"]
+		name_label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1))
+		name_label.add_theme_font_size_override("font_size", 18)
+		vbox.add_child(name_label)
+		
+		var phone_label := Label.new()
+		phone_label.text = c["phone"]
+		phone_label.add_theme_color_override("font_color", Color(0.1, 0.37, 0.39))
+		phone_label.add_theme_font_size_override("font_size", 16)
+		vbox.add_child(phone_label)
+		
+		card.pressed.connect(_on_contact_selected.bind(c["id"]))
+		_contacts_vbox.add_child(card)
+
+func _get_contact(contact_id: String) -> Dictionary:
+	for c in CONTACTS:
+		if c["id"] == contact_id:
+			return c
+	return {}
+
+func _on_contact_selected(contact_id: String) -> void:
+	if _challenge_active:
+		var c := _get_contact(contact_id)
+		if contact_id == _challenge_correct_id:
+			_challenge_active = false
+			_contacts_instruction.hide()
+			await Popups.show_alert(
+				"Chamada efetuada com sucesso! A equipe de resgate e transporte adaptado foi acionada.",
+				"Fechar",
+				"✅ %s" % c["name"]
+			)
+			contact_challenge_succeeded.emit()
+		else:
+			await Popups.show_alert(_challenge_feedback(contact_id), "Tentar de novo", "❌ Contato incorreto")
+		return
+
+	if contact_id == "compesa":
+		_show_screen("compesa")
+	else:
+		var c := _get_contact(contact_id)
+		await Popups.show_alert("%s\n\n📞 %s" % [c["role"], c["phone"]], "Fechar", "%s %s" % [c["icon"], c["name"]])
+
+func _challenge_feedback(contact_id: String) -> String:
+	match contact_id:
+		"guarda":
+			return "A Guarda Municipal protege o patrimônio e faz mediação urbana, não resgates climáticos."
+		"procon":
+			return "O PROCON cuida dos direitos do consumidor, não de calamidades."
+		"compesa":
+			return "A COMPESA cuida do saneamento (água e esgoto), não de resgates e evacuações."
+		_:
+			return "Esse não é o contato certo para esta situação."
+
+## Abre o menu de Contatos em modo desafio: o jogador precisa escolher o órgão
+## correto. Ao acertar, emite `contact_challenge_succeeded`. (Plano 2, §7)
+func start_contact_challenge(correct_id := "defesa_civil", instruction := "") -> void:
+	_challenge_active = true
+	_challenge_correct_id = correct_id
+	if instruction != "":
+		_contacts_instruction.text = instruction
+	else:
+		_contacts_instruction.text = "Qual órgão você deve acionar para o resgate e a evacuação?"
+	_contacts_instruction.show()
+	if not visible:
+		show()
+	_show_screen("contacts_list")
 
 func _setup_aluguel_social_detail_view():
 	aluguel_social_detail_view = Control.new()

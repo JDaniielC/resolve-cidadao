@@ -11,7 +11,12 @@ func _ready() -> void:
 	# Connect to MenuController pause state signal
 	MenuController.menu_state_changed.connect(_on_menu_state_changed)
 	SceneManager.load_complete.connect(_on_level_loaded)
-	
+
+	# Continuando de um save: pula a intro e restaura o nível salvo.
+	if GameManager.current_stage > 1:
+		_resume_from_save()
+		return
+
 	# Create intro overlay to keep the screen dark
 	intro_layer = CanvasLayer.new()
 	intro_layer.layer = 1 # Above game (0) but below UILayer (2)
@@ -77,6 +82,20 @@ func swap_level(scene_path: String, outgoing: Node) -> void:
 	var camera: GameCamera = $GameCamera2D
 	if camera:
 		camera.refresh_target()
+	GameManager.current_level_path = scene_path
+	GameManager.save_progress()
+
+## Continuando de um save: restaura o nível salvo e devolve o controle ao jogador.
+func _resume_from_save() -> void:
+	var default_level := "res://scenes/levels/rain_street_ray.tscn"
+	var target := GameManager.current_level_path
+	if target != "" and target != default_level:
+		var current_level := get_node_or_null("RayScene")
+		if current_level:
+			swap_level(target, current_level)
+	for player in Globals.get_players():
+		if player is PlayerEntity:
+			player.input_enabled = true
 
 func _on_level_loaded(_loaded_scene: Node) -> void:
 	var camera: GameCamera = $GameCamera2D

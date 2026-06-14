@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var satisfaction_bar: ProgressBar = $Panel/VBox/StatsBox/SatisfactionBar
 @onready var continue_button: Button = $Panel/VBox/ButtonsBox/ContinueButton
 @onready var credits_button: Button = $Panel/VBox/ButtonsBox/CreditsButton
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var anim_player: AnimationPlayer = get_node_or_null("AnimationPlayer")
 @onready var stars_particles: CPUParticles2D = $StarsParticles
 
 var credits_scene = preload("res://scenes/ui/menus/credits_menu.tscn")

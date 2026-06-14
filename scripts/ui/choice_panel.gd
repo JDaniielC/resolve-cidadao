@@ -15,8 +15,8 @@ func _ready():
 func show_choice(choice_id: String):
 	current_choice_id = choice_id
 	GameManager.pause_game()
-	var dialogue_data = load("res://dialogues/dona_maria_data.gd").new()
-	_choice_data = dialogue_data.get_choice(choice_id)
+	var choices_data = load("res://dialogues/choices_data.gd").new()
+	_choice_data = choices_data.get_choice(choice_id)
 
 	question_label.text = _choice_data["question"]
 	feedback_label.text = ""
@@ -42,6 +42,10 @@ func _on_choice_selected(option_index: int):
 	var is_correct: bool = option.get("correct", false)
 	GameManager.choice_made.emit(option_index, is_correct)
 
+	# Delta de satisfação opcional (ex.: opção desrespeitosa derruba a satisfação).
+	if option.has("satisfaction"):
+		GameManager.add_satisfaction(option["satisfaction"])
+
 	if is_correct:
 		_show_feedback(option.get("feedback", "Resposta correta!"), true)
 		await get_tree().create_timer(1.2).timeout
@@ -53,6 +57,10 @@ func _on_choice_selected(option_index: int):
 				load("res://dialogues/missao_01/dona_maria.dialogue"),
 				"pos_quiz_moradia"
 			)
+	elif option.has("lesson"):
+		# Opção com lição (ex.: lição de empatia): modal bloqueante com um botão
+		# tipo "Pedir Desculpas" e o painel continua aberto para nova tentativa.
+		await Popups.show_alert(option["lesson"], option.get("lesson_button", "Entendi"))
 	else:
 		_show_feedback(option.get("feedback", "Não é essa. Tente outra opção."), false)
 		_flash_button(choice_buttons[option_index])

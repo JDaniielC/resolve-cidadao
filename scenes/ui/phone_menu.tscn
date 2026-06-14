@@ -3,78 +3,130 @@
 [ext_resource type="Script" uid="uid://bx6srs3ywgk5w" path="res://scripts/ui/phone_menu.gd" id="1_6pj1p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_PhoneFrame"]
-bg_color = Color(0.956863, 0.945098, 0.917647, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.117647, 0.117647, 0.117647, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
-shadow_size = 10
-shadow_offset = Vector2(0, 5)
+bg_color = Color(0.98, 0.98, 0.98, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.12, 0.12, 0.14, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 20
+shadow_offset = Vector2(0, 8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_Header"]
 bg_color = Color(0.101961, 0.368627, 0.388235, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
+corner_radius_top_left = 28
+corner_radius_top_right = 28
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_Card"]
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.878431, 0.843137, 0.811765, 1)
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.03)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_CardHover"]
+bg_color = Color(0.98, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.101961, 0.368627, 0.388235, 0.4)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.1, 0.3, 0.3, 0.1)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_TabActive"]
+bg_color = Color(0.101961, 0.368627, 0.388235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_TabInactive"]
+bg_color = Color(0.92, 0.94, 0.94, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_TagRed"]
+bg_color = Color(0.85, 0.3, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ButtonGreen"]
+bg_color = Color(0.15, 0.45, 0.35, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ButtonGreenHover"]
+bg_color = Color(0.2, 0.55, 0.45, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_Alert"]
+bg_color = Color(1, 0.98, 0.95, 1)
+border_width_left = 6
+border_color = Color(0.85, 0.3, 0.3, 1)
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_BottomNav"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 1
+border_color = Color(0.9, 0.9, 0.9, 1)
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ProgressBG"]
+bg_color = Color(0.9, 0.92, 0.92, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_TabActive"]
-bg_color = Color(0.101961, 0.368627, 0.388235, 0.117647)
-border_width_bottom = 3
-border_color = Color(0.101961, 0.368627, 0.388235, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_TabInactive"]
-bg_color = Color(0, 0, 0, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ProgressFill"]
+bg_color = Color(0.2, 0.65, 0.45, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.85, 0.85, 0.85, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_TagRed"]
-bg_color = Color(0.65098, 0.247059, 0.247059, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ButtonGreen"]
-bg_color = Color(0.172549, 0.368627, 0.180392, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ButtonGreenHover"]
-bg_color = Color(0.219608, 0.470588, 0.231373, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_Alert"]
-bg_color = Color(0.917647, 0.878431, 0.823529, 1)
-border_width_left = 4
-border_color = Color(0.65098, 0.247059, 0.247059, 1)
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_BottomNav"]
-bg_color = Color(0.0784314, 0.156863, 0.176471, 1)
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+border_color = Color(1, 1, 1, 0.2)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="PhoneMenu" type="Control" unique_id=1241561247]
 layout_mode = 3
@@ -95,17 +147,17 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.470588)
 
 [node name="Panel" type="Panel" parent="." unique_id=294455120]
-custom_minimum_size = Vector2(360, 600)
+custom_minimum_size = Vector2(400, 640)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -300.0
-offset_right = 180.0
-offset_bottom = 300.0
+offset_left = -200.0
+offset_top = -320.0
+offset_right = 200.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -123,16 +175,16 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="Header" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=911748671]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_Header")
 
@@ -141,7 +193,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="BackButton" type="Button" parent="Panel/VBoxContainer/Header/HBox" unique_id=1865432131]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
@@ -155,7 +207,7 @@ size_flags_horizontal = 3
 [node name="Title" type="Label" parent="Panel/VBoxContainer/Header/HBox" unique_id=495053350]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "GESTÃO DA CIDADE"
 horizontal_alignment = 1
 
@@ -164,7 +216,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CloseButton" type="Button" parent="Panel/VBoxContainer/Header/HBox" unique_id=2083373524]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
@@ -199,7 +251,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox" unique_id=615887986]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="AvatarPanel" type="PanelContainer" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox" unique_id=1125766116]
@@ -208,10 +260,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_Card")
 
 [node name="Margin" type="MarginContainer" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox/AvatarPanel" unique_id=954297726]
 layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="HBox" type="HBoxContainer" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox/AvatarPanel/Margin" unique_id=1406560594]
 layout_mode = 2
@@ -235,48 +287,50 @@ text = "Administre os problemas da cidade e busque soluções."
 autowrap_mode = 2
 
 [node name="ProblemsCard" type="Button" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox" unique_id=265843987]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_colors/font_hover_color = Color(0.101961, 0.368627, 0.388235, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_Card")
+theme_override_styles/hover = SubResource("StyleBoxFlat_CardHover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_Card")
-theme_override_styles/hover = SubResource("StyleBoxFlat_Card")
 text = " 📋  Registro de Problemas"
 alignment = 0
 
 [node name="ContactsCard" type="Button" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox" unique_id=600987824]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_colors/font_hover_color = Color(0.101961, 0.368627, 0.388235, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_Card")
+theme_override_styles/hover = SubResource("StyleBoxFlat_CardHover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_Card")
-theme_override_styles/hover = SubResource("StyleBoxFlat_Card")
 text = " 📞  Contatos / Responsáveis"
 alignment = 0
 
 [node name="SatisfactionCard" type="Button" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox" unique_id=76944522]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_colors/font_hover_color = Color(0.101961, 0.368627, 0.388235, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_Card")
+theme_override_styles/hover = SubResource("StyleBoxFlat_CardHover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_Card")
-theme_override_styles/hover = SubResource("StyleBoxFlat_Card")
 text = " 📈  Satisfação da Cidade"
 alignment = 0
 
 [node name="ConceptsCard" type="Button" parent="Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox" unique_id=879834394]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_colors/font_hover_color = Color(0.101961, 0.368627, 0.388235, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_Card")
+theme_override_styles/hover = SubResource("StyleBoxFlat_CardHover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_Card")
 text = " 📘  Conceitos e Aprendizados"
 alignment = 0
 
@@ -304,26 +358,28 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox" unique_id=221375342]
-custom_minimum_size = Vector2(0, 5)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="Tabs" type="HBoxContainer" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox" unique_id=299255473]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 12
 
 [node name="ActiveTab" type="Button" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/Tabs" unique_id=1123339867]
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.1, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_TabActive")
 text = "Em andamento"
 
 [node name="CompletedTab" type="Button" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/Tabs" unique_id=940635298]
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_TabInactive")
 text = "Concluídos"
 
@@ -332,11 +388,12 @@ custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
 [node name="WaterProblemCard" type="Button" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox" unique_id=1414672010]
-custom_minimum_size = Vector2(0, 140)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_Card")
+theme_override_styles/hover = SubResource("StyleBoxFlat_CardHover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_Card")
-theme_override_styles/hover = SubResource("StyleBoxFlat_Card")
 
 [node name="Margin" type="MarginContainer" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard" unique_id=343213106]
 layout_mode = 1
@@ -346,15 +403,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
 
 [node name="VBox" type="VBoxContainer" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin" unique_id=963962818]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 6
 
 [node name="HBox" type="HBoxContainer" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox" unique_id=82737465]
 layout_mode = 2
@@ -387,19 +444,19 @@ horizontal_alignment = 1
 [node name="LocLabel" type="Label" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox" unique_id=1392702250]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 15
 text = "📍 Rua da Aurora, Coque"
 
 [node name="DateLabel" type="Label" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox" unique_id=534056094]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 13
 text = "📅 Registrado em: 15/03/2026 - 10:35"
 
 [node name="UpdateLabel" type="Label" parent="Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox" unique_id=178359091]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.101961, 0.368627, 0.388235, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "Última atualização: Em análise pela COMPESA."
 autowrap_mode = 2
 
@@ -954,6 +1011,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ButtonGreenHover")
 text = "Concluir"
 
 [node name="IndicatorsView" type="Control" parent="Panel/VBoxContainer/ContentView" unique_id=1509942676]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1029,8 +1087,10 @@ text = "50%"
 [node name="SatisfacaoBar" type="ProgressBar" parent="Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer" unique_id=812682726]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_ProgressBG")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ProgressFill")
 value = 50.0
+show_percentage = false
 
 [node name="Spacer2" type="Control" parent="Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer" unique_id=1284374859]
 custom_minimum_size = Vector2(0, 5)
@@ -1045,8 +1105,10 @@ text = "💧 Saneamento e Água:"
 [node name="SaneamentoBar" type="ProgressBar" parent="Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer" unique_id=1278774214]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_ProgressBG")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ProgressFill")
 value = 50.0
+show_percentage = false
 
 [node name="Spacer3" type="Control" parent="Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer" unique_id=14612856]
 custom_minimum_size = Vector2(0, 5)
@@ -1061,8 +1123,10 @@ text = "🌊 Drenagem e Enchentes:"
 [node name="DrenagemBar" type="ProgressBar" parent="Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer" unique_id=129190879]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_ProgressBG")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ProgressFill")
 value = 30.0
+show_percentage = false
 
 [node name="ConceptsView" type="Control" parent="Panel/VBoxContainer/ContentView" unique_id=1000837583]
 visible = false
@@ -1213,7 +1277,7 @@ text = "Auxílio financeiro mensal temporário pago pelo governo a famílias que
 autowrap_mode = 2
 
 [node name="BottomNav" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=633665100]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_BottomNav")
 
@@ -1224,7 +1288,9 @@ theme_override_constants/separation = 0
 [node name="HomeButton" type="Button" parent="Panel/VBoxContainer/BottomNav/HBox" unique_id=1663050110]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.1, 0.37, 0.39, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.37, 0.39, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.3, 0.3, 1)
 theme_override_font_sizes/font_size = 14
 text = "🏠
 Início"
@@ -1233,7 +1299,9 @@ flat = true
 [node name="ProblemsButton" type="Button" parent="Panel/VBoxContainer/BottomNav/HBox" unique_id=747836220]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.37, 0.39, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.3, 0.3, 1)
 theme_override_font_sizes/font_size = 14
 text = "📋
 Registro"
@@ -1242,16 +1310,20 @@ flat = true
 [node name="ContactsButton" type="Button" parent="Panel/VBoxContainer/BottomNav/HBox" unique_id=890434286]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.37, 0.39, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.3, 0.3, 1)
 theme_override_font_sizes/font_size = 14
 text = "📞
 Contatos"
 flat = true
 
-[node name="IndicatorsButton" type="Button" parent="Panel/VBoxContainer/BottomNav/HBox" unique_id=193473388]
+[node name="IndicatorsButton" type="Button" parent="Panel/VBoxContainer/BottomNav/HBox" unique_id=193473399]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.37, 0.39, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.3, 0.3, 1)
 theme_override_font_sizes/font_size = 14
 text = "📈
 Painel"

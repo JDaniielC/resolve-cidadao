@@ -18,8 +18,21 @@ const FADE_OUT_DURATION: float = 0.5
 
 
 func _ready() -> void:
+	_setup_save_buttons()
 	_setup_animations()
 	_connect_buttons()
+
+
+## Renomeia "Play" para "Novo Jogo" e adiciona "Continuar" se houver progresso salvo.
+func _setup_save_buttons() -> void:
+	play_button.text = "Novo Jogo"
+	if GameManager.has_save():
+		var continue_button: Button = play_button.duplicate()
+		continue_button.name = "ContinueButton"
+		continue_button.text = "Continuar"
+		buttons_container.add_child(continue_button)
+		buttons_container.move_child(continue_button, 0)
+		continue_button.pressed.connect(_on_continue_pressed)
 
 
 ## Setup fade-in animations for title and buttons
@@ -30,7 +43,10 @@ func _setup_animations() -> void:
 	title_tween.tween_property(title_label, "modulate:a", 1.0, TITLE_FADE_DURATION)
 
 	# Buttons stagger fade-in: each button appears with 100ms delay
-	var buttons: Array[Button] = [play_button, settings_button, credits_button, quit_button]
+	var buttons: Array[Button] = []
+	for child in buttons_container.get_children():
+		if child is Button:
+			buttons.append(child)
 
 	for button: Button in buttons:
 		button.modulate.a = 0.0
@@ -51,8 +67,16 @@ func _connect_buttons() -> void:
 	quit_button.pressed.connect(_on_quit_pressed)
 
 
-## Handle Play button press
+## Handle "Novo Jogo" button press — zera o progresso e começa do início.
 func _on_play_pressed() -> void:
+	GameManager.reset_progress()
+	GameManager.clear_save()
+	_fade_out_and_load("res://scenes/main_game.tscn")
+
+
+## Handle "Continuar" button press — restaura o progresso salvo.
+func _on_continue_pressed() -> void:
+	GameManager.load_progress()
 	_fade_out_and_load("res://scenes/main_game.tscn")
 
 
