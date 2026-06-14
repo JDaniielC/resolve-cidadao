@@ -10,6 +10,7 @@ extends CanvasLayer
 
 @onready var satisfaction_bar = $TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/VBox/SatisfactionBar
 @onready var percentage_label = $TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/PercentageLabel
+@onready var face_icon = $TopRightContainer/VBox/SatisfactionPanel/Margin/HBox/FaceIcon
 @onready var cellphone_button = $TopRightContainer/VBox/Control/CellphoneButton
 
 var button_tween: Tween
@@ -317,6 +318,7 @@ func _on_satisfaction_changed(new_value: float):
 	var tween = create_tween()
 	tween.tween_property(satisfaction_bar, "value", new_value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	percentage_label.text = "%d%%" % int(new_value)
+	_update_face_icon(new_value)
 
 func _on_time_changed(hour: int, minute: int):
 	_update_time_ui(hour, minute)
@@ -327,6 +329,15 @@ func _on_weather_changed(new_weather: String):
 func _update_satisfaction_ui(value: float):
 	satisfaction_bar.value = value
 	percentage_label.text = "%d%%" % int(value)
+	_update_face_icon(value)
+
+func _update_face_icon(value: float):
+	if value >= 75:
+		face_icon.text = "😊"
+	elif value >= 45:
+		face_icon.text = "😐"
+	else:
+		face_icon.text = "😡"
 
 func _update_time_ui(hour: int, minute: int):
 	time_label.text = "%02d:%02d" % [hour, minute]
