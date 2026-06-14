@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://bdub1v086adrv"]
+
+[ext_resource type="Script" uid="uid://cq0ne5myrgcu0" path="res://scripts/characters/funcionario_abrigo.gd" id="1_rli1n"]
+[ext_resource type="Texture2D" uid="uid://dfk5n5un0yfng" path="res://entities/npcs/funcionario-abrigo.png" id="2_rli1n"]
+[ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="3_f8xc8"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="4_knjg1"]
+[ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="5_qa3g8"]
+[ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="6_wd54p"]
+[ext_resource type="Resource" uid="uid://bdxfhlrryq6a3" path="res://dialogues/missao_01/funcionario.dialogue" id="7_emhuk"]
+[ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="8_lxjh3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8xc8"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1036, 95, 91, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knjg1"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1127, 95, 91, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qa3g8"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1309, 95, 91, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd54p"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1400, 95, 91, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rli1n"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1032, 262, 91, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg56d"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1123, 262, 91, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emhuk"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1214, 262, 91, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxjh3"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1305, 262, 91, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crcc3"]
+atlas = ExtResource("2_rli1n")
+region = Rect2(1396, 262, 91, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4sb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8xc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knjg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qa3g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd54p")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rli1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg56d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emhuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxjh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crcc3")
+}],
+"loop": true,
+"name": &"Emoção",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="1_gsk0d"]
+radius = 30.612244
+height = 122.44899
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dona"]
+radius = 61.224487
+
+[node name="Funcionario" type="CharacterBody2D" unique_id=1925654727]
+scale = Vector2(0.49, 0.49)
+script = ExtResource("1_rli1n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=500550676]
+position = Vector2(-8.375501, -27.012196)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_y4sb7")
+animation = &"Emoção"
+autoplay = "Default"
+frame_progress = 0.12446299
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363887923]
+position = Vector2(-6.122449, -22.448978)
+shape = SubResource("1_gsk0d")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=273116475]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("3_f8xc8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=996651999]
+position = Vector2(-4.0816326, -20.408161)
+shape = SubResource("CircleShape2D_dona")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1234567890 node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_knjg1")
+current_state = NodePath("interact")
+
+[node name="interact" type="Node" parent="StateMachine" unique_id=1234567891 node_paths=PackedStringArray("interaction_area", "on_completion")]
+script = ExtResource("5_qa3g8")
+interaction_area = NodePath("../../InteractionArea")
+action_trigger = "interact"
+one_shot = false
+on_completion = [NodePath("../start_dialogue")]
+
+[node name="start_dialogue" type="Node" parent="StateMachine" unique_id=1234567892 node_paths=PackedStringArray("on_completion")]
+script = ExtResource("6_wd54p")
+dialogue = ExtResource("7_emhuk")
+title = "intro"
+on_completion = [NodePath("../interact")]
+
+[node name="MissionMarker" type="Node2D" parent="." unique_id=-823380159]
+position = Vector2(0, -130)
+script = ExtResource("8_lxjh3")
+visible_at_stage = 7
+
+[node name="Arrow" type="Label" parent="MissionMarker" unique_id=-823380158]
+auto_translate_mode = 1
+offset_left = -16.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 32
+text = "❗"
+horizontal_alignment = 1
+vertical_alignment = 1

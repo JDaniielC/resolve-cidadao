@@ -48,6 +48,11 @@ func _on_choice_selected(option_index: int):
 		GameManager.advance_stage()
 		GameManager.resume_game()
 		hide()
+		if current_choice_id == "choice_moradia_comprometida":
+			DialogueManager.show_dialogue_balloon(
+				load("res://dialogues/missao_01/dona_maria.dialogue"),
+				"pos_quiz_moradia"
+			)
 	else:
 		_show_feedback(option.get("feedback", "Não é essa. Tente outra opção."), false)
 		_flash_button(choice_buttons[option_index])

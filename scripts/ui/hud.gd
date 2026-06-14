@@ -265,9 +265,18 @@ func _end_tutorial() -> void:
 func _on_interact_pressed() -> void:
 	if is_tutorial_active:
 		return
-	Input.action_press("interact")
+	var ev_press = InputEventAction.new()
+	ev_press.action = "interact"
+	ev_press.pressed = true
+	Input.parse_input_event(ev_press)
+	
 	await get_tree().process_frame
-	Input.action_release("interact")
+	
+	var ev_release = InputEventAction.new()
+	ev_release.action = "interact"
+	ev_release.pressed = false
+	Input.parse_input_event(ev_release)
+
 
 func _update_display():
 	var new_objective = GameManager.get_objective()
