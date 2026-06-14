@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ej5n1o0u7n7h" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
 [ext_resource type="PackedScene" uid="uid://br0xct5m1j2p" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
 [ext_resource type="PackedScene" uid="uid://pp2i221w3x3r" path="res://scenes/ui/hud.tscn" id="6_hud01"]
-[ext_resource type="PackedScene" uid="uid://ccplymqnqr38d" path="res://scenes/levels/rain_street_ray.tscn" id="6_ygxny"]
+[ext_resource type="PackedScene" uid="uid://ccplymqnqr38d" path="res://scenes/levels/rain_street.tscn" id="6_ygxny"]
 [ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
 [ext_resource type="AudioStream" uid="uid://ooc5h2d72spu" path="res://sounds/rain.ogg" id="8_70vka"]
 [ext_resource type="Script" uid="uid://ct5nj742jxgbo" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
@@ -26,7 +26,7 @@ layer = 2
 
 [node name="HUD" parent="." unique_id=1437515677 instance=ExtResource("6_hud01")]
 
-[node name="RayScene" parent="." unique_id=1224219234 instance=ExtResource("6_ygxny")]
+[node name="RainStreet" parent="." unique_id=1224219234 instance=ExtResource("6_ygxny")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1721135728]
 stream = ExtResource("8_70vka")

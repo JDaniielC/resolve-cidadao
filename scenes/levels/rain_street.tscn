@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bensm5j707hn8"]
+[gd_scene format=4 uid="uid://ccplymqnqr38d"]
 
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="1_wfxqf"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="2_ab5jk"]
@@ -6162,7 +6162,7 @@ size = Vector2(163.5, 39)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_school_door"]
 size = Vector2(56, 63)
 
-[node name="RayScene" type="Node2D" unique_id=378477655]
+[node name="RainStreet" type="Node2D" unique_id=378477655]
 
 [node name="CameraBounds" parent="." unique_id=1828162143 instance=ExtResource("13_cambounds")]
 

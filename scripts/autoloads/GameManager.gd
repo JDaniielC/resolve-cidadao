@@ -41,7 +41,7 @@ var housing_solved: bool = false
 
 const PROGRESS_PATH := "user://progress.cfg"
 ## Caminho da cena de nível ativa (para restaurar o local certo ao continuar).
-var current_level_path: String = "res://scenes/levels/rain_street_ray.tscn"
+var current_level_path: String = "res://scenes/levels/rain_street.tscn"
 
 var stage_data = {
 	1: {"name": "Primeiro Controle", "objective": "Aproxime-se de Dona Maria"},
@@ -187,4 +187,4 @@ func reset_progress() -> void:
 	current_weather = "Chuva Forte"
 	water_solved = false
 	game_completed = false
-	current_level_path = "res://scenes/levels/rain_street_ray.tscn"
+	current_level_path = "res://scenes/levels/rain_street.tscn"

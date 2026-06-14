@@ -98,10 +98,10 @@ func swap_level(scene_path: String, outgoing: Node) -> void:
 
 ## Continuando de um save: restaura o nível salvo e devolve o controle ao jogador.
 func _resume_from_save() -> void:
-	var default_level := "res://scenes/levels/rain_street_ray.tscn"
+	var default_level := "res://scenes/levels/rain_street.tscn"
 	var target := GameManager.current_level_path
 	if target != "" and target != default_level:
-		var current_level := get_node_or_null("RayScene")
+		var current_level := _get_active_level()
 		if current_level:
 			swap_level(target, current_level)
 	for player in Globals.get_players():
