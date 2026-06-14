@@ -72,7 +72,7 @@ func set_npc_proximity(npc_ref = null):
 func _process(delta):
 	super._process(delta)
 	if Input.is_action_just_pressed("interact") and nearby_npc:
-		print("Player pressed E, triggering dialogue with NPC")
+		stop()
 		nearby_npc.trigger_dialogue()
 	_update_sprite_animation()
 

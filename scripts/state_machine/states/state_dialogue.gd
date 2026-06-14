@@ -9,8 +9,16 @@ class_name StateDialogue
 
 func enter():
 	if dialogue:
+		var player = state_machine.params.get("entity")
+		if player is CharacterEntity:
+			player.stop()
+			player.input_enabled = false
+
 		get_tree().paused = pause
 		DialogueManager.show_dialogue_balloon(dialogue, title)
 		await DialogueManager.dialogue_ended
+
+		if player is CharacterEntity:
+			player.input_enabled = true
 		get_tree().paused = false
 		complete()
