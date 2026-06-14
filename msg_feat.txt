@@ -1,5 +1,0 @@
-feat: expansão de diálogos e integração de sistemas narrativos [Plano 2]
-
-- Diálogos: adiciona ramificações com consequências (satisfação) para Dona Maria, Lucas, Seu Severino e Agente Social.
-- Missão 1: integra Pop-ups de alerta narrativo e notificações de SMS para orientar os objetivos da prefeitura/defesa civil.
-- Educação: implementa desbloqueio de conceitos ("Abrigos Públicos", "Aluguel Social", etc.) através do sistema de notificações (toasts).

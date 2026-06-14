@@ -1,5 +1,0 @@
-ui: botão de avançar diálogo e ícone de satisfação reativo
-
-- Balão de Diálogo: adiciona botão "E" para avançar texto (foco mobile); ajusta layout para evitar sobreposição com o HUD.
-- HUD: implementa sistema de carinhas dinâmicas baseadas no nível de satisfação atual (0-44: 😡, 45-74: 😐, 75-100: 😊).
-- Scripts: oculta joystick e botões globais durante as conversas.
