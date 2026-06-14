@@ -7,8 +7,19 @@ Seu Severino: Daqui eu não arredo o pé por causa de chuva.
 Seu Severino: O morro?… Valha-me Deus. Eu achei que era só água acumulada na rua.
 Seu Severino: Tudo bem, meu filho… Eu aceito ir. Mas eu não saio deste quarto sem o meu rádio de pilha antigo.
 Seu Severino: Ele está comigo desde as grandes cheias de antigamente, foi o último presente da minha falecida esposa.
-Jogador: Com certeza, Seu Severino. A gente leva ele sim.
-Jogador: A própria Defesa Civil orienta que, numa evacuação, a gente priorize documentos, remédios de uso contínuo e aparelhos de comunicação leves.
-Seu Severino: Obrigado por entender, meu rapaz. Tem gente nova que acha que é só velharia sem valor… Bom, eu vou.
-Seu Severino: Mas minhas pernas estão muito inchadas por causa da idade. Não tenho forças pra caminhar na correnteza até o abrigo.
-=> END
+=> radio_escolha
+
+~ radio_escolha
+Seu Severino: O senhor me ajuda a levar ele?
+- Com certeza, Seu Severino. Esse rádio é essencial.
+	Jogador: Além do valor sentimental, ele é um meio de comunicação importante. Em emergências, as rádios locais costumam ser as primeiras a transmitir alertas.
+	do Notifications.notify_concept("Comunicação em Crises")
+	set GameManager.add_satisfaction(3.0)
+	Seu Severino: Exatamente, meu rapaz! Fico feliz que você entenda. Vamos levar ele.
+	Seu Severino: Mas minhas pernas estão muito inchadas por causa da idade. Não tenho forças pra caminhar na correnteza até o abrigo.
+	=> END
+- Deixa esse rádio velho pra lá, é só tranqueira. Vamos logo.
+	do GameManager.penalize_satisfaction(6.0)
+	Seu Severino: Tranqueira?! Foi a última lembrança que a minha falecida me deixou.
+	Seu Severino: Se é pra deixar pra trás o que me importa, eu não saio daqui não.
+	=> radio_escolha

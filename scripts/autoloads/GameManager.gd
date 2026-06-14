@@ -9,8 +9,12 @@ signal weather_changed(new_weather: String)
 
 var current_stage: int = 1
 var is_game_paused: bool = false
+## Marca o fim da missão/jogo. Quando true, a satisfação para de decair.
+var game_completed: bool = false
 
 # Satisfaction system
+## Quanto de satisfação a cidade perde por hora de jogo decorrida.
+const SATISFACTION_DECAY_PER_HOUR: float = 1.0
 var satisfaction: float = 90.0:
 	set(value):
 		satisfaction = clamp(value, 0.0, 100.0)
@@ -93,6 +97,20 @@ func add_satisfaction(amount: float):
 func remove_satisfaction(amount: float):
 	satisfaction -= amount
 
+## Resolve um registro de problema: aumenta a satisfação da cidade e dispara a
+## notificação correspondente. Use em cada ponto de resolução para manter o
+## comportamento consistente (a satisfação sobe e o jogador é avisado).
+func resolve_problem(label: String, amount: float) -> void:
+	add_satisfaction(amount)
+	Notifications.notify_resolved(label, amount)
+
+## Penaliza a satisfação por uma escolha negativa: baixa a satisfação E avisa o
+## jogador com um toast. O decaimento passivo por tempo continua usando
+## remove_satisfaction() direto, de propósito, para NÃO notificar a cada segundo.
+func penalize_satisfaction(amount: float, reason := "") -> void:
+	remove_satisfaction(amount)
+	Notifications.notify_penalty(amount, reason)
+
 ## Set a specific time (useful for mission transitions)
 func set_game_time(hour: int, minute: int):
 	game_hour = hour
@@ -102,6 +120,13 @@ func set_game_time(hour: int, minute: int):
 ## Advance time by a number of minutes
 func advance_time(minutes: int):
 	game_minute += minutes
+	# A satisfação da cidade decai com o tempo, exceto após o fim da missão.
+	if not game_completed:
+		remove_satisfaction(SATISFACTION_DECAY_PER_HOUR / 60.0 * minutes)
+
+## Marca a missão/jogo como concluído — congela o decaimento da satisfação.
+func complete_game() -> void:
+	game_completed = true
 
 ## Set the weather explicitly — use this in each new map/mission
 ## to define the climate that fits the narrative context.
@@ -124,6 +149,7 @@ func save_progress() -> void:
 	cfg.set_value("progress", "game_minute", game_minute)
 	cfg.set_value("progress", "weather", current_weather)
 	cfg.set_value("progress", "water_solved", water_solved)
+	cfg.set_value("progress", "game_completed", game_completed)
 	cfg.set_value("progress", "level", current_level_path)
 	cfg.save(PROGRESS_PATH)
 
@@ -138,6 +164,7 @@ func load_progress() -> void:
 	game_minute = cfg.get_value("progress", "game_minute", 30)
 	current_weather = cfg.get_value("progress", "weather", "Chuva Forte")
 	water_solved = cfg.get_value("progress", "water_solved", false)
+	game_completed = cfg.get_value("progress", "game_completed", false)
 	current_level_path = cfg.get_value("progress", "level", current_level_path)
 	if current_stage >= 9:
 		current_weather = "Nublado"
@@ -159,4 +186,5 @@ func reset_progress() -> void:
 	game_minute = 30
 	current_weather = "Chuva Forte"
 	water_solved = false
+	game_completed = false
 	current_level_path = "res://scenes/levels/rain_street_ray.tscn"

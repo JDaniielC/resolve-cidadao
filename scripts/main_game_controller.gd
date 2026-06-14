@@ -30,6 +30,13 @@ func _ready() -> void:
 	
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
+	# Initial narrative popup
+	await Popups.show_alert(
+		"As fortes chuvas em Recife atingiram níveis críticos. Como Agente Social, sua missão é garantir a segurança e os direitos da comunidade do Coque.",
+		"Entendido",
+		"Alerta de Emergência"
+	)
+	
 	await get_tree().create_timer(1.0).timeout
 	
 	# Disable player input during the intro dialogue
@@ -54,6 +61,7 @@ func _on_dialogue_ended(resource: DialogueResource) -> void:
 		
 		# Start the interactive HUD tutorial
 		var hud = $HUD
+		Notifications.notify_problem("Transmissão de rádio alerta para risco de inundação!", "📢")
 		if hud and hud.has_method("start_tutorial"):
 			hud.start_tutorial()
 		else:

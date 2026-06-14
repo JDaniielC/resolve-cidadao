@@ -56,6 +56,7 @@ func _update_dialogue_title():
 			dialogue_state.title = "pos_abrigo"
 		elif GameManager.current_stage == 9:
 			dialogue_state.title = "rua_destruida"
+			Notifications.notify_problem("Danos estruturais graves identificados no bairro.", "🏠")
 		elif GameManager.current_stage == 11:
 			dialogue_state.title = "final"
 		print("Dona Maria: Updated StateMachine dialogue state title to: ", dialogue_state.title)
@@ -104,7 +105,7 @@ func _on_dialogue_finished(_resource):
 			_update_dialogue_title()
 		elif GameManager.current_stage == 11:
 			print("Dona Maria: Final thank you dialogue finished. Completing mission and adding satisfaction!")
-			GameManager.add_satisfaction(15.0)
+			GameManager.resolve_problem("Moradia — Aluguel Social", 15.0)
 			
 			var main_game = get_tree().current_scene
 			var mission_complete = main_game.get_node_or_null("MissionComplete")

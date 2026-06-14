@@ -1,21 +1,63 @@
 ~ intro
 Dona Maria: Oxente, meu filho... ainda bem que apareceu alguém por aqui.
+=> intro_bem
+
+~ intro_bem
+Dona Maria: Tô aqui tentando segurar as pontas, viu...
 - A senhora está bem?
 	Dona Maria: Eu tô tentando ficar, né? Mas essa chuva não dá trégua.
 	Dona Maria: Desde ontem a água só faz subir.
 	Dona Maria: Passei a manhã inteira levantando os móveis.
 	Dona Maria: O sofá já molhou todinho.
-	- A água entrou na sua casa?
-		Dona Maria: Entrou sim.
-		Dona Maria: Pouquinho primeiro... depois foi tomando conta de tudo.
-		- Alguém veio ajudar vocês?
-			Dona Maria: A Defesa Civil passou mais cedo.
-			Dona Maria: Disseram que algumas áreas podem alagar ainda mais.
-			Dona Maria: Também falaram que abriram um abrigo temporário numa escola aqui perto.
-			- E a senhora pretende ir?
-				Dona Maria: Acho que vou ter que ir.
-				Dona Maria: Ficar aqui tá ficando perigoso.
-				=> END
+	=> intro_agua
+- A senhora mora sozinha aqui?
+	Dona Maria: Moro com meu neto, o Lucas. Ele é um bom menino, mas hoje ele foi pra casa de um amiguinho na parte alta.
+	Dona Maria: Ainda bem... não queria que ele visse a casa assim.
+	set GameManager.add_satisfaction(2.0)
+	=> intro_agua
+- Não tenho tempo pra isso agora, dona. Se vira.
+	do GameManager.penalize_satisfaction(5.0)
+	Dona Maria: Sem tempo nem pra uma palavra de conforto?...
+	Dona Maria: Que Deus te acompanhe, então.
+	=> intro_bem
+
+~ intro_agua
+Dona Maria: Olha só o estado que a água deixou tudo lá dentro...
+- A água entrou na sua casa?
+	Dona Maria: Entrou sim.
+	Dona Maria: Pouquinho primeiro... depois foi tomando conta de tudo.
+	=> intro_ajuda
+- Casa em área alagada? A senhora que se arriscou.
+	do GameManager.penalize_satisfaction(5.0)
+	Dona Maria: O senhor acha que a gente escolhe onde pode morar?
+	Dona Maria: Foi o canto que deu pra ter a vida inteira...
+	=> intro_agua
+
+~ intro_ajuda
+Dona Maria: Eu só queria saber se ainda vem ajuda pra cá.
+- Alguém veio ajudar vocês?
+	Dona Maria: A Defesa Civil passou mais cedo.
+	Dona Maria: Disseram que algumas áreas podem alagar ainda mais.
+	Dona Maria: Também falaram que abriram um abrigo temporário numa escola aqui perto.
+	=> intro_abrigo
+- Problema seu. Cada um que cuide da própria vida.
+	do GameManager.penalize_satisfaction(4.0)
+	Dona Maria: Cada um por si?... Pensei que ainda houvesse quem se importasse.
+	=> intro_ajuda
+
+~ intro_abrigo
+Dona Maria: Esse abrigo na escola... será que eu devia mesmo ir?
+- E a senhora pretende ir?
+	Dona Maria: Acho que vou ter que ir.
+	Dona Maria: Ficar aqui tá ficando perigoso.
+	do Notifications.notify_sms("Prefeitura / Defesa Civil", "Abrigo emergencial aberto na Escola Municipal. Dirija-se ao local para triagem.")
+	do Notifications.notify_concept("Abrigo Temporário")
+	=> END
+
+- Faz o que quiser, tanto faz pra mim.
+	do GameManager.penalize_satisfaction(3.0)
+	Dona Maria: Tanto faz pro senhor... mas é a minha vida que tá em jogo.
+	=> intro_abrigo
 
 ~ espera
 Dona Maria: Meu filho, dá uma olhada no celular da cidade.
@@ -30,17 +72,35 @@ Dona Maria: Obrigada por ter parado pra me ouvir.
 ~ rua_destruida
 Dona Maria: Ainda bem que a chuva passou...
 Dona Maria: Mas agora apareceu outro problema.
+=> rua_problema
+
+~ rua_problema
+Dona Maria: Sei nem por onde começar a contar...
 - O que aconteceu?
 	Dona Maria: Minha casa ficou muito danificada.
 	Dona Maria: Tem parede rachada e o piso levantou em vários lugares.
-	- A senhora consegue continuar morando aqui?
-		Dona Maria: Sinceramente?
-		Dona Maria: Tenho medo.
-		Dona Maria: E também não tenho dinheiro pra alugar outro lugar.
-		=> END
+	=> rua_morar
+- Já passou, né? Segue a vida.
+	do GameManager.penalize_satisfaction(4.0)
+	Dona Maria: Pro senhor é fácil dizer "segue a vida"...
+	Dona Maria: A casa que sobrou pra mim tá caindo aos pedaços.
+	=> rua_problema
+
+~ rua_morar
+Dona Maria: E agora, pra onde é que eu vou?
+- A senhora consegue continuar morando aqui?
+	Dona Maria: Sinceramente?
+	Dona Maria: Tenho medo.
+	Dona Maria: E também não tenho dinheiro pra alugar outro lugar.
+	=> END
+- Dá um jeito aí, sempre tem um jeito.
+	do GameManager.penalize_satisfaction(4.0)
+	Dona Maria: "Dá um jeito"... se fosse simples assim eu já tinha dado.
+	=> rua_morar
 
 ~ pos_quiz_moradia
 Assistente Social: Dona Maria, pelo que você me contou, talvez você tenha direito ao aluguel social.
+do Notifications.notify_concept("Aluguel Social")
 Jogador: Aluguel social?
 Assistente Social: É um auxílio oferecido em situações como essa.
 Assistente Social: Principalmente quando a moradia fica sem condições de uso.
@@ -51,6 +111,5 @@ Assistente Social: Depois são feitos os encaminhamentos necessários.
 
 ~ final
 Dona Maria: Ainda vai ser difícil… mas agora eu sei por onde começar.
+do Notifications.notify_sms("Prefeitura", "Parabéns! Você ajudou Dona Maria a entender seus direitos. A satisfação da cidade aumentou.")
 => END
-
-

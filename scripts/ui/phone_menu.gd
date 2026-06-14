@@ -508,7 +508,7 @@ func _on_call_compesa_pressed():
 	
 	if not GameManager.water_solved:
 		GameManager.water_solved = true
-		GameManager.add_satisfaction(10.0)
+		GameManager.resolve_problem("Abastecimento de água", 10.0)
 		_update_phone_ui_state()
 
 func _on_calling_ok_pressed():
@@ -977,4 +977,3 @@ func _on_aluguel_social_read_finished():
 	if GameManager.current_stage == 10:
 		GameManager.advance_stage()
 		print("[PhoneMenu] Concept read complete, advancing to Stage 11: Final da Missão")
-
