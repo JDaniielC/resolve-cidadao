@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://jct3wxo41j4t"]
+
+[ext_resource type="Script" uid="uid://dytpg86xo26ct" path="res://scripts/characters/social_agent.gd" id="1_o3bmm"]
+[ext_resource type="Texture2D" uid="uid://dv57rr8qt7lx1" path="res://entities/npcs/agente_social.png" id="2_o3bmm"]
+[ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="3_7sult"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="4_3heid"]
+[ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="5_soe63"]
+[ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="6_1lsuy"]
+[ext_resource type="Resource" uid="uid://ddmxr41eqnaeb" path="res://dialogues/agente_social.dialogue" id="7_52khx"]
+[ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="8_64uln"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb60a"]
+atlas = ExtResource("2_o3bmm")
+region = Rect2(30, 40, 80, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sult"]
+atlas = ExtResource("2_o3bmm")
+region = Rect2(136, 40, 80, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3heid"]
+atlas = ExtResource("2_o3bmm")
+region = Rect2(30, 40, 80, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4sb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb60a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sult")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3heid")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="1_gsk0d"]
+radius = 30.612244
+height = 122.44899
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dona"]
+radius = 61.224487
+
+[node name="agente" type="CharacterBody2D" unique_id=1925654727]
+y_sort_enabled = true
+scale = Vector2(0.49, 0.49)
+script = ExtResource("1_o3bmm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=500550676]
+position = Vector2(-8.375501, -27.012196)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_y4sb7")
+animation = &"Default"
+autoplay = "Default"
+frame_progress = 0.74059427
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363887923]
+position = Vector2(-6.122449, -22.448978)
+shape = SubResource("1_gsk0d")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=273116475]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("3_7sult")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=996651999]
+position = Vector2(-4.0816326, -20.408161)
+shape = SubResource("CircleShape2D_dona")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1234567890 node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_3heid")
+current_state = NodePath("interact")
+
+[node name="interact" type="Node" parent="StateMachine" unique_id=1234567891 node_paths=PackedStringArray("interaction_area", "on_completion")]
+script = ExtResource("5_soe63")
+interaction_area = NodePath("../../InteractionArea")
+action_trigger = "interact"
+one_shot = false
+on_completion = [NodePath("../start_dialogue")]
+
+[node name="start_dialogue" type="Node" parent="StateMachine" unique_id=1234567892 node_paths=PackedStringArray("on_completion")]
+script = ExtResource("6_1lsuy")
+dialogue = ExtResource("7_52khx")
+title = "intro"
+on_completion = [NodePath("../interact")]
+
+[node name="MissionMarker" type="Node2D" parent="." unique_id=-823380159]
+position = Vector2(-10.204082, -114.28571)
+script = ExtResource("8_64uln")
+visible_at_stage = 10
+
+[node name="Arrow" type="Label" parent="MissionMarker" unique_id=-823380158]
+auto_translate_mode = 1
+offset_left = -16.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 32
+text = "❗"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -60,8 +60,12 @@ Dona Maria: Esse abrigo na escola... será que eu devia mesmo ir?
 	=> intro_abrigo
 
 ~ espera
-Dona Maria: Meu filho, dá uma olhada no celular da cidade.
+Dona Maria: Meu filho, dá uma olhada no celular.
 Dona Maria: Lá você encontra o registro de problemas e os serviços públicos disponíveis.
+=> END
+
+~ espera_agente
+Dona Maria: Por favor, converse com a assistente social ali adiante para ver se ela consegue nos ajudar.
 => END
 
 ~ pos_abrigo
@@ -92,24 +96,27 @@ Dona Maria: E agora, pra onde é que eu vou?
 	Dona Maria: Sinceramente?
 	Dona Maria: Tenho medo.
 	Dona Maria: E também não tenho dinheiro pra alugar outro lugar.
+	Dona Maria: Mas olhe... Vi uma assistente social ali adiante na rua. Será que você podia falar com ela para ver se existe alguma ajuda para mim?
+	Você: Claro, dona Maria. Vou falar com ela agora mesmo e ver o que podemos fazer.
+	Dona Maria: Muito obrigada, meu filho. Deus te abençoe.
 	=> END
 - Dá um jeito aí, sempre tem um jeito.
 	do GameManager.penalize_satisfaction(4.0)
 	Dona Maria: "Dá um jeito"... se fosse simples assim eu já tinha dado.
 	=> rua_morar
 
-~ pos_quiz_moradia
-Assistente Social: Dona Maria, pelo que você me contou, talvez você tenha direito ao aluguel social.
+~ final
+Você: Dona Maria, conversei com a assistente social.
+Dona Maria: E o que ela disse, meu filho? Tem alguma ajuda para mim?
+Você: Sim! Ela explicou sobre o Aluguel Social. É um auxílio mensal da prefeitura para você alugar outra casa temporariamente enquanto a sua é vistoriada.
+Você: A assistente social vai iniciar o seu cadastro. Ela só vai precisar de alguns documentos seus e do laudo da Defesa Civil.
+Dona Maria: Graças a Deus! Isso tira um peso enorme das minhas costas. Eu não sabia que tinha esse direito.
+Você: A assistente social vai guiar a senhora em todo o processo.
+Dona Maria: Muito obrigada, meu filho. Sem você, eu nem saberia por onde começar.
 do Notifications.notify_concept("Aluguel Social")
-Jogador: Aluguel social?
-Assistente Social: É um auxílio oferecido em situações como essa.
-Assistente Social: Principalmente quando a moradia fica sem condições de uso.
-Jogador: Como alguém consegue participar?
-Assistente Social: Primeiro acontece uma avaliação da situação da família.
-Assistente Social: Depois são feitos os encaminhamentos necessários.
+do Notifications.notify_sms("Prefeitura", "Parabéns! Você ajudou Dona Maria a entender seus direitos. A satisfação da cidade aumentou.")
 => END
 
-~ final
-Dona Maria: Ainda vai ser difícil… mas agora eu sei por onde começar.
-do Notifications.notify_sms("Prefeitura", "Parabéns! Você ajudou Dona Maria a entender seus direitos. A satisfação da cidade aumentou.")
+~ pos_final
+Dona Maria: Obrigado por toda a ajuda, meu filho. O Aluguel Social vai me ajudar muito.
 => END

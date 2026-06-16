@@ -6,9 +6,7 @@ extends CharacterBody2D
 @export_group("Settings")
 @export var animation_tree: AnimationTree ## The AnimationTree attached to this entity, needed to manage animations.
 @export var sync_rotation: Array[Node2D] ## A list of nodes that update their rotation based on the direction the entity is facing.
-@export var hit_box: HitBox ## The HitBox node that handles the entity's hit detection.
 @export var inventory: Inventory = null ## The inventory of the entity.
-@export var weapon: DataWeapon: set = _set_weapon ## The weapon equipped by the entity.
 @export var initial_facing: Direction ## The initial direction the entity will face when spawned.
 
 @export_group("Movement")
@@ -25,8 +23,6 @@ var friction_multiplier := 1.0
 @export var jump_time := 1.25
 
 @export_group("States")
-@export var on_attack: State ## State to enable when this entity attacks.
-@export var on_hit: State ## State to enable when this entity damages another entity.
 @export var on_fall: State ## State to enable when this entity falls.
 @export var on_screen_entered: State ## State to enable when this entity is visible on screen.
 @export var on_screen_exited: State ## State to enable when this entity is outside the visible screen.
@@ -60,20 +56,13 @@ var is_jumping: bool:
 	set(value):
 		is_jumping = value
 		_emit_action("jump", value)
-## Set to true when the entity enters the on_attack state, false when it leaves it.
-var is_attacking: bool:
-	set(value):
-		is_attacking = value
-		_emit_action("attack", value)
-var is_charging := false ## Set to true when the entity is charging an attack.
-var is_hurting := false ## Set to true when the entity enters the on_hurt state, false when it leaves it.
+
 var is_blocked := false: ## True when blocks_detector is colliding.
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
 var is_falling := false ## Set to true when the entity enters the on_fall state, false when it leaves it.
 
-## Emitted when this entity successfully lands an attack on a target.
-signal hit  
+
 ## Emitted when the entity's movement direction changes.  
 ## @param direction The new movement direction as a Vector2.
 signal direction_changed(direction: Vector2)
@@ -103,8 +92,6 @@ func _init_screen_notifier():
 			screen_notifier.screen_exited.connect(func(): enable_state(on_screen_exited))
 		add_child(screen_notifier)
 
-func _set_weapon(_weapon: DataWeapon):
-	weapon = _weapon
 
 func _init_attack_cooldown_timer():
 	pass
@@ -153,8 +140,6 @@ func move_towards(_position):
 
 ## Handles entity movement, applying the right velocity to the body.
 func move(direction: Vector2):
-	if is_attacking:
-		return
 	var delta = get_process_delta_time()
 	var target_velocity = Vector2.ZERO
 	var moving_direction := direction.normalized()
@@ -184,24 +169,7 @@ func end_jump():
 	collision_layer ^= 1 << 1
 	collision_mask ^= (1 << 2) | (1 << 1)
 
-##Starts an attack.
-func attack():
-	pass
 
-##Applies a flash to all children Sprite2D nodes found in group "flash" of the entity. 
-func flash(power := 0.0, duration := 0.15, color := Color.TRANSPARENT):
-	var nodes_to_flash: Array[Node] = get_children(true).filter(func(n: Node): return n.is_in_group(Const.GROUP.FLASH))
-	for n in nodes_to_flash:
-		n.material.set_shader_parameter("power", power)
-		if color != Color.TRANSPARENT:
-			n.material.set_shader_parameter("flash_color", color)
-	if (power > 0):
-		await get_tree().create_timer(duration).timeout
-		flash(0)
-
-##Useful for dashing.
-func add_impulse(force := 0.0):
-	velocity += facing * force
 
 ##Returns the entity to the latest safe position.[br]
 ##safe_position is set before starting a jump.[br]

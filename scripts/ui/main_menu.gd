@@ -12,7 +12,6 @@ const FADE_OUT_DURATION: float = 0.5
 @onready var title_label: Label = $VBoxContainer/TitleLabel
 @onready var buttons_container: VBoxContainer = $VBoxContainer/ButtonsContainer
 @onready var play_button: Button = $VBoxContainer/ButtonsContainer/PlayButton
-@onready var settings_button: Button = $VBoxContainer/ButtonsContainer/SettingsButton
 @onready var credits_button: Button = $VBoxContainer/ButtonsContainer/CreditsButton
 @onready var quit_button: Button = $VBoxContainer/ButtonsContainer/QuitButton
 
@@ -62,7 +61,6 @@ func _setup_animations() -> void:
 ## Connect button signals to their respective callbacks
 func _connect_buttons() -> void:
 	play_button.pressed.connect(_on_play_pressed)
-	settings_button.pressed.connect(_on_settings_pressed)
 	credits_button.pressed.connect(_on_credits_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 
@@ -79,11 +77,6 @@ func _on_continue_pressed() -> void:
 	GameManager.load_progress()
 	_fade_out_and_load("res://scenes/main_game.tscn")
 
-
-## Handle Settings button press
-func _on_settings_pressed() -> void:
-	var settings_menu = preload("res://scenes/ui/menus/settings_menu.tscn").instantiate()
-	add_child(settings_menu)
 
 
 ## Handle Credits button press

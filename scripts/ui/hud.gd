@@ -17,6 +17,7 @@ var button_tween: Tween
 var glow_tween: Tween
 var last_objective: String = ""
 var _phone_glowing: bool = false
+var guidance_arrow: Control
 
 # Mobile interaction button & Tutorial overlay variables
 var interact_button: Button
@@ -65,6 +66,7 @@ func _ready():
 	# Build mobile interact button and tutorial structures
 	_build_interact_button()
 	_build_tutorial_ui()
+	_build_guidance_arrow()
 	
 	_update_display()
 	last_objective = GameManager.get_objective()
@@ -408,3 +410,86 @@ func _stop_phone_glow():
 		glow_tween = null
 	cellphone_button.scale = Vector2.ONE
 	cellphone_button.modulate = Color.WHITE
+
+
+func _process(_delta: float) -> void:
+	_update_guidance_arrow()
+
+
+func _build_guidance_arrow() -> void:
+	guidance_arrow = Control.new()
+	guidance_arrow.name = "GuidanceArrow"
+	guidance_arrow.custom_minimum_size = Vector2(40, 40)
+	guidance_arrow.pivot_offset = Vector2(20, 20)
+	guidance_arrow.draw.connect(_draw_arrow)
+	
+	var container = PanelContainer.new()
+	container.name = "GuidanceContainer"
+	container.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	container.anchor_left = 0.5
+	container.anchor_right = 0.5
+	container.offset_left = -25
+	container.offset_top = 20
+	container.offset_right = 25
+	container.offset_bottom = 70
+	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.1, 0.1, 0.1, 0.7)
+	style.corner_radius_top_left = 25
+	style.corner_radius_top_right = 25
+	style.corner_radius_bottom_right = 25
+	style.corner_radius_bottom_left = 25
+	container.add_theme_stylebox_override("panel", style)
+	
+	var center = CenterContainer.new()
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	center.add_child(guidance_arrow)
+	container.add_child(center)
+	
+	add_child(container)
+	container.hide()
+
+
+func _draw_arrow() -> void:
+	var points = PackedVector2Array([
+		Vector2(32, 20),      # Tip
+		Vector2(14, 8),       # Top corner
+		Vector2(14, 15),      # Inner top corner
+		Vector2(8, 15),       # Back top corner
+		Vector2(8, 25),       # Back bottom corner
+		Vector2(14, 25),      # Inner bottom corner
+		Vector2(14, 32)       # Bottom corner
+	])
+	var color = Color("E07A5F")
+	guidance_arrow.draw_polygon(points, PackedColorArray([color]))
+
+
+func _update_guidance_arrow() -> void:
+	if not is_instance_valid(guidance_arrow):
+		return
+	
+	var active_marker: Node2D = null
+	for marker in get_tree().get_nodes_in_group("mission_markers"):
+		if marker.visible and marker.visible_at_stage == GameManager.current_stage:
+			active_marker = marker
+			break
+			
+	if not active_marker:
+		guidance_arrow.get_parent().get_parent().hide()
+		return
+		
+	var player = get_tree().get_first_node_in_group("player") as Node2D
+	if not player:
+		guidance_arrow.get_parent().get_parent().hide()
+		return
+		
+	var dist = player.global_position.distance_to(active_marker.global_position)
+	if dist < 120:
+		guidance_arrow.get_parent().get_parent().hide()
+		return
+		
+	guidance_arrow.get_parent().get_parent().show()
+	var dir = (active_marker.global_position - player.global_position).normalized()
+	var angle = dir.angle()
+	guidance_arrow.rotation = angle

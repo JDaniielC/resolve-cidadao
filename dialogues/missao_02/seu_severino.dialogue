@@ -12,7 +12,7 @@ Seu Severino: Ele está comigo desde as grandes cheias de antigamente, foi o úl
 ~ radio_escolha
 Seu Severino: O senhor me ajuda a levar ele?
 - Com certeza, Seu Severino. Esse rádio é essencial.
-	Jogador: Além do valor sentimental, ele é um meio de comunicação importante. Em emergências, as rádios locais costumam ser as primeiras a transmitir alertas.
+	Você: Além do valor sentimental, ele é um meio de comunicação importante. Em emergências, as rádios locais costumam ser as primeiras a transmitir alertas.
 	do Notifications.notify_concept("Comunicação em Crises")
 	set GameManager.add_satisfaction(3.0)
 	Seu Severino: Exatamente, meu rapaz! Fico feliz que você entenda. Vamos levar ele.

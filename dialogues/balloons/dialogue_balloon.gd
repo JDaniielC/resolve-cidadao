@@ -1,9 +1,8 @@
 extends DialogueManagerExampleBalloon
 ## An extension of the basic dialogue balloon for use with Dialogue Manager.
 
-## The container for the name label.
-@onready var name_container: Panel = $Balloon/NameContainer
 @onready var next_button: Button = %NextButton
+@onready var name_container: Panel = $Balloon/NameContainer
 
 func _ready() -> void:
 	super._ready()
@@ -34,6 +33,10 @@ func _process(delta: float) -> void:
 func apply_dialogue_line() -> void:
 	super.apply_dialogue_line()
 	name_container.visible = not dialogue_line.character.is_empty()
+	if name_container.visible:
+		var text_length = dialogue_line.character.length()
+		var estimated_width = max(160, text_length * 11 + 24)
+		name_container.size.x = estimated_width
 
 func _on_next_button_pressed() -> void:
 	if dialogue_label.is_typing:

@@ -52,10 +52,6 @@ custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Jogar"
 
-[node name="SettingsButton" parent="VBoxContainer/ButtonsContainer" unique_id=1948855402 instance=ExtResource("2_6t8x9")]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-text = "Configurações"
 
 [node name="CreditsButton" parent="VBoxContainer/ButtonsContainer" unique_id=844264282 instance=ExtResource("2_6t8x9")]
 custom_minimum_size = Vector2(300, 50)

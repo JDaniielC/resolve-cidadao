@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://ccplymqnqr38d"]
+[gd_scene format=4 uid="uid://c8sjrdvbugwtb"]
 
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="1_wfxqf"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="2_ab5jk"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="4_0tg25"]
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_aw4y2"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="8_20akl"]
-[ext_resource type="Texture2D" uid="uid://dyhw4l23cpylg" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
+[ext_resource type="Texture2D" uid="uid://b5k0tb86v3ch3" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
 [ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="10_daynight"]
 [ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="11_weather"]
 [ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="12_marker"]
@@ -6163,6 +6163,7 @@ size = Vector2(163.5, 39)
 size = Vector2(56, 63)
 
 [node name="RainStreet" type="Node2D" unique_id=378477655]
+y_sort_enabled = true
 
 [node name="CameraBounds" parent="." unique_id=1828162143 instance=ExtResource("13_cambounds")]
 
@@ -6224,10 +6225,11 @@ script = ExtResource("3_gefw2")
 z_index = 2
 y_sort_enabled = true
 
-[node name="DonaMariam" parent="Entities" unique_id=1925654727 instance=ExtResource("5_aw4y2")]
-z_index = 2
+[node name="DonaMaria" parent="Entities" unique_id=1925654727 instance=ExtResource("5_aw4y2")]
+y_sort_enabled = true
 position = Vector2(516, 473)
 scale = Vector2(0.5, 0.5)
+wall_min_slide_angle = 0.0
 
 [node name="Player" parent="Entities" unique_id=445539203 instance=ExtResource("4_0tg25")]
 position = Vector2(656, 414)

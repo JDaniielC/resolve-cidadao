@@ -11,14 +11,10 @@ signal contact_challenge_succeeded
 @onready var home_view = $Panel/VBoxContainer/ContentView/HomeView
 @onready var problems_list_view = $Panel/VBoxContainer/ContentView/ProblemsListView
 @onready var problem_detail_view = $Panel/VBoxContainer/ContentView/ProblemDetailView
-@onready var quiz_view = $Panel/VBoxContainer/ContentView/QuizView
-@onready var compesa_view = $Panel/VBoxContainer/ContentView/CompesaView
-@onready var calling_view = $Panel/VBoxContainer/ContentView/CallingView
 @onready var indicators_view = $Panel/VBoxContainer/ContentView/IndicatorsView
 @onready var concepts_view = $Panel/VBoxContainer/ContentView/ConceptsView
 @onready var content_view = $Panel/VBoxContainer/ContentView
 @onready var concepts_vbox = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox
-@onready var concept_card_compesa = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer2
 @onready var concept_card_defesa = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer3
 @onready var concept_card_aluguel = $Panel/VBoxContainer/ContentView/ConceptsView/Scroll/VBox/MarginContainer4
 
@@ -47,10 +43,9 @@ var current_step_idx: int = 0
 @onready var home_concepts_card = $Panel/VBoxContainer/ContentView/HomeView/Scroll/VBox/ConceptsCard
 
 # Problems List Buttons/Cards
-@onready var water_problem_card = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard
-@onready var water_status_tag = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox/HBox/StatusTag
-@onready var water_status_label = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox/HBox/StatusTag/Label
-@onready var water_update_label = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard/Margin/VBox/UpdateLabel
+@onready var active_tab = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/Tabs/ActiveTab
+@onready var completed_tab = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/Tabs/CompletedTab
+@onready var problem_card_template = $Panel/VBoxContainer/ContentView/ProblemsListView/Scroll/VBox/WaterProblemCard
 
 # Problem Detail Elements
 @onready var detail_icon = $Panel/VBoxContainer/ContentView/ProblemDetailView/VBox/Card/Margin/VBox/HBox/Icon
@@ -64,24 +59,6 @@ var current_step_idx: int = 0
 @onready var detail_impact_text = $Panel/VBoxContainer/ContentView/ProblemDetailView/VBox/Card/Margin/VBox/ImpactText
 @onready var detail_resolve_button = $Panel/VBoxContainer/ContentView/ProblemDetailView/VBox/MarginContainer/ResolveButton
 
-# Quiz Elements
-@onready var opt_prefeitura = $Panel/VBoxContainer/ContentView/QuizView/VBox/Options/PrefeituraOption
-@onready var opt_compesa = $Panel/VBoxContainer/ContentView/QuizView/VBox/Options/CompesaOption
-@onready var opt_arpe = $Panel/VBoxContainer/ContentView/QuizView/VBox/Options/ArpeOption
-@onready var confirm_quiz_button = $Panel/VBoxContainer/ContentView/QuizView/VBox/MarginContainer/ConfirmButton
-@onready var feedback_overlay = $Panel/VBoxContainer/ContentView/QuizView/FeedbackOverlay
-@onready var feedback_title = $Panel/VBoxContainer/ContentView/QuizView/FeedbackOverlay/Panel/VBox/Title
-@onready var feedback_desc = $Panel/VBoxContainer/ContentView/QuizView/FeedbackOverlay/Panel/VBox/Description
-@onready var feedback_ok_button = $Panel/VBoxContainer/ContentView/QuizView/FeedbackOverlay/Panel/VBox/OkButton
-
-# Contact COMPESA Elements
-@onready var compesa_call_button = $Panel/VBoxContainer/ContentView/CompesaView/VBox/MarginContainer/CallButton
-
-# Calling Screen Elements
-@onready var calling_status = $Panel/VBoxContainer/ContentView/CallingView/VBox/StatusLabel
-@onready var calling_desc = $Panel/VBoxContainer/ContentView/CallingView/VBox/DescLabel
-@onready var calling_ok_button = $Panel/VBoxContainer/ContentView/CallingView/VBox/OkButton
-
 # Indicators Screen Elements
 @onready var ind_saneamento_bar = $Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer/SaneamentoBar
 @onready var ind_satisfacao_bar = $Panel/VBoxContainer/ContentView/IndicatorsView/Scroll/VBox/MarginContainer2/VBoxContainer/SatisfacaoBar
@@ -89,12 +66,12 @@ var current_step_idx: int = 0
 
 const PHONE_TUTORIAL := [
 	{
-		"title": "Celular da Cidade",
-		"text": "Este é o celular da cidade. Aqui você consulta informações públicas e acompanha o que está acontecendo no bairro."
+		"title": "Celular",
+		"text": "Este é o celular. Aqui você consulta informações públicas e acompanha o que está acontecendo no bairro."
 	},
 	{
 		"title": "Registro de Problemas",
-		"text": "No Registro de Problemas você vê ocorrências registradas — como abrigos abertos, falta de água e outros serviços."
+		"text": "No Registro de Problemas você vê ocorrências registradas — como abrigos abertos e outros serviços."
 	},
 	{
 		"title": "Contatos / Responsáveis",
@@ -114,6 +91,12 @@ var current_screen: String = "home"
 var active_problem: String = "water"
 var selected_quiz_option: int = 0
 var phone_glowing: bool = false
+var current_problems_tab: String = "active"
+
+var style_active: StyleBox
+var style_active_hover: StyleBox
+var style_inactive: StyleBox
+var style_inactive_hover: StyleBox
 
 var shelter_problem_card: Button
 var housing_problem_card: Button
@@ -133,7 +116,6 @@ var _concepts_empty_label: Label
 # Contatos (lista + modo desafio)
 const CONTACTS := [
 	{"id": "defesa_civil", "icon": "🛡️", "name": "Defesa Civil", "phone": "199", "role": "Gestão de desastres, mapeamento de áreas de risco, evacuações e socorro a desalojados."},
-	{"id": "compesa", "icon": "💧", "name": "COMPESA", "phone": "0800 081 0195", "role": "Companhia estadual de saneamento: abastecimento de água e coleta de esgoto."},
 	{"id": "guarda", "icon": "👮", "name": "Guarda Municipal", "phone": "153", "role": "Segurança patrimonial, mediação de conflitos urbanos e proteção de bens públicos."},
 	{"id": "procon", "icon": "⚖️", "name": "PROCON", "phone": "151", "role": "Proteção, orientação e defesa dos direitos do consumidor."},
 ]
@@ -150,9 +132,17 @@ func _ready():
 	_build_tutorial_overlay()
 	_build_contacts_list()
 	_setup_concepts()
+	
+	style_active = active_tab.get_theme_stylebox("normal")
+	style_active_hover = active_tab.get_theme_stylebox("hover")
+	style_inactive = completed_tab.get_theme_stylebox("normal")
+	style_inactive_hover = completed_tab.get_theme_stylebox("hover")
 
 	back_button.pressed.connect(_on_back_pressed)
 	close_button.pressed.connect(_on_close_pressed)
+	
+	active_tab.pressed.connect(func(): _set_problems_tab("active"))
+	completed_tab.pressed.connect(func(): _set_problems_tab("completed"))
 	
 	nav_home.pressed.connect(func(): _show_screen("home"))
 	nav_problems.pressed.connect(func(): _show_screen("problems_list"))
@@ -163,19 +153,6 @@ func _ready():
 	home_contacts_card.pressed.connect(func(): _show_screen("contacts_list"))
 	home_satisfaction_card.pressed.connect(func(): _show_screen("indicators"))
 	home_concepts_card.pressed.connect(func(): _show_screen("concepts"))
-	
-	water_problem_card.pressed.connect(func(): _show_problem_detail("water"))
-	
-	detail_resolve_button.pressed.connect(func(): _show_screen("quiz"))
-	
-	opt_prefeitura.pressed.connect(func(): _select_quiz_option(1))
-	opt_compesa.pressed.connect(func(): _select_quiz_option(2))
-	opt_arpe.pressed.connect(func(): _select_quiz_option(3))
-	confirm_quiz_button.pressed.connect(_on_confirm_quiz_pressed)
-	feedback_ok_button.pressed.connect(_on_feedback_ok_pressed)
-	
-	compesa_call_button.pressed.connect(_on_call_compesa_pressed)
-	calling_ok_button.pressed.connect(_on_calling_ok_pressed)
 	
 	GameManager.stage_changed.connect(_on_stage_changed)
 	
@@ -198,8 +175,8 @@ func toggle():
 			_start_phone_tutorial()
 
 func _setup_shelter_card() -> void:
-	shelter_problem_card = water_problem_card.duplicate(DUPLICATE_USE_INSTANTIATION) as Button
-	water_problem_card.get_parent().add_child(shelter_problem_card)
+	shelter_problem_card = problem_card_template.duplicate(DUPLICATE_USE_INSTANTIATION) as Button
+	problem_card_template.get_parent().add_child(shelter_problem_card)
 	shelter_problem_card.name = "ShelterProblemCard"
 	
 	var icon := shelter_problem_card.get_node("Margin/VBox/HBox/Icon") as Label
@@ -221,8 +198,8 @@ func _setup_shelter_card() -> void:
 	shelter_problem_card.pressed.connect(func(): _show_problem_detail("shelter"))
 
 func _setup_housing_card() -> void:
-	housing_problem_card = water_problem_card.duplicate(DUPLICATE_USE_INSTANTIATION) as Button
-	water_problem_card.get_parent().add_child(housing_problem_card)
+	housing_problem_card = problem_card_template.duplicate(DUPLICATE_USE_INSTANTIATION) as Button
+	problem_card_template.get_parent().add_child(housing_problem_card)
 	housing_problem_card.name = "HousingProblemCard"
 	
 	var icon := housing_problem_card.get_node("Margin/VBox/HBox/Icon") as Label
@@ -317,13 +294,17 @@ func _show_problem_detail(problem_id: String) -> void:
 	if problem_id == "shelter":
 		detail_icon.text = "🏫"
 		detail_title.text = "Abrigo temporário"
-		detail_status_tag.self_modulate = Color("2E6B8A")
-		detail_status_label.text = " Disponível "
+		if GameManager.current_stage >= 8:
+			detail_status_tag.self_modulate = Color("4E8C50")
+			detail_status_label.text = " Concluído "
+		else:
+			detail_status_tag.self_modulate = Color("2E6B8A")
+			detail_status_label.text = " Disponível "
 		detail_loc_label.text = "📍 Escola Municipal — esquina da rua, 2 quarteirões"
 		detail_desc_title.text = "Informações:"
 		detail_desc_text.text = "Abrigo emergencial aberto pela Prefeitura do Recife e Defesa Civil para famílias afetadas pelas chuvas. O local oferece colchões, água e apoio de assistentes sociais."
 		detail_impact_title.text = "Como chegar:"
-		detail_impact_text.text = "📍 Siga em direção à escola marcada no mapa da rua. A entrada fica na lateral do prédio."
+		detail_impact_text.text = "📍 Siga a seta indicativa na tela até a escola. A entrada fica na lateral do prédio."
 		detail_resolve_button.hide()
 	elif problem_id == "housing":
 		detail_icon.text = "🏠"
@@ -336,22 +317,10 @@ func _show_problem_detail(problem_id: String) -> void:
 		detail_impact_title.text = "Impacto:"
 		detail_impact_text.text = "Família desabrigada e com medo de retornar para casa sem auxílio ou moradia segura."
 		detail_resolve_button.hide() # Resolvida automaticamente por diálogo/pergunta na rua
-	else:
-		_apply_water_detail_view()
 	_show_screen("problem_detail")
 	if problem_id == "shelter" and GameManager.current_stage == 5:
 		print("[PhoneMenu] Shelter located in registry, advancing to stage 6...")
 		GameManager.advance_stage()
-
-func _apply_water_detail_view() -> void:
-	detail_icon.text = "💧"
-	detail_title.text = "Falta de água"
-	detail_desc_title.text = "Resumo da queixa:"
-	detail_desc_text.text = "Moradores relatam que a água falta vários dias durante a semana. Quando volta, é por pouco tempo e com pouca pressão."
-	detail_impact_title.text = "Impacto na satisfação:"
-	detail_impact_text.text = "☹️ -10% de satisfação da cidade"
-	detail_resolve_button.show()
-	_update_phone_ui_state()
 
 func _show_screen(screen_name: String):
 	var previous_screen = current_screen
@@ -363,18 +332,14 @@ func _show_screen(screen_name: String):
 		"home": target_view = home_view
 		"problems_list": target_view = problems_list_view
 		"problem_detail": target_view = problem_detail_view
-		"quiz": target_view = quiz_view
 		"contacts_list": target_view = _contacts_list_view
-		"compesa": target_view = compesa_view
-		"calling": target_view = calling_view
 		"indicators": target_view = indicators_view
 		"concepts": target_view = concepts_view
 
 	# Hide all views (instantly for now, or fade out if you want)
-	for view in [home_view, problems_list_view, problem_detail_view, quiz_view, compesa_view, calling_view, indicators_view, concepts_view]:
+	for view in [home_view, problems_list_view, problem_detail_view, indicators_view, concepts_view]:
 		if view: view.hide()
 	if _contacts_list_view: _contacts_list_view.hide()
-	feedback_overlay.hide()
 
 	# Update Headers
 	if aluguel_social_detail_view:
@@ -400,19 +365,9 @@ func _show_screen(screen_name: String):
 		"problem_detail":
 			header_title.text = "REGISTROS"
 			back_button.show()
-		"quiz":
-			header_title.text = "RESPONSÁVEIS"
-			back_button.show()
-			_select_quiz_option(0)
 		"contacts_list":
 			header_title.text = "CONTATOS"
 			back_button.show()
-		"compesa":
-			header_title.text = "CONTATO"
-			back_button.show()
-		"calling":
-			header_title.text = "LIGANDO..."
-			back_button.hide()
 		"indicators":
 			header_title.text = "SATISFAÇÃO"
 			back_button.show()
@@ -436,10 +391,8 @@ func _update_nav_highlight():
 	
 	nav_home.add_theme_color_override("font_color", active_color if current_screen == "home" else inactive_color)
 	nav_problems.add_theme_color_override("font_color", active_color if current_screen in ["problems_list", "problem_detail"] else inactive_color)
-	nav_contacts.add_theme_color_override("font_color", active_color if current_screen in ["contacts_list", "compesa", "quiz"] else inactive_color)
+	nav_contacts.add_theme_color_override("font_color", active_color if current_screen == "contacts_list" else inactive_color)
 	nav_indicators.add_theme_color_override("font_color", active_color if current_screen == "indicators" else inactive_color)
-	
-	# Small animated indicator (optional, but let's stick to color for now for stability)
 
 func _on_back_pressed():
 	match current_screen:
@@ -449,69 +402,10 @@ func _on_back_pressed():
 			_show_screen("concepts")
 		"problem_detail":
 			_show_screen("problems_list")
-		"quiz":
-			_show_screen("problem_detail")
-		"compesa":
-			_show_screen("contacts_list")
 
 func _on_close_pressed():
 	if _tutorial_overlay.visible:
 		return
-	hide()
-
-func _select_quiz_option(option_idx: int):
-	selected_quiz_option = option_idx
-	
-	opt_prefeitura.modulate = Color.WHITE
-	opt_compesa.modulate = Color.WHITE
-	opt_arpe.modulate = Color.WHITE
-	
-	match option_idx:
-		1:
-			opt_prefeitura.modulate = Color(0.9, 0.9, 1.0)
-		2:
-			opt_compesa.modulate = Color(0.9, 1.0, 0.9)
-		3:
-			opt_arpe.modulate = Color(1.0, 0.9, 0.9)
-
-func _on_confirm_quiz_pressed():
-	if selected_quiz_option == 0:
-		return
-		
-	feedback_overlay.show()
-	if selected_quiz_option == 2:
-		feedback_title.text = "✅ CORRETO!"
-		feedback_desc.text = "A COMPESA (Companhia Pernambucana de Saneamento) é a concessionária pública responsável pelo abastecimento de água e tratamento de esgoto na cidade do Recife."
-	elif selected_quiz_option == 1:
-		feedback_title.text = "❌ INCORRETO"
-		feedback_desc.text = "A Prefeitura do Recife cuida da pavimentação de ruas, iluminação pública, limpeza urbana e Defesa Civil, mas o saneamento básico e abastecimento de água direta é de responsabilidade de uma empresa estadual específica."
-	elif selected_quiz_option == 3:
-		feedback_title.text = "❌ INCORRETO"
-		feedback_desc.text = "A ARPE é a Agência Reguladora de Pernambuco. Ela fiscaliza a qualidade dos serviços públicos prestados e regula tarifas, mas a distribuição e manutenção direta da rede é da concessionária COMPESA."
-
-func _on_feedback_ok_pressed():
-	feedback_overlay.hide()
-	if selected_quiz_option == 2:
-		_show_screen("compesa")
-
-func _on_call_compesa_pressed():
-	_show_screen("calling")
-	calling_status.text = "Ligando para 0800 081 0195..."
-	calling_desc.text = "Simulando contato telefônico com a central de atendimento..."
-	calling_ok_button.hide()
-	
-	await get_tree().create_timer(2.0).timeout
-	
-	calling_status.text = "📞 Chamada Finalizada!"
-	calling_desc.text = "Protocolo de atendimento gerado: #202619472.\n\nCOMPESA registrou a queixa! Uma equipe de campo foi despachada para o Coque para restabelecer a tubulação rompida."
-	calling_ok_button.show()
-	
-	if not GameManager.water_solved:
-		GameManager.water_solved = true
-		GameManager.resolve_problem("Abastecimento de água", 10.0)
-		_update_phone_ui_state()
-
-func _on_calling_ok_pressed():
 	hide()
 
 func _update_phone_ui_state():
@@ -521,7 +415,7 @@ func _update_phone_ui_state():
 		concepts_aluguel_social_container.visible = GameManager.housing_solved or GameManager.current_stage >= 10
 	
 	if not phone_unlocked:
-		water_problem_card.hide()
+		problem_card_template.hide()
 		if shelter_problem_card:
 			shelter_problem_card.hide()
 		if housing_problem_card:
@@ -531,38 +425,35 @@ func _update_phone_ui_state():
 		nav_problems.disabled = true
 		nav_contacts.disabled = true
 	else:
-		water_problem_card.show()
-		if shelter_problem_card:
-			shelter_problem_card.show()
-		if housing_problem_card:
-			if GameManager.current_stage >= 9:
-				housing_problem_card.show()
-			else:
-				housing_problem_card.hide()
+		problem_card_template.hide()
+		
+		if current_problems_tab == "active":
+			if shelter_problem_card:
+				if GameManager.current_stage < 8:
+					shelter_problem_card.show()
+				else:
+					shelter_problem_card.hide()
+			if housing_problem_card:
+				if GameManager.current_stage >= 9 and not GameManager.housing_solved:
+					housing_problem_card.show()
+				else:
+					housing_problem_card.hide()
+		else:
+			if shelter_problem_card:
+				if GameManager.current_stage >= 8:
+					shelter_problem_card.show()
+				else:
+					shelter_problem_card.hide()
+			if housing_problem_card:
+				if GameManager.current_stage >= 9 and GameManager.housing_solved:
+					housing_problem_card.show()
+				else:
+					housing_problem_card.hide()
+
 		home_problems_card.disabled = false
 		home_contacts_card.disabled = false
 		nav_problems.disabled = false
 		nav_contacts.disabled = false
-
-	if GameManager.water_solved:
-		water_status_tag.self_modulate = Color("4E8C50")
-		water_status_label.text = "Resolvido"
-		water_update_label.text = "Última atualização: Serviço concluído."
-		
-		detail_status_tag.self_modulate = Color("4E8C50")
-		detail_status_label.text = "Resolvido"
-		detail_resolve_button.text = "Problema Resolvido"
-		detail_resolve_button.disabled = true
-	else:
-		water_status_tag.self_modulate = Color("A63F3F")
-		water_status_label.text = "Não resolvido"
-		water_update_label.text = "Última atualização: Em análise pela COMPESA."
-		
-		if active_problem == "water":
-			detail_status_tag.self_modulate = Color("A63F3F")
-			detail_status_label.text = " Não resolvido "
-			detail_resolve_button.text = "Ver como resolver"
-			detail_resolve_button.disabled = false
 
 	if housing_problem_card:
 		var status_tag := housing_problem_card.get_node("Margin/VBox/HBox/StatusTag") as PanelContainer
@@ -578,10 +469,24 @@ func _update_phone_ui_state():
 			status_label.text = "Não resolvido"
 			update_label.text = "Última atualização: Moradia estruturalmente comprometida."
 
+	if shelter_problem_card:
+		var status_tag := shelter_problem_card.get_node("Margin/VBox/HBox/StatusTag") as PanelContainer
+		var status_label := shelter_problem_card.get_node("Margin/VBox/HBox/StatusTag/Label") as Label
+		var update_label := shelter_problem_card.get_node("Margin/VBox/UpdateLabel") as Label
+		
+		if GameManager.current_stage >= 8:
+			status_tag.self_modulate = Color("4E8C50")
+			status_label.text = "Concluído"
+			update_label.text = "Última atualização: Visita ao abrigo concluída."
+		else:
+			status_tag.self_modulate = Color("2E6B8A")
+			status_label.text = "Disponível"
+			update_label.text = "Vagas disponíveis para famílias afetadas pela chuva."
+
 func _update_indicators_screen():
 	ind_satisfacao_bar.value = GameManager.satisfaction
 	ind_satisfacao_val.text = "%d%%" % int(GameManager.satisfaction)
-	ind_saneamento_bar.value = 80.0 if GameManager.water_solved else 50.0
+	ind_saneamento_bar.value = 50.0
 
 func _on_stage_changed(new_stage: int):
 	if new_stage == 4:
@@ -594,7 +499,6 @@ func _on_stage_changed(new_stage: int):
 
 func _setup_concepts() -> void:
 	_concept_nodes = {
-		"compesa": {"node": concept_card_compesa, "title": "COMPESA"},
 		"defesa_civil": {"node": concept_card_defesa, "title": "Defesa Civil"},
 		"aluguel_social": {"node": concept_card_aluguel, "title": "Aluguel Social"},
 	}
@@ -609,7 +513,7 @@ func _setup_concepts() -> void:
 	_ensure_base_concepts()
 	_refresh_concepts_view()
 
-## Libera um conceito pelo id ("compesa", "defesa_civil", "aluguel_social").
+## Libera um conceito pelo id ("defesa_civil", "aluguel_social").
 ## Mostra um toast de "Conceito desbloqueado" (a menos que silent = true).
 func unlock_concept(concept_id: String, silent := false) -> void:
 	if not _concept_nodes.has(concept_id) or _unlocked_concepts.has(concept_id):
@@ -622,7 +526,6 @@ func unlock_concept(concept_id: String, silent := false) -> void:
 ## Conceitos básicos ficam disponíveis assim que o celular é destravado (stage >= 4).
 func _ensure_base_concepts() -> void:
 	if GameManager.current_stage >= 4:
-		unlock_concept("compesa", true)
 		unlock_concept("defesa_civil", true)
 
 func _refresh_concepts_view() -> void:
@@ -735,11 +638,8 @@ func _on_contact_selected(contact_id: String) -> void:
 			await Popups.show_alert(_challenge_feedback(contact_id), "Tentar de novo", "❌ Contato incorreto")
 		return
 
-	if contact_id == "compesa":
-		_show_screen("compesa")
-	else:
-		var c := _get_contact(contact_id)
-		await Popups.show_alert("%s\n\n📞 %s" % [c["role"], c["phone"]], "Fechar", "%s %s" % [c["icon"], c["name"]])
+	var c := _get_contact(contact_id)
+	await Popups.show_alert("%s\n\n📞 %s" % [c["role"], c["phone"]], "Fechar", "%s %s" % [c["icon"], c["name"]])
 
 func _challenge_feedback(contact_id: String) -> String:
 	match contact_id:
@@ -747,8 +647,6 @@ func _challenge_feedback(contact_id: String) -> String:
 			return "A Guarda Municipal protege o patrimônio e faz mediação urbana, não resgates climáticos."
 		"procon":
 			return "O PROCON cuida dos direitos do consumidor, não de calamidades."
-		"compesa":
-			return "A COMPESA cuida do saneamento (água e esgoto), não de resgates e evacuações."
 		_:
 			return "Esse não é o contato certo para esta situação."
 
@@ -977,3 +875,34 @@ func _on_aluguel_social_read_finished():
 	if GameManager.current_stage == 10:
 		GameManager.advance_stage()
 		print("[PhoneMenu] Concept read complete, advancing to Stage 11: Final da Missão")
+
+
+func _set_problems_tab(tab_name: String):
+	current_problems_tab = tab_name
+	
+	if tab_name == "active":
+		active_tab.add_theme_stylebox_override("normal", style_active)
+		active_tab.add_theme_stylebox_override("hover", style_active_hover)
+		active_tab.add_theme_stylebox_override("pressed", style_active)
+		active_tab.add_theme_stylebox_override("focus", style_active)
+		active_tab.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		
+		completed_tab.add_theme_stylebox_override("normal", style_inactive)
+		completed_tab.add_theme_stylebox_override("hover", style_inactive_hover)
+		completed_tab.add_theme_stylebox_override("pressed", style_inactive)
+		completed_tab.add_theme_stylebox_override("focus", style_inactive)
+		completed_tab.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4, 1))
+	else:
+		active_tab.add_theme_stylebox_override("normal", style_inactive)
+		active_tab.add_theme_stylebox_override("hover", style_inactive_hover)
+		active_tab.add_theme_stylebox_override("pressed", style_inactive)
+		active_tab.add_theme_stylebox_override("focus", style_inactive)
+		active_tab.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4, 1))
+		
+		completed_tab.add_theme_stylebox_override("normal", style_active)
+		completed_tab.add_theme_stylebox_override("hover", style_active_hover)
+		completed_tab.add_theme_stylebox_override("pressed", style_active)
+		completed_tab.add_theme_stylebox_override("focus", style_active)
+		completed_tab.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		
+	_update_phone_ui_state()

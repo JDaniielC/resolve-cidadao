@@ -28,4 +28,4 @@ func set_npc_proximity(value: bool):
 func _input(event):
 	if event.is_action_pressed("interact") and is_near_npc:
 		print("Player pressed interact near NPC")
-		get_tree().root.get_node("MainGame/DonaMariam").trigger_dialogue()
+		get_tree().root.get_node("MainGame/DonaMaria").trigger_dialogue()

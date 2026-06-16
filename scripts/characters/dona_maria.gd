@@ -57,9 +57,27 @@ func _update_dialogue_title():
 		elif GameManager.current_stage == 9:
 			dialogue_state.title = "rua_destruida"
 			Notifications.notify_problem("Danos estruturais graves identificados no bairro.", "🏠")
+		elif GameManager.current_stage == 10:
+			dialogue_state.title = "espera_agente"
 		elif GameManager.current_stage == 11:
-			dialogue_state.title = "final"
+			if GameManager.housing_solved:
+				dialogue_state.title = "pos_final"
+			else:
+				dialogue_state.title = "final"
 		print("Dona Maria: Updated StateMachine dialogue state title to: ", dialogue_state.title)
+
+	var marker = get_node_or_null("MissionMarker")
+	if marker:
+		if GameManager.current_stage in [1, 2]:
+			marker.visible_at_stage = GameManager.current_stage
+		elif GameManager.current_stage == 9:
+			marker.visible_at_stage = 9
+		elif GameManager.current_stage == 11:
+			marker.visible_at_stage = 11
+		else:
+			marker.visible_at_stage = -1
+		if marker.has_method("_update_visibility"):
+			marker._update_visibility(GameManager.current_stage)
 
 func _show_need_choice() -> void:
 	var choice_panel = get_tree().root.get_node_or_null("MainGame/UILayer/ChoicePanel")
@@ -85,26 +103,12 @@ func _on_dialogue_finished(_resource):
 		elif GameManager.current_stage == 6:
 			print("Dona Maria: Pre-shelter hint dialogue finished.")
 		elif GameManager.current_stage == 9:
-			print("Dona Maria: Destructed street dialogue finished. Showing choice...")
-			_show_moradia_choice()
-		elif GameManager.current_stage == 10:
-			print("Dona Maria: Aluguel social orientation dialogue finished. Opening phone to explain concept...")
-			GameManager.housing_solved = true
-			
-			var main_game = get_tree().current_scene
-			var phone = main_game.get_node_or_null("UILayer/PhoneMenu")
-			if not phone:
-				phone = get_tree().root.find_child("PhoneMenu", true, false)
-			if phone:
-				var phone_wrapper = phone.get_parent()
-				if phone_wrapper and phone_wrapper is CanvasLayer:
-					phone_wrapper.visible = true
-				phone.visible = true
-				phone._show_screen("concepts")
-				phone._show_aluguel_social_detail()
+			print("Dona Maria: Destructed street dialogue finished. Advancing stage to 10...")
+			GameManager.advance_stage()
 			_update_dialogue_title()
 		elif GameManager.current_stage == 11:
 			print("Dona Maria: Final thank you dialogue finished. Completing mission and adding satisfaction!")
+			GameManager.housing_solved = true
 			GameManager.resolve_problem("Moradia — Aluguel Social", 15.0)
 			
 			var main_game = get_tree().current_scene

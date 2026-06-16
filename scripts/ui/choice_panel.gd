@@ -58,11 +58,6 @@ func _on_choice_selected(option_index: int):
 			GameManager.advance_stage()
 			GameManager.resume_game()
 			hide()
-			if current_choice_id == "choice_moradia_comprometida":
-				DialogueManager.show_dialogue_balloon(
-					load("res://dialogues/missao_01/dona_maria.dialogue"),
-					"pos_quiz_moradia"
-				)
 		)
 		options_container.add_child(continue_btn)
 		choice_buttons.append(continue_btn)

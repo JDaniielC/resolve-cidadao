@@ -123,7 +123,7 @@ func _apply_weather(weather: String, animated: bool) -> void:
 func _set_particles_immediate(profile: Dictionary) -> void:
 	if not rain_particles:
 		return
-	rain_particles.amount = profile["amount"]
+	rain_particles.amount = profile["amount"] if profile["amount"] else 0
 	rain_particles.initial_velocity_min = profile["vel_min"]
 	rain_particles.initial_velocity_max = profile["vel_max"]
 	rain_particles.emitting = profile["amount"] > 0

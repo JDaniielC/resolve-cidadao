@@ -1,11 +1,12 @@
 [gd_scene format=4 uid="uid://bvr7jfamd6mn2"]
 
-[ext_resource type="Texture2D" uid="uid://bu8x7cypqp6e4" path="res://tilesets/pos-enchente.png" id="1_fyc8u"]
+[ext_resource type="Texture2D" uid="uid://dny661js3bcqi" path="res://tilesets/pos-enchente.png" id="1_fyc8u"]
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="2_6g0qd"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="3_5v6ne"]
 [ext_resource type="Script" uid="uid://cx6lymvgaafxd" path="res://scenes/levels/cpu_particles_2d.gd" id="4_alykg"]
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_4lo8a"]
 [ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="6_3g6q3"]
+[ext_resource type="PackedScene" uid="uid://jct3wxo41j4t" path="res://scenes/npcs/agente_social.tscn" id="6_6g0qd"]
 [ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="7_0h2ul"]
 [ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="8_tupta"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="9_076d1"]
@@ -16374,8 +16375,8 @@ size = Vector2(40, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_commercial"]
 size = Vector2(336, 176.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_awdld"]
-size = Vector2(72, 45)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28evd"]
+size = Vector2(72, 113)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwt65"]
 size = Vector2(77, 94.75)
@@ -16394,6 +16395,10 @@ b = Vector2(17, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shops"]
 size = Vector2(455.75, 98)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6we2m"]
+a = Vector2(-61.693573, -17.143616)
+b = Vector2(161.7425, 64.15881)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gate"]
 size = Vector2(59.25, 57)
@@ -16566,10 +16571,17 @@ script = ExtResource("4_alykg")
 z_index = 2
 y_sort_enabled = true
 
-[node name="DonaMariam" parent="Entities" unique_id=1925654727 instance=ExtResource("5_4lo8a")]
-z_index = 2
+[node name="agente" parent="Entities" unique_id=1925654727 instance=ExtResource("6_6g0qd")]
+position = Vector2(1080, 222)
+
+[node name="DonaMaria" parent="Entities" unique_id=1214101450 instance=ExtResource("5_4lo8a")]
+y_sort_enabled = true
 position = Vector2(516, 473)
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 
 [node name="Player" parent="Entities" unique_id=445539203 instance=ExtResource("6_3g6q3")]
 position = Vector2(930, 205)
@@ -16646,8 +16658,8 @@ position = Vector2(222, 120.75)
 shape = SubResource("RectangleShape2D_commercial")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Residencial" unique_id=1210765226]
-position = Vector2(437, 407.5)
-shape = SubResource("RectangleShape2D_awdld")
+position = Vector2(437, 373.5)
+shape = SubResource("RectangleShape2D_28evd")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries/Residencial" unique_id=856503569]
 position = Vector2(519, 346.625)
@@ -16672,6 +16684,11 @@ position = Vector2(265.875, 517)
 shape = SubResource("RectangleShape2D_shops")
 
 [node name="BottomLeft" type="StaticBody2D" parent="Boundaries" unique_id=1760583119]
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Boundaries/BottomLeft" unique_id=330265525]
+position = Vector2(127, 691.99994)
+rotation = -0.37188733
+shape = SubResource("SegmentShape2D_6we2m")
 
 [node name="GateWall" type="CollisionShape2D" parent="Boundaries/BottomLeft" unique_id=347154468]
 position = Vector2(490.625, 658)

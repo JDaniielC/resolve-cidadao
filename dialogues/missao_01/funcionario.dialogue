@@ -32,3 +32,7 @@ Funcionário: Em que posso ajudar?
 	Funcionário: "À toa"? Essa gente perdeu tudo o que tinha.
 	Funcionário: Aqui ninguém está à toa — está tentando se reconstruir.
 	=> intro_perguntas
+
+~ espera
+Funcionário: Obrigado pela visita. Continuamos organizando o acolhimento das famílias por aqui.
+=> END

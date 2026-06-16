@@ -42,9 +42,10 @@ func trigger_dialogue():
 func _update_dialogue_title():
 	var dialogue_state = get_node_or_null("StateMachine/start_dialogue")
 	if dialogue_state:
-		# For stage 7 and above, we want to play the intro dialogue.
-		# If the player already talked to him (stage 8+), we can keep it as intro or END
-		dialogue_state.title = "intro"
+		if GameManager.current_stage >= 8:
+			dialogue_state.title = "espera"
+		else:
+			dialogue_state.title = "intro"
 		print("[FuncionarioAbrigo] Updated StateMachine dialogue title to: ", dialogue_state.title)
 
 func _on_dialogue_finished(resource: DialogueResource):

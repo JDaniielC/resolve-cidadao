@@ -53,8 +53,8 @@ var stage_data = {
 	7: {"name": "Abrigo Temporário", "objective": "Converse com o funcionário do abrigo"},
 	8: {"name": "Passagem de Tempo", "objective": "Saia do abrigo para ver os estragos no bairro"},
 	9: {"name": "Rua Destruída", "objective": "Converse com Dona Maria sobre a casa dela"},
-	10: {"name": "Direito à Moradia", "objective": "Acompanhe a orientação sobre o Aluguel Social"},
-	11: {"name": "Final da Missão", "objective": "Fale com Dona Maria"}
+	10: {"name": "Direito à Moradia", "objective": "Converse com a Agente Social"},
+	11: {"name": "Final da Missão", "objective": "Explique o Aluguel Social para Dona Maria"}
 }
 
 var time_accumulator: float = 0.0

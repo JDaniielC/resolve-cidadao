@@ -6224,8 +6224,8 @@ script = ExtResource("3_gefw2")
 z_index = 2
 y_sort_enabled = true
 
-[node name="DonaMariam" parent="Entities" unique_id=1925654727 instance=ExtResource("5_aw4y2")]
-z_index = 2
+[node name="DonaMaria" parent="Entities" unique_id=1925654727 instance=ExtResource("5_aw4y2")]
+y_sort_enabled = true
 position = Vector2(516, 473)
 scale = Vector2(0.5, 0.5)
 

@@ -1,34 +1,19 @@
 # dialogues/agente_social.dialogue
 
+~ intro
+=> start
+
 ~ start
-Agente Social: Olá! Sou assistente social da prefeitura. Estamos aqui para ajudar as famílias afetadas pela enchente.
-Jogador: Olá. A Dona Maria perdeu quase tudo e a casa dela está com rachaduras. Ela não tem para onde ir.
-Agente Social: Entendo. É uma situação prioritária. Em casos onde a moradia é condenada ou fica em área de risco, o município oferece um auxílio específico.
-Jogador: Qual seria esse auxílio?
-- Vale Transporte => wrong_choice
-- Aluguel Social => correct_choice
-- Cesta Básica => wrong_choice
-- A senhora que resolva, não é o seu trabalho? => rude_choice
+Agente Social: Olá! Sou assistente social da prefeitura. Estamos aqui prestando apoio às famílias afetadas pelas enchentes.
+Você: Olá. A Dona Maria está com a casa cheia de rachaduras e sem condições de moradia. Ela está desesperada e precisa de ajuda.
+Agente Social: Entendo. É uma situação prioritária. Em casos onde a moradia é condenada ou fica em área de risco, o município oferece um auxílio financeiro chamado Aluguel Social.
+Você: Como funciona esse benefício?
+Agente Social: O Aluguel Social é um auxílio financeiro temporário pago mensalmente para que a família possa alugar uma moradia provisória segura.
+Agente Social: Para acessar, ela precisará de documentos de identificação, comprovante de residência e o laudo de interdição da Defesa Civil. Nós cuidamos do cadastro e da assistência social.
+Você: Entendi. Vou avisar a ela e explicar como funciona.
+Agente Social: Excelente! Agradeço por nos ajudar a identificar essa situação.
+=> END
 
-~ wrong_choice
-do GameManager.penalize_satisfaction(5.0)
-Agente Social: Na verdade, esse auxílio não resolveria o problema de moradia da Dona Maria agora. Pense bem nas opções de habitação.
-=> start
-
-~ rude_choice
-do GameManager.penalize_satisfaction(5.0)
-Agente Social: É o meu trabalho, sim — mas ela é a sua vizinha. Quando a comunidade se importa, a ajuda chega mais rápido.
-=> start
-
-~ correct_choice
-set GameManager.add_satisfaction(15.0)
-Agente Social: Exatamente! O **Aluguel Social** é o benefício destinado a famílias que precisam sair de suas casas por risco iminente ou desastres.
-Agente Social: Vou iniciar o cadastro dela agora mesmo. Ela precisará passar por uma vistoria técnica e social.
-- Quais documentos ela vai precisar separar?
-	Agente Social: Geralmente, documentos de identificação de todos que moram na casa, comprovante de residência e o laudo da Defesa Civil condenando o imóvel.
-	Agente Social: Mas não se preocupe, orientaremos ela em cada passo.
-	do Notifications.notify_concept("Documentação Social")
-- Entendido. Vou avisar a ela.
-Agente Social: Obrigado por ajudar a identificar esse caso! A satisfação da comunidade aumentou.
-set GameManager.advance_stage()
+~ espera
+Agente Social: Olá! Já estamos cuidando do processo do Aluguel Social para Dona Maria.
 => END

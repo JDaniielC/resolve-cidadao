@@ -9,7 +9,6 @@ extends CanvasLayer
 var is_open := false
 var items: Array[ContentItem] = [] ## The items in this inventory.
 
-signal equip_weapon(weapon: DataWeapon)
 
 func _ready() -> void:
 	visible = is_open
@@ -67,7 +66,3 @@ func _update_item_list():
 		var item_name = "%s x%s" % [tr(item.resource_name), content.quantity]
 		item_list.add_item(item_name, item.icon)
 
-func _on_item_list_item_activated(index: int) -> void:
-	var item = items[index].item
-	if item is DataWeapon:
-		equip_weapon.emit(item)
