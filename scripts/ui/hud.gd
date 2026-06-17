@@ -63,6 +63,9 @@ func _ready():
 	
 	cellphone_button.pivot_offset = cellphone_button.size / 2
 	
+	EmojiFont.apply_to(weather_icon)
+	EmojiFont.apply_to(face_icon)
+	
 	# Build mobile interact button and tutorial structures
 	_build_interact_button()
 	_build_tutorial_ui()
