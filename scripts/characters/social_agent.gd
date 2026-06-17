@@ -74,5 +74,5 @@ func _update_npc_state():
 	if not active:
 		can_interact = false
 		var player = get_tree().get_first_node_in_group("player")
-		if player and player.has_method("set_npc_proximity") and player.near_npc == self:
+		if player and player.has_method("set_npc_proximity") and player.nearby_npc == self:
 			player.set_npc_proximity(null)
