@@ -1,0 +1,88 @@
+name: Deploy Web
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  export:
+    name: Export Godot Web build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.6.3
+          use-dotnet: false
+          include-templates: true
+
+      - name: Read game version
+        id: version
+        run: |
+          VERSION=$(grep '^config/version=' project.godot | sed 's/.*"\(.*\)".*/\1/')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Game version: $VERSION"
+
+      - name: Validate tag version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          GAME_VERSION="${{ steps.version.outputs.version }}"
+          if [ "$TAG_VERSION" != "$GAME_VERSION" ]; then
+            echo "Tag v$TAG_VERSION does not match project.godot version $GAME_VERSION"
+            exit 1
+          fi
+
+      - name: Export Web
+        run: |
+          mkdir -p dist/web
+          godot --headless --path . --export-release "Web" dist/web/index.html
+
+      - name: Write version metadata
+        run: |
+          echo "${{ steps.version.outputs.version }}" > dist/web/version.txt
+          echo "${{ github.sha }}" > dist/web/commit.txt
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/web
+
+      - name: Package release zip
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          cd dist/web
+          zip -r "../../ResolveCidadao-${{ steps.version.outputs.version }}-web.zip" .
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ResolveCidadao-${{ steps.version.outputs.version }}-web.zip
+          generate_release_notes: true
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: export
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

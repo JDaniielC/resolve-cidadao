@@ -2,7 +2,6 @@
 # Godot-specific ignores
 .import/
 export.cfg
-export_presets.cfg
 *.import
 .godot/
 *.cache
@@ -25,6 +24,7 @@ addons/Todo_Manager/todo.cfg
 
 # Build and export
 build/
+builds/
 export/
 dist/
 
