@@ -15,6 +15,8 @@ var _player: Node2D = null
 @onready var arrow_label: Label = $Arrow
 
 func _ready() -> void:
+	if arrow_label:
+		EmojiFont.apply_to(arrow_label)
 	add_to_group("mission_markers")
 	GameManager.stage_changed.connect(_on_stage_changed)
 	_update_visibility(GameManager.current_stage)

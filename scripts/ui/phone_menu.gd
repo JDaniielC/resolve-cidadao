@@ -756,6 +756,7 @@ func _setup_aluguel_social_detail_view():
 	step_icon_label.text = "🤝"
 	step_icon_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	step_icon_label.add_theme_font_size_override("font_size", 42)
+	EmojiFont.apply_to(step_icon_label)
 	card_vbox.add_child(step_icon_label)
 	
 	step_title_label = Label.new()
