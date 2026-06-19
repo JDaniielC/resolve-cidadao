@@ -21,18 +21,29 @@ func _on_body_entered(body: Node2D) -> void:
 		print("[Area2D] Transition locked. Current stage: %d, required: %d" % [GameManager.current_stage, required_stage])
 		return
 
-	var main_game := get_tree().current_scene
-	
-	# Find the current level node dynamically (it's the direct child of main_game that contains this Area2D)
+	var main_game := _find_main_game()
+	if main_game == null:
+		push_error("[Area2D] Could not find MainGame controller.")
+		return
+
+	# Find the current level node dynamically (direct child of main_game that contains this Area2D)
 	var current_level: Node = self
-	while current_level != null and current_level.get_parent() != main_game:
+	while current_level.get_parent() != null and current_level.get_parent() != main_game:
 		current_level = current_level.get_parent()
-		
-	if current_level == null:
+
+	if current_level.get_parent() != main_game:
 		push_error("[Area2D] Could not find the level root node to swap.")
 		return
 
 	_transition_started = true
 	print("[Area2D] Player entered transition area. Transitioning from %s to: %s" % [current_level.name, target_scene])
-	if main_game.has_method("swap_level"):
-		main_game.swap_level.call_deferred(target_scene, current_level)
+	main_game.swap_level.call_deferred(target_scene, current_level)
+
+
+func _find_main_game() -> Node:
+	var node: Node = self
+	while node:
+		if node.has_method("swap_level"):
+			return node
+		node = node.get_parent()
+	return null

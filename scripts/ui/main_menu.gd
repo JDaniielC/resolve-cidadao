@@ -69,13 +69,23 @@ func _connect_buttons() -> void:
 func _on_play_pressed() -> void:
 	GameManager.reset_progress()
 	GameManager.clear_save()
-	_fade_out_and_load("res://scenes/main_game.tscn")
+	_load_game()
 
 
 ## Handle "Continuar" button press — restaura o progresso salvo.
 func _on_continue_pressed() -> void:
 	GameManager.load_progress()
-	_fade_out_and_load("res://scenes/main_game.tscn")
+	_load_game()
+
+
+func _load_game() -> void:
+	_set_buttons_enabled(false)
+	SceneManager.swap_scenes(
+		"res://scenes/main_game.tscn",
+		get_tree().root,
+		get_tree().current_scene,
+		Const.TRANSITION.FADE_TO_BLACK
+	)
 
 
 
@@ -92,17 +102,23 @@ func _on_quit_pressed() -> void:
 
 ## Helper: fade out and execute callback
 func _fade_out_and_do(callback: Callable) -> void:
+	var black_overlay := ColorRect.new()
+	black_overlay.color = Color.BLACK
+	black_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	black_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(black_overlay)
+	black_overlay.modulate.a = 0.0
+
 	var fade_tween: Tween = create_tween()
 	fade_tween.set_ease(Tween.EASE_IN)
-	fade_tween.tween_property(self, "modulate:a", 0.0, FADE_OUT_DURATION)
+	fade_tween.tween_property(black_overlay, "modulate:a", 1.0, FADE_OUT_DURATION)
 	fade_tween.tween_callback(callback)
 
 
-## Fade out and load a new scene
-func _fade_out_and_load(scene_path: String) -> void:
-	_fade_out_and_do(func() -> void:
-		MenuController.load_scene(scene_path)
-	)
+func _set_buttons_enabled(enabled: bool) -> void:
+	for child in buttons_container.get_children():
+		if child is BaseButton:
+			child.disabled = not enabled
 
 
 ## Fade out and quit the game

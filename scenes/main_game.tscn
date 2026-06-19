@@ -30,6 +30,6 @@ layer = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1721135728]
 stream = ExtResource("8_70vka")
-autoplay = true
+volume_db = -80.0
 
 [node name="MissionComplete" parent="." unique_id=2030100200 instance=ExtResource("10_mc")]

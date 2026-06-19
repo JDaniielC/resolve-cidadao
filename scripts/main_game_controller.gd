@@ -7,6 +7,10 @@ var pause_menu_scene = preload("res://scenes/ui/menus/pause_menu.tscn")
 var intro_overlay: ColorRect
 var intro_layer: CanvasLayer
 
+func _enter_tree() -> void:
+	if GameManager.current_stage <= 1:
+		_create_intro_overlay()
+
 func _ready() -> void:
 	# Connect to MenuController pause state signal
 	MenuController.menu_state_changed.connect(_on_menu_state_changed)
@@ -19,17 +23,6 @@ func _ready() -> void:
 		_resume_from_save()
 		return
 
-	# Create intro overlay to keep the screen dark
-	intro_layer = CanvasLayer.new()
-	intro_layer.layer = 1 # Above game (0) but below UILayer (2)
-	add_child(intro_layer)
-	
-	intro_overlay = ColorRect.new()
-	intro_overlay.color = Color.BLACK
-	intro_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	intro_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE # Allow clicks to pass to dialogue
-	intro_layer.add_child(intro_overlay)
-	
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
 	# Initial narrative popup
@@ -38,6 +31,8 @@ func _ready() -> void:
 		"Entendido",
 		"Alerta de Emergência"
 	)
+
+	_start_rain_ambience()
 	
 	await get_tree().create_timer(1.0).timeout
 	
@@ -84,7 +79,15 @@ func _open_pause_menu() -> void:
 	add_child(pause_menu_scene.instantiate())
 
 func swap_level(scene_path: String, outgoing: Node) -> void:
+	_run_level_swap(scene_path, outgoing)
+
+func _run_level_swap(scene_path: String, outgoing: Node) -> void:
+	await Cutscene.fade_out(0.5)
 	var incoming: Node = load(scene_path).instantiate()
+	if incoming == null:
+		push_error("Failed to load level: %s" % scene_path)
+		await Cutscene.fade_in(0.5)
+		return
 	add_child(incoming)
 	if outgoing and is_instance_valid(outgoing):
 		outgoing.queue_free()
@@ -93,8 +96,29 @@ func swap_level(scene_path: String, outgoing: Node) -> void:
 	if camera:
 		camera.refresh_target()
 		_apply_camera_bounds()
-	GameManager.current_level_path = scene_path
+	var level_path := incoming.scene_file_path
+	if level_path != "":
+		GameManager.current_level_path = level_path
 	GameManager.save_progress()
+	await Cutscene.fade_in(0.5)
+
+func _create_intro_overlay() -> void:
+	if intro_layer:
+		return
+	intro_layer = CanvasLayer.new()
+	intro_layer.layer = 1 # Above game (0) but below UILayer (2)
+	add_child(intro_layer)
+
+	intro_overlay = ColorRect.new()
+	intro_overlay.color = Color.BLACK
+	intro_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	intro_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	intro_layer.add_child(intro_overlay)
+
+func _start_rain_ambience() -> void:
+	var rain_player := get_node_or_null("AudioStreamPlayer") as AudioStreamPlayer
+	if rain_player and not rain_player.playing:
+		rain_player.play()
 
 ## Continuando de um save: restaura o nível salvo e devolve o controle ao jogador.
 func _resume_from_save() -> void:
@@ -107,6 +131,7 @@ func _resume_from_save() -> void:
 	for player in Globals.get_players():
 		if player is PlayerEntity:
 			player.input_enabled = true
+	_start_rain_ambience()
 
 func _on_level_loaded(_loaded_scene: Node) -> void:
 	var camera: GameCamera = $GameCamera2D
