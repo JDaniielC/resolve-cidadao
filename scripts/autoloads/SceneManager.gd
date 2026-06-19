@@ -199,15 +199,25 @@ func _on_content_invalid(path:String) -> void:
 ## [b][color=plum]start_scene[/color][/b] implement this to kick off your scene. I use it to return control to the player. But you could also trigger events with the scene or anything else you want to hold until loading and transitioning are both totally done.[br][br]
 ## For sample implementations, see [Level]
 func _on_content_finished_loading(incoming_scene) -> void:
+	if incoming_scene == null:
+		push_error("SceneManager: failed to instantiate incoming scene.")
+		_loading_in_progress = false
+		if _loading_screen != null:
+			_loading_screen.queue_free()
+			_loading_screen = null
+		return
+
 	var outgoing_scene = _scene_to_unload	# NEW > can't use current_scene anymore
 	
 	# if our outgoing_scene has data to pass, give it to our incoming_scene
-	if outgoing_scene != null:	
+	if is_instance_valid(outgoing_scene):
 		if outgoing_scene.has_method("get_data") and incoming_scene.has_method("receive_data"):
 			incoming_scene.receive_data(outgoing_scene.get_data())
 	
 	# load the incoming into the designated node
 	_load_scene_into.add_child(incoming_scene)
+	if _load_scene_into == get_tree().root:
+		get_tree().current_scene = incoming_scene
 		# listen for this if you want to perform tasks on the scene immeidately after adding it to the tree
 	# ex: moveing the HUD back up to the top of the stack
 	scene_added.emit(incoming_scene,_loading_screen)
@@ -242,9 +252,9 @@ func _on_content_finished_loading(incoming_scene) -> void:
 	# probably not necssary since we split our _content_finished_loading but it won't hurt to have an extra check
 	if _loading_screen != null:
 		_loading_screen.finish_transition()
-		
-		# Wait or loading animation to finish
-		await _loading_screen.anim_player.animation_finished
+		await _loading_screen.transition_out_complete
+		_loading_screen.queue_free()
+		_loading_screen = null
 
 	# if your incoming scene implements init_scene() > call it here
 	# ex: I'm using it to enable control of the player (they're locked while in transition)

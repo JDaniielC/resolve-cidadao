@@ -12208,7 +12208,7 @@ y_sort_enabled = true
 position = Vector2(561, 384)
 
 [node name="Player" parent="Entities" unique_id=445539203 instance=ExtResource("2_07pi2")]
-position = Vector2(671, 580)
+position = Vector2(666, 667)
 
 [node name="Boundaries" type="Node2D" parent="." unique_id=1803611762]
 
@@ -12430,6 +12430,6 @@ offset_top = -20.0
 offset_right = 16.0
 offset_bottom = 16.0
 theme_override_font_sizes/font_size = 32
-text = "!"
+text = "❗"
 horizontal_alignment = 1
 vertical_alignment = 1
