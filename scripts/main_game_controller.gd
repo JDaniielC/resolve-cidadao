@@ -154,7 +154,7 @@ func _get_active_level() -> Node:
 	for child in get_children():
 		if child is CanvasLayer or child is AudioStreamPlayer:
 			continue
-		if child.name in ["HUD", "MissionComplete", "GameCamera2D"]:
+		if child.name in ["HUD", "MissionComplete", "GameCamera2D", "ScreenRain"]:
 			continue
 		if child is Node2D:
 			return child
