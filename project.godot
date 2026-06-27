@@ -174,7 +174,7 @@ inventory={
 [internationalization]
 
 locale/translations=PackedStringArray("res://local/translations.en.translation", "res://local/translations.it.translation")
-locale/translations_pot_files=PackedStringArray("res://dialogues/start.dialogue", "res://dialogues/commons.dialogue", "res://dialogues/missao_01/dona_maria.dialogue", "res://dialogues/missao_01/radio.dialogue", "res://dialogues/agente_social.dialogue", "res://dialogues/missao_02/lucas.dialogue", "res://dialogues/missao_02/seu_severino.dialogue", "res://dialogues/missao_01/funcionario.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/start.dialogue", "res://dialogues/commons.dialogue", "res://dialogues/missao_01/dona_maria.dialogue", "res://dialogues/missao_01/radio.dialogue", "res://dialogues/agente_social.dialogue", "res://dialogues/missao_02/lucas.dialogue", "res://dialogues/missao_02/seu_severino.dialogue", "res://dialogues/missao_01/funcionario.dialogue", "res://resolve-cidadao/dialogues/agente_social.dialogue", "res://resolve-cidadao/dialogues/commons.dialogue", "res://resolve-cidadao/dialogues/missao_01/dona_maria.dialogue", "res://resolve-cidadao/dialogues/missao_01/funcionario.dialogue", "res://resolve-cidadao/dialogues/missao_01/radio.dialogue", "res://resolve-cidadao/dialogues/missao_02/lucas.dialogue", "res://resolve-cidadao/dialogues/missao_02/seu_severino.dialogue", "res://resolve-cidadao/dialogues/start.dialogue")
 
 [layer_names]
 
