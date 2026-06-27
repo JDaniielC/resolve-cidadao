@@ -4,6 +4,19 @@ extends Node2D
 # Preload pause menu scene
 var pause_menu_scene = preload("res://scenes/ui/menus/pause_menu.tscn")
 
+const DRY_LEVEL_PATHS: Array[String] = [
+	"res://scenes/levels/shelter.tscn",
+	"res://scenes/levels/destructed_street.tscn",
+]
+
+const RAIN_VOLUME_DB := {
+	"Chuva Forte": 0.0,
+	"Chuva Leve": -14.0,
+	"Nublado": -80.0,
+	"Limpo": -80.0,
+	"Estiagem": -80.0,
+}
+
 var intro_overlay: ColorRect
 var intro_layer: CanvasLayer
 
@@ -17,6 +30,7 @@ func _ready() -> void:
 	SceneManager.load_complete.connect(_on_level_loaded)
 	await get_tree().process_frame
 	_apply_camera_bounds()
+	_apply_level_rain()
 
 	# Continuando de um save: pula a intro e restaura o nível salvo.
 	if GameManager.current_stage > 1:
@@ -100,6 +114,7 @@ func _run_level_swap(scene_path: String, outgoing: Node) -> void:
 	if level_path != "":
 		GameManager.current_level_path = level_path
 	GameManager.save_progress()
+	_apply_level_rain()
 	await Cutscene.fade_in(0.5)
 
 func _create_intro_overlay() -> void:
@@ -138,6 +153,7 @@ func _on_level_loaded(_loaded_scene: Node) -> void:
 	if camera:
 		camera.refresh_target()
 		_apply_camera_bounds()
+	_apply_level_rain()
 
 func _apply_camera_bounds() -> void:
 	var camera: GameCamera = $GameCamera2D
@@ -159,6 +175,23 @@ func _get_active_level() -> Node:
 		if child is Node2D:
 			return child
 	return null
+
+func _apply_level_rain() -> void:
+	var level := _get_active_level()
+	var level_path := level.scene_file_path if level else ""
+	var suppress_rain := level_path in DRY_LEVEL_PATHS
+
+	var screen_rain := get_node_or_null("ScreenRain")
+	if screen_rain and screen_rain.has_method("set_suppressed"):
+		screen_rain.set_suppressed(suppress_rain)
+
+	var rain_player := get_node_or_null("AudioStreamPlayer") as AudioStreamPlayer
+	if not rain_player:
+		return
+	if suppress_rain:
+		rain_player.volume_db = -80.0
+	elif RAIN_VOLUME_DB.has(GameManager.current_weather):
+		rain_player.volume_db = RAIN_VOLUME_DB[GameManager.current_weather]
 
 func _on_menu_state_changed(_is_paused: bool) -> void:
 	## Handle menu state changes (pause/resume).

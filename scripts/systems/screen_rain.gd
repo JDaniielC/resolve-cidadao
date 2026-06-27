@@ -9,6 +9,8 @@ const PROFILE := {
 	"Estiagem": {"amount": 0, "vel_min": 0.0, "vel_max": 0.0, "emitting": false},
 }
 
+var _suppressed := false
+
 func _ready() -> void:
 	add_to_group("rain_particles")
 	z_index = 100
@@ -56,7 +58,14 @@ func _follow_camera() -> void:
 	global_position = camera.global_position + Vector2(0.0, -top_offset)
 	emission_rect_extents = Vector2(half_w, 12.0)
 
+func set_suppressed(value: bool) -> void:
+	_suppressed = value
+	_apply_weather(GameManager.current_weather)
+
 func _apply_weather(weather: String) -> void:
+	if _suppressed:
+		emitting = false
+		return
 	var profile: Dictionary = PROFILE.get(weather, PROFILE["Nublado"])
 	amount = profile["amount"]
 	initial_velocity_min = profile["vel_min"]

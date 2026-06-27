@@ -67,6 +67,9 @@ size = Vector2(17.5, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbm1m"]
 size = Vector2(354.5, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit_door"]
+size = Vector2(56, 63)
+
 [node name="Shelter" type="Node2D" unique_id=1273472289]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1561938669]
@@ -247,6 +250,10 @@ script = ExtResource("3_33ox6")
 target_scene = "uid://bvr7jfamd6mn2"
 required_stage = 9
 auto_advance_from_stage = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1707690440]
+position = Vector2(660, 708)
+shape = SubResource("RectangleShape2D_exit_door")
 
 [node name="MissionMarker" type="Node2D" parent="Area2D" unique_id=1594685108]
 position = Vector2(660, 650)
