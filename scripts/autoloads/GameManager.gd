@@ -58,6 +58,8 @@ var stage_data = {
 }
 
 var time_accumulator: float = 0.0
+## >1 acelera o relógio (só testes). Ex.: 30 ≈ 30 min de jogo por segundo real.
+var debug_time_scale: float = 1
 
 func _ready():
 	print("GameManager initialized at stage %d" % current_stage)
@@ -69,9 +71,9 @@ func _ready():
 func _process(delta: float):
 	if is_game_paused:
 		return
-	time_accumulator += delta
-	if time_accumulator >= 1.0: # Every 1 second, game time advances by 1 minute
-		time_accumulator = 0.0
+	time_accumulator += delta * debug_time_scale
+	while time_accumulator >= 1.0:
+		time_accumulator -= 1.0
 		advance_time(1)
 
 func advance_stage():

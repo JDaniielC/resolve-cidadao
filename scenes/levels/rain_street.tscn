@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="4_0tg25"]
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_aw4y2"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="8_20akl"]
-[ext_resource type="Texture2D" uid="uid://b5k0tb86v3ch3" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
+[ext_resource type="Texture2D" uid="uid://dyhw4l23cpylg" path="res://tilesets/bairro-1.png" id="9_5l4fb"]
 [ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="10_daynight"]
 [ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="11_weather"]
 [ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="12_marker"]
@@ -6217,12 +6217,81 @@ texture = SubResource("GradientTexture2D_ab5jk")
 texture_scale = 0.5
 script = ExtResource("2_ab5jk")
 
+[node name="Lamp 4" type="TileMapLayer" parent="Lamp" unique_id=45034771]
+position = Vector2(-431, -77)
+tile_map_data = PackedByteArray("AABIABkAAAAbABoAABBJABkAAAAaABoAABBJABoAAAAaABsAABA=")
+tile_set = ExtResource("1_wfxqf")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lamp/Lamp 4" unique_id=2143672841]
+position = Vector2(1159, 406)
+color = Color(0.99999994, 0.8119936, 0.19830257, 1)
+energy = 1.2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ab5jk")
+texture_scale = 0.5
+script = ExtResource("2_ab5jk")
+
+[node name="Lamp 5" type="TileMapLayer" parent="Lamp" unique_id=128124402]
+position = Vector2(-427, -195)
+tile_map_data = PackedByteArray("AABIABkAAAAbABoAABBJABkAAAAaABoAABBJABoAAAAaABsAABA=")
+tile_set = ExtResource("1_wfxqf")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lamp/Lamp 5" unique_id=1185008165]
+position = Vector2(1159, 406)
+color = Color(0.99999994, 0.8119936, 0.19830257, 1)
+energy = 1.2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ab5jk")
+texture_scale = 0.5
+script = ExtResource("2_ab5jk")
+
+[node name="Lamp 6" type="TileMapLayer" parent="Lamp" unique_id=567697468]
+position = Vector2(-426, -377)
+tile_map_data = PackedByteArray("AABIABkAAAAbABoAABBJABkAAAAaABoAABBJABoAAAAaABsAABA=")
+tile_set = ExtResource("1_wfxqf")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lamp/Lamp 6" unique_id=1703729283]
+position = Vector2(1159, 406)
+color = Color(0.99999994, 0.8119936, 0.19830257, 1)
+energy = 1.2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ab5jk")
+texture_scale = 0.5
+script = ExtResource("2_ab5jk")
+
+[node name="Lamp 7" type="TileMapLayer" parent="Lamp" unique_id=1145279383]
+position = Vector2(-845, -158)
+tile_map_data = PackedByteArray("AABIABkAAAAbABoAABBJABkAAAAaABoAABBJABoAAAAaABsAABA=")
+tile_set = ExtResource("1_wfxqf")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lamp/Lamp 7" unique_id=648585021]
+position = Vector2(1159, 406)
+color = Color(0.99999994, 0.8119936, 0.19830257, 1)
+energy = 1.2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ab5jk")
+texture_scale = 0.5
+script = ExtResource("2_ab5jk")
+
+[node name="Lamp 8" type="TileMapLayer" parent="Lamp" unique_id=1964095593]
+position = Vector2(-846, 17)
+tile_map_data = PackedByteArray("AABIABkAAAAbABoAABBJABkAAAAaABoAABBJABoAAAAaABsAABA=")
+tile_set = ExtResource("1_wfxqf")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lamp/Lamp 8" unique_id=1067866150]
+position = Vector2(1159, 406)
+color = Color(0.99999994, 0.8119936, 0.19830257, 1)
+energy = 1.2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ab5jk")
+texture_scale = 0.5
+script = ExtResource("2_ab5jk")
+
 [node name="Entities" type="Node2D" parent="." unique_id=2077745928]
 z_index = 2
 y_sort_enabled = true
 
 [node name="DonaMaria" parent="Entities" unique_id=1925654727 instance=ExtResource("5_aw4y2")]
-y_sort_enabled = true
 position = Vector2(516, 473)
 scale = Vector2(0.5, 0.5)
 wall_min_slide_angle = 0.0
