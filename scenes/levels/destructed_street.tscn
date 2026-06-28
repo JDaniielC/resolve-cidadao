@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bvr7jfamd6mn2"]
 
-[ext_resource type="Texture2D" uid="uid://dny661js3bcqi" path="res://tilesets/pos-enchente.png" id="1_fyc8u"]
+[ext_resource type="Texture2D" uid="uid://bu8x7cypqp6e4" path="res://tilesets/pos-enchente.png" id="1_fyc8u"]
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="2_6g0qd"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="3_5v6ne"]
 [ext_resource type="Script" uid="uid://cx6lymvgaafxd" path="res://scenes/levels/cpu_particles_2d.gd" id="4_alykg"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://jct3wxo41j4t" path="res://scenes/npcs/agente_social.tscn" id="6_6g0qd"]
 [ext_resource type="Script" uid="uid://drbxnkp70qcmd" path="res://scripts/systems/day_night_controller.gd" id="7_0h2ul"]
 [ext_resource type="Script" uid="uid://d3s6ngbbdb70k" path="res://scripts/systems/weather_controller.gd" id="8_tupta"]
+[ext_resource type="PackedScene" uid="uid://cqnsaajp7bucm" path="res://scenes/npcs/lucas.tscn" id="9_5v6ne"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="9_076d1"]
 [ext_resource type="PackedScene" uid="uid://cambounds01" path="res://scenes/levels/camera_bounds.tscn" id="10_cambounds"]
 
@@ -16506,6 +16507,9 @@ size = Vector2(14, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_school_door"]
 size = Vector2(56, 63)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6we2m"]
+size = Vector2(49, 183)
+
 [node name="destructed_street" type="Node2D" unique_id=1873935651]
 y_sort_enabled = true
 
@@ -16575,7 +16579,6 @@ y_sort_enabled = true
 position = Vector2(1080, 222)
 
 [node name="DonaMaria" parent="Entities" unique_id=1214101450 instance=ExtResource("5_4lo8a")]
-y_sort_enabled = true
 position = Vector2(516, 473)
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
@@ -16585,6 +16588,9 @@ wall_min_slide_angle = 0.0
 
 [node name="Player" parent="Entities" unique_id=445539203 instance=ExtResource("6_3g6q3")]
 position = Vector2(930, 205)
+
+[node name="Lucas" parent="Entities" unique_id=1019691590 instance=ExtResource("9_5v6ne")]
+position = Vector2(643, 135)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=843751258]
 color = Color(0.9870936, 0.9919657, 0.99660796, 1)
@@ -16894,3 +16900,16 @@ auto_advance_from_stage = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=227588397]
 position = Vector2(934, 144)
 shape = SubResource("RectangleShape2D_school_door")
+
+[node name="CasaSeverinoDoor" type="Node2D" parent="." unique_id=1771042525]
+
+[node name="Area2D" type="Area2D" parent="CasaSeverinoDoor" unique_id=978116125]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("9_076d1")
+target_scene = "uid://dmdtu6jw104wl"
+required_stage = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CasaSeverinoDoor/Area2D" unique_id=1540074633]
+position = Vector2(556.5, 136.5)
+shape = SubResource("RectangleShape2D_6we2m")

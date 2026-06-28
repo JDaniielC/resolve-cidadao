@@ -120,3 +120,14 @@ do Notifications.notify_sms("Prefeitura", "Parabéns! Você ajudou Dona Maria a 
 ~ pos_final
 Dona Maria: Obrigado por toda a ajuda, meu filho. O Aluguel Social vai me ajudar muito.
 => END
+
+
+~ gatilho_missao2
+Dona Maria: Mas me escuta, meu filho... meu coração tá apertado por outra coisa.
+Dona Maria: Tem um vizinho meu, Seu Severino, que mora logo ali na subida do morro.
+Dona Maria: Aquela encosta de terra tá muito instável com essa chuva toda. E ele é um velho teimoso que diz que não sai de casa por nada.
+Dona Maria: O netinho dele, o pequeno Lucas, tá desesperado lá fora. Por favor, vai lá ver como eles estão antes que o pior aconteça!
+=> END
+
+~ pos_gatilho
+Dona Maria: Até mais meu filho... Lucas tá na esquinha

@@ -23,3 +23,11 @@ Seu Severino: O senhor me ajuda a levar ele?
 	Seu Severino: Tranqueira?! Foi a última lembrança que a minha falecida me deixou.
 	Seu Severino: Se é pra deixar pra trás o que me importa, eu não saio daqui não.
 	=> radio_escolha
+
+ 
+~ obrigado
+Seu Severino: Obrigado, meu rapaz... Eu sei que fui teimoso.
+Seu Severino: Mas é difícil deixar uma vida inteira pra trás assim.
+=> END
+ 
+

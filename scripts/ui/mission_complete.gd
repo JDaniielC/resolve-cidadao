@@ -1,5 +1,6 @@
 # scripts/ui/mission_complete.gd
 extends CanvasLayer
+signal closed   # ← ADICIONAR esta linha
 
 @onready var satisfaction_label: Label = $Panel/VBox/StatsBox/SatisfactionLabel
 @onready var satisfaction_bar: ProgressBar = $Panel/VBox/StatsBox/SatisfactionBar
@@ -36,6 +37,8 @@ func show_mission_complete() -> void:
 func _on_continue_pressed() -> void:
 	GameManager.resume_game()
 	hide()
+	closed.emit()   # ← ADICIONAR esta linha
+
 
 func _on_credits_pressed() -> void:
 	var tree = get_tree()
