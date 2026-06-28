@@ -6,8 +6,12 @@
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="7_7ld0m"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="8_wnv1r"]
 [ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_yfo47"]
-[ext_resource type="Resource" uid="uid://bncjc6qbgrnbr" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
+[ext_resource type="Resource" uid="uid://be2cflaiqr0qx" path="res://dialogues/missao_01/dona_maria.dialogue" id="14_m2n4x"]
 [ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="15_marker"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpgsr"]
+atlas = ExtResource("4_e7sdw")
+region = Rect2(140, 750, 110, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4x02"]
 atlas = ExtResource("4_e7sdw")
@@ -15,11 +19,7 @@ region = Rect2(140, 580, 110, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_in3os"]
 atlas = ExtResource("4_e7sdw")
-region = Rect2(840, 750, 110, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vpgsr"]
-atlas = ExtResource("4_e7sdw")
-region = Rect2(140, 750, 110, 160)
+region = Rect2(826, 576, 166, 171)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cavk0"]
 atlas = ExtResource("4_e7sdw")
@@ -105,13 +105,10 @@ region = Rect2(840, 240, 110, 160)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x4x02")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_in3os")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_vpgsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4x02")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_in3os")
