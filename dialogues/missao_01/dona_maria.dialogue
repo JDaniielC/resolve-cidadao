@@ -1,5 +1,5 @@
 ~ intro
-Dona Maria: Oxente, meu filho... ainda bem que apareceu alguém por aqui.
+Dona Maria: Oxente, minha filha... ainda bem que apareceu alguém por aqui.
 => intro_bem
 
 ~ intro_bem
@@ -60,7 +60,7 @@ Dona Maria: Esse abrigo na escola... será que eu devia mesmo ir?
 	=> intro_abrigo
 
 ~ espera
-Dona Maria: Meu filho, dá uma olhada no celular.
+Dona Maria: Minha filha, dá uma olhada no celular.
 Dona Maria: Lá você encontra o registro de problemas e os serviços públicos disponíveis.
 => END
 
@@ -69,7 +69,7 @@ Dona Maria: Por favor, converse com a assistente social ali adiante para ver se 
 => END
 
 ~ pos_abrigo
-Dona Maria: Vai com Deus, meu filho. A escola fica ali na esquina — é o abrigo que a Defesa Civil abriu.
+Dona Maria: Vai com Deus, minha filha. A escola fica ali na esquina — é o abrigo que a Defesa Civil abriu.
 Dona Maria: Obrigada por ter parado pra me ouvir.
 => END
 
@@ -97,8 +97,8 @@ Dona Maria: E agora, pra onde é que eu vou?
 	Dona Maria: Tenho medo.
 	Dona Maria: E também não tenho dinheiro pra alugar outro lugar.
 	Dona Maria: Mas olhe... Vi uma assistente social ali adiante na rua. Será que você podia falar com ela para ver se existe alguma ajuda para mim?
-	Você: Claro, dona Maria. Vou falar com ela agora mesmo e ver o que podemos fazer.
-	Dona Maria: Muito obrigada, meu filho. Deus te abençoe.
+	- Claro, dona Maria. Vou falar com ela agora mesmo e ver o que podemos fazer.
+	Dona Maria: Muito obrigada, minha filha. Deus te abençoe.
 	=> END
 - Dá um jeito aí, sempre tem um jeito.
 	do GameManager.penalize_satisfaction(4.0)
@@ -106,17 +106,17 @@ Dona Maria: E agora, pra onde é que eu vou?
 	=> rua_morar
 
 ~ final
-Você: Dona Maria, conversei com a assistente social.
-Dona Maria: E o que ela disse, meu filho? Tem alguma ajuda para mim?
-Você: Sim! Ela explicou sobre o Aluguel Social. É um auxílio mensal da prefeitura para você alugar outra casa temporariamente enquanto a sua é vistoriada.
-Você: A assistente social vai iniciar o seu cadastro. Ela só vai precisar de alguns documentos seus e do laudo da Defesa Civil.
-Dona Maria: Graças a Deus! Isso tira um peso enorme das minhas costas. Eu não sabia que tinha esse direito.
-Você: A assistente social vai guiar a senhora em todo o processo.
-Dona Maria: Muito obrigada, meu filho. Sem você, eu nem saberia por onde começar.
-do Notifications.notify_concept("Aluguel Social")
-do Notifications.notify_sms("Prefeitura", "Parabéns! Você ajudou Dona Maria a entender seus direitos. A satisfação da cidade aumentou.")
-=> END
+- Dona Maria, conversei com a assistente social.
+	Dona Maria: E o que ela disse, minha filha? Tem alguma ajuda para mim?
+	- Sim! Ela explicou sobre o Aluguel Social.\n É um auxílio mensal da prefeitura para você alugar outra casa temporariamente\n enquanto a sua é vistoriada.
+		- A assistente social vai iniciar o seu cadastro.\n Ela só vai precisar de alguns documentos seus e do laudo da Defesa Civil.
+			Dona Maria: Graças a Deus! Isso tira um peso enorme das minhas costas. Eu não sabia que tinha esse direito.
+			- A assistente social vai guiar a senhora em todo o processo.
+				Dona Maria: Muito obrigada, minha filha. Sem você, eu nem saberia por onde começar.
+				do Notifications.notify_concept("Aluguel Social")
+				do Notifications.notify_sms("Prefeitura", "Parabéns! Você ajudou Dona Maria a entender seus direitos. A satisfação da cidade aumentou.")
+				=> END
 
 ~ pos_final
-Dona Maria: Obrigado por toda a ajuda, meu filho. O Aluguel Social vai me ajudar muito.
+Dona Maria: Obrigado por toda a ajuda, minha filha. O Aluguel Social vai me ajudar muito.
 => END

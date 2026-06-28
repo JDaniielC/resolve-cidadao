@@ -32,7 +32,7 @@ Ensinar:
 Dona Maria está tentando salvar algumas caixas enquanto a chuva continua.
 
 **Diálogo**
-**Dona Maria:** Oxente, meu filho... ainda bem que apareceu alguém por aqui.
+**Dona Maria:** Oxente, minha filha... ainda bem que apareceu alguém por aqui.
 **Jogador (Escolha):** "A senhora está bem?"
 **Dona Maria:** Eu tô tentando ficar, né? Mas essa chuva não dá trégua. Desde ontem a água só faz subir. Passei a manhã inteira levantando os móveis. O sofá já molhou todinho.
 **Jogador (Escolha):** "A água entrou na sua casa?"
