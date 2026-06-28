@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bvr7jfamd6mn2"]
 
-[ext_resource type="Texture2D" uid="uid://dny661js3bcqi" path="res://tilesets/pos-enchente.png" id="1_fyc8u"]
+[ext_resource type="Texture2D" uid="uid://c2p1j04wvuxss" path="res://tilesets/pos-enchente_processed.png" id="1_fyc8u"]
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="2_6g0qd"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="3_5v6ne"]
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_4lo8a"]
