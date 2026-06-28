@@ -11,6 +11,7 @@ var current_stage: int = 1
 var is_game_paused: bool = false
 ## Marca o fim da missão/jogo. Quando true, a satisfação para de decair.
 var game_completed: bool = false
+var assessment_completed: bool = false
 
 # Satisfaction system
 ## Quanto de satisfação a cidade perde por hora de jogo decorrida.
@@ -189,4 +190,5 @@ func reset_progress() -> void:
 	current_weather = "Chuva Forte"
 	water_solved = false
 	game_completed = false
+	assessment_completed = false
 	current_level_path = "res://scenes/levels/rain_street.tscn"

@@ -3,20 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://ej5n1o0u7n7h" path="res://scenes/ui/dialogue_box.tscn" id="4_7x9kj"]
 [ext_resource type="PackedScene" uid="uid://br0xct5m1j2p" path="res://scenes/ui/choice_panel.tscn" id="5_m2k8p"]
 [ext_resource type="PackedScene" uid="uid://pp2i221w3x3r" path="res://scenes/ui/hud.tscn" id="6_hud01"]
-[ext_resource type="PackedScene" uid="uid://ccplymqnqr38d" path="res://scenes/levels/rain_street.tscn" id="6_ygxny"]
+[ext_resource type="PackedScene" uid="uid://c8sjrdvbugwtb" path="res://scenes/levels/rain_street.tscn" id="6_ygxny"]
 [ext_resource type="PackedScene" uid="uid://bd4d16v3np4c" path="res://scenes/ui/phone_menu.tscn" id="7_phone"]
 [ext_resource type="AudioStream" uid="uid://ooc5h2d72spu" path="res://sounds/rain.ogg" id="8_70vka"]
 [ext_resource type="Script" uid="uid://ct5nj742jxgbo" path="res://scripts/main_game_controller.gd" id="8_h3x7f"]
 [ext_resource type="PackedScene" uid="uid://8vwu5i52l856" path="res://scenes/system/game_camera.tscn" id="9_camera"]
-[ext_resource type="PackedScene" uid="uid://mission_complete01" path="res://scenes/ui/menus/mission_complete.tscn" id="10_mc"]
-[ext_resource type="Script" path="res://scripts/systems/screen_rain.gd" id="11_rain"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/mission_complete.tscn" id="10_mc"]
+[ext_resource type="Script" uid="uid://ub2pulorfwgn" path="res://scripts/systems/screen_rain.gd" id="11_rain"]
+[ext_resource type="PackedScene" uid="uid://naet66aa7acu" path="res://scenes/ui/menus/mission_assessment.tscn" id="12_assess"]
 
 [node name="MainGame" type="Node2D" unique_id=324672207]
 script = ExtResource("8_h3x7f")
 
 [node name="GameCamera2D" parent="." unique_id=481754669 instance=ExtResource("9_camera")]
 
-[node name="ScreenRain" type="CPUParticles2D" parent="."]
+[node name="ScreenRain" type="CPUParticles2D" parent="." unique_id=2061463113]
 z_index = 100
 script = ExtResource("11_rain")
 
@@ -38,3 +39,5 @@ stream = ExtResource("8_70vka")
 volume_db = -80.0
 
 [node name="MissionComplete" parent="." unique_id=2030100200 instance=ExtResource("10_mc")]
+
+[node name="MissionAssessment" parent="." unique_id=1454003439 instance=ExtResource("12_assess")]

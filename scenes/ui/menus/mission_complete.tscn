@@ -151,6 +151,14 @@ show_percentage = false
 theme_override_styles/fill = SubResource("StyleBoxFlat_bar")
 theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
 
+[node name="AssessmentLabel" type="Label" parent="Panel/VBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Avaliação: 4/4 acertos (100%)"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="ButtonsBox" type="HBoxContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 10

@@ -106,12 +106,21 @@ func _on_dialogue_finished(_resource):
 			print("Dona Maria: Destructed street dialogue finished. Advancing stage to 10...")
 			GameManager.advance_stage()
 			_update_dialogue_title()
-		elif GameManager.current_stage == 11:
-			print("Dona Maria: Final thank you dialogue finished. Completing mission and adding satisfaction!")
+		elif GameManager.current_stage == 11 and not GameManager.assessment_completed:
+			print("Dona Maria: Final dialogue finished. Starting assessment flow...")
 			GameManager.housing_solved = true
 			GameManager.resolve_problem("Moradia — Aluguel Social", 15.0)
-			
-			var main_game = get_tree().current_scene
-			var mission_complete = main_game.get_node_or_null("MissionComplete")
-			if mission_complete and mission_complete.has_method("show_mission_complete"):
-				mission_complete.show_mission_complete()
+
+			var main_game := _find_main_game()
+			if main_game and main_game.has_method("begin_mission_wrap_up"):
+				main_game.call_deferred("begin_mission_wrap_up")
+			else:
+				push_error("Dona Maria: MainGame controller not found for mission wrap-up.")
+
+func _find_main_game() -> Node:
+	var node: Node = self
+	while node:
+		if node.has_method("begin_mission_wrap_up"):
+			return node
+		node = node.get_parent()
+	return get_tree().root.get_node_or_null("MainGame")
