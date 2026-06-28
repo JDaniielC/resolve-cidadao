@@ -4,6 +4,7 @@ signal closed   # ← ADICIONAR esta linha
 
 @onready var satisfaction_label: Label = $Panel/VBox/StatsBox/SatisfactionLabel
 @onready var satisfaction_bar: ProgressBar = $Panel/VBox/StatsBox/SatisfactionBar
+@onready var assessment_label: Label = $Panel/VBox/StatsBox/AssessmentLabel
 @onready var continue_button: Button = $Panel/VBox/ButtonsBox/ContinueButton
 @onready var credits_button: Button = $Panel/VBox/ButtonsBox/CreditsButton
 @onready var anim_player: AnimationPlayer = get_node_or_null("AnimationPlayer")
@@ -16,7 +17,7 @@ func _ready() -> void:
 	continue_button.pressed.connect(_on_continue_pressed)
 	credits_button.pressed.connect(_on_credits_pressed)
 
-func show_mission_complete() -> void:
+func show_mission_complete(assessment_score: int = -1, assessment_total: int = 0) -> void:
 	GameManager.complete_game()
 	GameManager.pause_game()
 	show()
@@ -25,6 +26,13 @@ func show_mission_complete() -> void:
 	var final_satisfaction := int(GameManager.satisfaction)
 	satisfaction_label.text = "%d%% de Satisfação" % final_satisfaction
 	satisfaction_bar.value = final_satisfaction
+
+	if assessment_score >= 0 and assessment_total > 0:
+		var percent := int(round(float(assessment_score) / float(assessment_total) * 100.0))
+		assessment_label.text = "Avaliação: %d/%d acertos (%d%%)" % [assessment_score, assessment_total, percent]
+		assessment_label.show()
+	else:
+		assessment_label.hide()
 	
 	# Play particles
 	if stars_particles:

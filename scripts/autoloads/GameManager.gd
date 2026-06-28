@@ -12,6 +12,7 @@ var current_stage: int = 1
 var is_game_paused: bool = false
 ## Marca o fim da missão/jogo. Quando true, a satisfação para de decair.
 var game_completed: bool = false
+var assessment_completed: bool = false
 
 # Satisfaction system
 ## Quanto de satisfação a cidade perde por hora de jogo decorrida.
@@ -69,6 +70,8 @@ var stage_data = {
 }
 
 var time_accumulator: float = 0.0
+## >1 acelera o relógio (só testes). Ex.: 30 ≈ 30 min de jogo por segundo real.
+var debug_time_scale: float = 1
 
 func _ready():
 	print("GameManager initialized at stage %d" % current_stage)
@@ -80,9 +83,9 @@ func _ready():
 func _process(delta: float):
 	if is_game_paused:
 		return
-	time_accumulator += delta
-	if time_accumulator >= 1.0:
-		time_accumulator = 0.0
+	time_accumulator += delta * debug_time_scale
+	while time_accumulator >= 1.0:
+		time_accumulator -= 1.0
 		advance_time(1)
 
 ## Avança para o próximo stage, desde que ele exista no stage_data.
@@ -200,5 +203,6 @@ func reset_progress() -> void:
 	housing_solved     = false
 	severino_saved     = false
 	game_completed     = false
+	assessment_completed = false
 	current_level_path = "res://scenes/levels/rain_street.tscn"
 	radio_collected = false

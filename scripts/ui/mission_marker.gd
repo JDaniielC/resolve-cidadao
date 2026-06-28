@@ -16,6 +16,7 @@ var _player: Node2D = null
 
 func _ready() -> void:
 	if arrow_label:
+		arrow_label.text = "❗"
 		EmojiFont.apply_to(arrow_label)
 	add_to_group("mission_markers")
 	GameManager.stage_changed.connect(_on_stage_changed)

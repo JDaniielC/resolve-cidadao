@@ -10,10 +10,8 @@
 [ext_resource type="PackedScene" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_props_setter.gd" id="9_fvq3l"]
-[ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
 [ext_resource type="Script" uid="uid://cmtmlyugkdwuh" path="res://scripts/state_machine/states/state_input_move.gd" id="11_we0b7"]
 [ext_resource type="Script" uid="uid://dlqmc36quropm" path="res://scripts/state_machine/input_data.gd" id="12_b2kln"]
-[ext_resource type="Script" uid="uid://b4jgftt0t4d1e" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
 [ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="14_gx6sm"]
 [ext_resource type="PackedScene" uid="uid://05uhe60taf6a" path="res://components/inventory.tscn" id="15_gx6sm"]
 
@@ -25,7 +23,7 @@ metadata/_custom_type_script = "uid://qawe0cujhuns"
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3wlsy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afbqv"]
 resource_local_to_scene = true
 shader = ExtResource("4_8hp4k")
 shader_parameter/flash_color = Color(0.891291, 4.18738e-06, 8.66354e-07, 1)
@@ -123,7 +121,11 @@ region = Rect2(215, 52, 41, 52)
 atlas = ExtResource("6_afbqv")
 region = Rect2(0, 208, 43, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_b2kln"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_afbqv"]
+atlas = ExtResource("6_afbqv")
+region = Rect2(0, 0, 42, 51)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqrof"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -246,7 +248,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AT_idle_0")
+"texture": SubResource("AtlasTexture_afbqv")
 }],
 "loop": false,
 "name": &"idle-down",
@@ -456,12 +458,12 @@ function_name = "jump"
 metadata/_custom_type_script = "uid://dlqmc36quropm"
 
 [node name="Player" unique_id=445539203 node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "inventory", "running_particles", "on_fall") groups=["player", "save"] instance=ExtResource("1_fnaeb")]
-y_sort_enabled = true
 script = ExtResource("2_x37y0")
 on_transfer_start = NodePath("StateMachine/auto")
 on_transfer_end = NodePath("StateMachine/move")
 inventory = NodePath("Inventory")
 initial_facing = SubResource("Resource_3wlsy")
+max_speed = 125.0
 running_particles = NodePath("SmokeParticles")
 on_fall = NodePath("StateMachine/fall")
 
@@ -481,8 +483,8 @@ shape = SubResource("CircleShape2D_1npff")
 debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
 
 [node name="AnimatedSprite2D" parent="." index="4" unique_id=1449465034]
-material = SubResource("ShaderMaterial_3wlsy")
-sprite_frames = SubResource("SpriteFrames_b2kln")
+material = SubResource("ShaderMaterial_afbqv")
+sprite_frames = SubResource("SpriteFrames_yqrof")
 
 [node name="AnimationTree" parent="." index="8" unique_id=2079922695]
 parameters/walk/BlendSpace2D/blend_position = Vector2(0.00376654, 0.992565)

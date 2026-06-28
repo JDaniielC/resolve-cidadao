@@ -5,22 +5,24 @@ extends Node
 
 ## The CanvasModulate node to tint. Assign in the Inspector or via script.
 @export var canvas_modulate: CanvasModulate
+## Limite inferior de brilho — evita noite ilegível sem apagar o escuro.
+@export var min_brightness: float = 0.38
 
 # Color keyframes for each part of the day (hour → Color)
 const DAY_PALETTE: Array = [
 	# [hour, Color]
-	[0,  Color(0.08, 0.08, 0.20)],  # Midnight – deep blue-black
-	[5,  Color(0.12, 0.10, 0.22)],  # Pre-dawn
-	[6,  Color(0.55, 0.35, 0.30)],  # Sunrise – warm pink/orange
-	[7,  Color(0.80, 0.70, 0.60)],  # Early morning – golden
-	[8,  Color(0.72, 0.84, 0.95)],  # Morning – light blue (current scene default)
-	[12, Color(1.00, 0.98, 0.92)],  # Noon – bright, slightly warm
-	[16, Color(0.95, 0.85, 0.70)],  # Afternoon – golden hour approaching
-	[18, Color(0.80, 0.50, 0.30)],  # Sunset – orange
-	[19, Color(0.45, 0.30, 0.40)],  # Dusk – purple-orange
-	[20, Color(0.18, 0.14, 0.28)],  # Evening – dark blue-purple
-	[22, Color(0.10, 0.09, 0.20)],  # Night – near midnight
-	[24, Color(0.08, 0.08, 0.20)],  # Wraps to midnight
+	[0,  Color(0.12, 0.13, 0.22)],  # Midnight
+	[5,  Color(0.16, 0.15, 0.26)],  # Pre-dawn
+	[6,  Color(0.55, 0.35, 0.30)],  # Sunrise
+	[7,  Color(0.80, 0.70, 0.60)],  # Early morning
+	[8,  Color(0.72, 0.84, 0.95)],  # Morning
+	[12, Color(1.00, 0.98, 0.92)],  # Noon
+	[16, Color(0.95, 0.85, 0.70)],  # Afternoon
+	[18, Color(0.80, 0.50, 0.30)],  # Sunset
+	[19, Color(0.40, 0.32, 0.38)],  # Dusk
+	[20, Color(0.22, 0.20, 0.30)],  # Evening
+	[22, Color(0.15, 0.16, 0.24)],  # Night
+	[24, Color(0.12, 0.13, 0.22)],  # Wraps to midnight
 ]
 
 var _tween: Tween
@@ -75,4 +77,13 @@ func _get_color_for_hour(hour: int, minute: int) -> Color:
 		return prev_kf[1]
 	
 	var t: float = (time_decimal - prev_kf[0]) / span
-	return prev_kf[1].lerp(next_kf[1], t)
+	var color: Color = prev_kf[1].lerp(next_kf[1], t)
+	return _clamp_brightness(color)
+
+func _clamp_brightness(color: Color) -> Color:
+	return Color(
+		maxf(color.r, min_brightness),
+		maxf(color.g, min_brightness),
+		maxf(color.b, min_brightness),
+		color.a
+	)

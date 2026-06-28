@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bu8x7cypqp6e4" path="res://tilesets/pos-enchente.png" id="1_fyc8u"]
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="2_6g0qd"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="3_5v6ne"]
-[ext_resource type="Script" uid="uid://cx6lymvgaafxd" path="res://scenes/levels/cpu_particles_2d.gd" id="4_alykg"]
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_4lo8a"]
 [ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="6_3g6q3"]
 [ext_resource type="PackedScene" uid="uid://jct3wxo41j4t" path="res://scenes/npcs/agente_social.tscn" id="6_6g0qd"]
@@ -16567,9 +16566,6 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_28evd")
 texture_scale = 0.5
 script = ExtResource("3_5v6ne")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1328540376]
-script = ExtResource("4_alykg")
 
 [node name="Entities" type="Node2D" parent="." unique_id=91754075]
 z_index = 2

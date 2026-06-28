@@ -1,10 +1,11 @@
-class_name LoadingScreen extends Node
+class_name LoadingScreen extends CanvasLayer
 
 ## Used by scene manager to display transitions and loading progress. You won't need to
 ## modify or work with any of the code in this class but I've annotated in case
 ## you're curious about the logic
 
 signal transition_in_complete
+signal transition_out_complete
 
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var anim_player: AnimationPlayer = %AnimationPlayer
@@ -16,8 +17,9 @@ var starting_animation_name:String
 ## enough that it's worth showing. The alternative is that when something loads
 ## quickly it flashes on screen briefly, and I don't like that.
 func _ready() -> void:
+	layer = 100
 	progress_bar.visible = false
-	pass
+	anim_player.animation_finished.connect(_on_animation_finished)
 
 ## called by SceneManager to start the "in" transition.
 func start_transition(animation_name:String) -> void:
@@ -25,15 +27,18 @@ func start_transition(animation_name:String) -> void:
 		push_warning("'%s' animation does not exist" % animation_name)
 		animation_name = "fade_to_black"
 	starting_animation_name = animation_name
-	# Animations disabled for MVP — signal midpoint immediately so SceneManager can proceed.
-	timer.start()
-	report_midpoint.call_deferred()
+	anim_player.play(animation_name)
 
 ## called by SceneManger to play the outro to the transition once the content is loaded
 func finish_transition() -> void:
 	if timer:
 		timer.stop()
-	queue_free()
+	progress_bar.visible = false
+	var out_animation := _get_outro_animation(starting_animation_name)
+	if anim_player.has_animation(out_animation):
+		anim_player.play(out_animation)
+	else:
+		transition_out_complete.emit()
 
 ## called at the end of "in" transitions on the method track of the AnimationPlayer let SceneManager
 ## know that the screen is obscured and loading of the incoming scene can begin
@@ -48,3 +53,11 @@ func _on_timer_timeout() -> void:
 
 func update_bar(val:float) -> void:
 	progress_bar.value = val
+
+func _get_outro_animation(intro: String) -> String:
+	return intro.replace("_to_", "_from_")
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	var name := String(anim_name)
+	if name.begins_with("fade_from") or name.begins_with("no_from") or name.begins_with("wipe_from"):
+		transition_out_complete.emit()

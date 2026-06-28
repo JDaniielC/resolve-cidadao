@@ -2,7 +2,6 @@
 
 [ext_resource type="TileSet" uid="uid://bku3wpjsmuoyn" path="res://tilesets/city_tileset.tres" id="1_wfxqf"]
 [ext_resource type="Script" uid="uid://0lbucx6hjrnj" path="res://scenes/levels/point_light_2d.gd" id="2_ab5jk"]
-[ext_resource type="Script" uid="uid://cx6lymvgaafxd" path="res://scenes/levels/cpu_particles_2d.gd" id="3_gefw2"]
 [ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="4_0tg25"]
 [ext_resource type="PackedScene" uid="uid://dvgu4o1jl3twi" path="res://scenes/npcs/dona_maria.tscn" id="5_aw4y2"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="8_20akl"]
@@ -6216,9 +6215,6 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_ab5jk")
 texture_scale = 0.5
 script = ExtResource("2_ab5jk")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=265862094]
-script = ExtResource("3_gefw2")
 
 [node name="Entities" type="Node2D" parent="." unique_id=2077745928]
 z_index = 2
