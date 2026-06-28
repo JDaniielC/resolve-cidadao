@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 var can_interact = false
 var _quiz_shown := false
-var _radio_done := false
+var _conversa_final_done := false
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_finished)
@@ -19,7 +19,7 @@ func _ready():
 		interaction_area.area_exited.connect(func(area): _on_interaction_exited(area.get_parent()))
 
 	_update_dialogue_title()
-	GameManager.stage_changed.connect(func(_s): _update_dialogue_title(); _on_stage_changed())
+	GameManager.stage_changed.connect(func(_s): _update_dialogue_title())
 
 func _on_interaction_entered(node):
 	if node and node.is_in_group("player"):
@@ -46,13 +46,33 @@ func _update_dialogue_title():
 		14:
 			dialogue_state.title = "intro"
 		15:
-			dialogue_state.title = "radio"
-		_:
+			if GameManager.get("radio_collected"):
+				dialogue_state.title = "conversa_final"
+			else:
+				dialogue_state.title = "aguardando_radio"
+		16:
+			# Stage 16 = jogador voltou após pegar o rádio
+			dialogue_state.title = "conversa_final"
+		17:
 			dialogue_state.title = "obrigado"
 
-func _on_stage_changed():
-	# Stage 16: abre o desafio do celular automaticamente
-	if GameManager.current_stage == 16:
+func _on_dialogue_finished(resource):
+	if not (resource and resource.resource_path.ends_with("seu_severino.dialogue")):
+		return
+
+	if GameManager.current_stage == 14 and not _quiz_shown:
+		# Terminou "intro" → quiz de abordagem
+		# ChoicePanel avança stage 14 → 15 ao acertar
+		_quiz_shown = true
+		var choice_panel = _get_choice_panel()
+		if choice_panel:
+			choice_panel.show_choice("severino_approach")
+		else:
+			push_error("[SeuSeverino] ChoicePanel não encontrado.")
+
+	elif GameManager.current_stage == 16 and not _conversa_final_done:
+		# Terminou "conversa_final" → agora abre o quiz da Defesa Civil
+		_conversa_final_done = true
 		await get_tree().create_timer(0.5).timeout
 		_start_phone_challenge()
 
@@ -61,45 +81,18 @@ func _start_phone_challenge():
 	if not phone:
 		push_error("[SeuSeverino] PhoneMenu não encontrado.")
 		return
-
-	# Instrução que aparece no topo da lista de contatos
 	phone.start_contact_challenge(
 		"defesa_civil",
 		"Seu Severino precisa de resgate! Qual órgão você deve acionar?"
 	)
-	# Espera o jogador escolher a Defesa Civil corretamente
 	await phone.contact_challenge_succeeded
-
-	# Notificação de confirmação
 	Notifications.notify_sms(
 		"Defesa Civil — 199",
 		"Resgate confirmado. Equipe a caminho. Dirija-se ao Abrigo Municipal na Escola Pública."
 	)
 	await get_tree().create_timer(1.0).timeout
-
-	# Avança para stage 17 (missão 2 concluída)
-	GameManager.advance_stage()
-
-func _on_dialogue_finished(resource):
-	if not (resource and resource.resource_path.ends_with("seu_severino.dialogue")):
-		return
-
-	if GameManager.current_stage == 14 and not _quiz_shown:
-		# Terminou o "intro" → abre quiz de abordagem
-		# O ChoicePanel avança stage 14 → 15 automaticamente ao acertar
-		_quiz_shown = true
-		var choice_panel = _get_choice_panel()
-		if choice_panel:
-			choice_panel.show_choice("severino_approach")
-		else:
-			push_error("[SeuSeverino] ChoicePanel não encontrado.")
-
-	elif GameManager.current_stage == 15 and not _radio_done:
-		# Terminou o diálogo do rádio → avança stage 15 → 16
-		_radio_done = true
-		await get_tree().create_timer(0.5).timeout
-		GameManager.advance_stage()
-		_update_dialogue_title()
+	GameManager.advance_stage()   # 16 → 17
+	_update_dialogue_title()
 
 func _get_choice_panel() -> Control:
 	var panel = get_tree().root.get_node_or_null("MainGame/UILayer/ChoicePanel")

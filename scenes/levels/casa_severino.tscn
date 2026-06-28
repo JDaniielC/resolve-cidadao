@@ -1,10 +1,13 @@
 [gd_scene format=4 uid="uid://dmdtu6jw104wl"]
 
 [ext_resource type="PackedScene" uid="uid://cambounds01" path="res://scenes/levels/camera_bounds.tscn" id="1_ei0be"]
+[ext_resource type="Texture2D" uid="uid://d4eak41i5xjwx" path="res://tilesets/casa do seu severino.png" id="2_deld4"]
 [ext_resource type="Texture2D" uid="uid://cm1uuqsm0olil" path="res://tilesets/casa seu severino.png" id="2_tjq8u"]
 [ext_resource type="PackedScene" uid="uid://cy6xqge5rijdm" path="res://scenes/npcs/seu_severino.tscn" id="3_ei0be"]
 [ext_resource type="PackedScene" uid="uid://dfxvfxqwdnh48" path="res://entities/player/player.tscn" id="5_r7l7k"]
 [ext_resource type="Script" uid="uid://bxp5fvb7ymxvy" path="res://scenes/levels/area_2d.gd" id="6_2xc4d"]
+[ext_resource type="Texture2D" uid="uid://b5xc6ea42slwc" path="res://assets/sprites/radio sprite.png" id="6_cro8x"]
+[ext_resource type="Script" uid="uid://b1jmk0dk0g38s" path="res://scenes/props/radio_item.gd" id="6_mpds4"]
 [ext_resource type="Script" uid="uid://fapuoaht8t7j" path="res://scripts/ui/mission_marker.gd" id="7_o5iko"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_deld4"]
@@ -6048,6 +6051,9 @@ texture = ExtResource("2_tjq8u")
 [sub_resource type="TileSet" id="TileSet_cro8x"]
 sources/3 = SubResource("TileSetAtlasSource_deld4")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpds4"]
+size = Vector2(153.53735, 1544.0437)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit_door"]
 size = Vector2(72, 78.5)
 
@@ -6060,7 +6066,7 @@ scale = Vector2(-1.0956515, -3.2267666)
 [node name="CenarioCasa" type="Sprite2D" parent="." unique_id=270155823]
 position = Vector2(636, 354)
 scale = Vector2(0.682, 0.31)
-texture = ExtResource("2_tjq8u")
+texture = ExtResource("2_deld4")
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1225294183]
 position = Vector2(-1.1920929e-07, 1)
@@ -6080,6 +6086,33 @@ scale = Vector2(0.768, 0.722)
 [node name="Player" parent="Entities" unique_id=445539203 instance=ExtResource("5_r7l7k")]
 position = Vector2(658.99994, 783.99994)
 scale = Vector2(1.653, 1.164)
+
+[node name="RadioItem" type="Node2D" parent="Entities" unique_id=1431209372]
+position = Vector2(601, 630)
+scale = Vector2(0.115, 0.054)
+script = ExtResource("6_mpds4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Entities/RadioItem" unique_id=817557262]
+position = Vector2(-147.82608, 111.111115)
+scale = Vector2(0.65217394, 1)
+texture = ExtResource("6_cro8x")
+
+[node name="Area2D" type="Area2D" parent="Entities/RadioItem" unique_id=1486304198]
+collision_layer = 71
+collision_mask = 71
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/RadioItem/Area2D" unique_id=1721746718]
+position = Vector2(-30.434082, 194.44385)
+scale = Vector2(6.745538, -1.3568431)
+shape = SubResource("RectangleShape2D_mpds4")
+
+[node name="InteractionPrompt" type="Label" parent="Entities/RadioItem" unique_id=742796851]
+offset_left = -417.3912
+offset_top = -703.704
+offset_right = -281.3912
+offset_bottom = -677.704
+scale = Vector2(5.2498055, 8.344347)
+text = "[ E ] Pegar rádio"
 
 [node name="ExitDoor" type="Node2D" parent="." unique_id=1394848881]
 position = Vector2(1168, 384)

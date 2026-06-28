@@ -12,7 +12,7 @@ Lucas: (segurando o choro) Você vai ajudar a gente, moço?
 	Lucas: Eu estava cuidando do vovô, mas ele ficou teimoso quando a água começou a chegar na calçada.
 	=> intro_fim
 - Não tenha medo, eu vou convencer ele. Onde ele está?
-	Lucas: Ele está ali na subida da rua, na casa de porta azul. Por favor, tira ele de lá!
+	Lucas: Ele está ali na subida da rua, na casa destruída . Por favor, tira ele de lá!
 	=> intro_fim
 - Por que ele não quer sair?
 	Lucas: Ele diz que não pode deixar as lembranças dele pra trás. Ele tem medo de perder tudo o que construiu.
@@ -24,12 +24,12 @@ Lucas: (segurando o choro) Você vai ajudar a gente, moço?
 	=> intro_perguntas
 
 ~ intro_fim
-Lucas: Por favor, me ajuda! A casa de porta azul, no final da subida. Eu vou ficar aqui esperando a mamãe chegar.
+Lucas: Por favor, me ajuda! A casa destruída, no meio da subida. Eu vou ficar aqui esperando a mamãe chegar.
 => END
 
 ~ espera
 Lucas: Você já foi falar com o meu vô?
-Lucas: Por favor, convence ele a sair! A casa de porta azul, lá na subida.
+Lucas: Por favor, convence ele a sair! A casa destruída, lá na subida.
 => END
  
  

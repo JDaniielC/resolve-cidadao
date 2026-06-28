@@ -14,9 +14,9 @@ Seu Severino: O senhor me ajuda a levar ele?
 - Com certeza, Seu Severino. Esse rádio é essencial.
 	Você: Além do valor sentimental, ele é um meio de comunicação importante. Em emergências, as rádios locais costumam ser as primeiras a transmitir alertas.
 	do Notifications.notify_concept("Comunicação em Crises")
-	set GameManager.add_satisfaction(3.0)
-	Seu Severino: Exatamente, meu rapaz! Fico feliz que você entenda. Vamos levar ele.
-	Seu Severino: Mas minhas pernas estão muito inchadas por causa da idade. Não tenho forças pra caminhar na correnteza até o abrigo.
+	do GameManager.add_satisfaction(3.0)
+	Seu Severino: Exatamente, meu rapaz! Fico feliz que você entenda.
+	Seu Severino: Ele tá ali na mesinha do canto. Pode pegar pra mim? Minhas pernas tão muito inchadas pra eu caminhar.
 	=> END
 - Deixa esse rádio velho pra lá, é só tranqueira. Vamos logo.
 	do GameManager.penalize_satisfaction(6.0)
@@ -24,10 +24,17 @@ Seu Severino: O senhor me ajuda a levar ele?
 	Seu Severino: Se é pra deixar pra trás o que me importa, eu não saio daqui não.
 	=> radio_escolha
 
- 
-~ obrigado
-Seu Severino: Obrigado, meu rapaz... Eu sei que fui teimoso.
-Seu Severino: Mas é difícil deixar uma vida inteira pra trás assim.
+~ aguardando_radio
+Seu Severino: O rádio tá ali na mesinha do canto, meu rapaz. Pode pegar pra mim?
 => END
- 
 
+~ conversa_final
+Seu Severino: Conseguiu pegar o rádio? Que bom, meu filho.
+Seu Severino: Mas agora... como a gente vai sair daqui? A rua tá cheia d'água.
+Seu Severino: Tem como chamar alguém pra nos ajudar?
+=> END
+
+~ obrigado
+Seu Severino: Obrigado, meu rapaz… Eu sei que fui teimoso.
+Seu Severino: Mas é difícil deixar uma vida inteira pra trás assim, entende?
+=> END

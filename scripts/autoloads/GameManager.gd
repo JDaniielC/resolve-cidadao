@@ -7,6 +7,7 @@ signal satisfaction_changed(new_value: float)
 signal time_changed(hour: int, minute: int)
 signal weather_changed(new_weather: String)
 
+var radio_collected: bool = false
 var current_stage: int = 1
 var is_game_paused: bool = false
 ## Marca o fim da missão/jogo. Quando true, a satisfação para de decair.
@@ -61,9 +62,10 @@ var stage_data = {
 	12: {"name": "Missão 2 — Início",   "objective": "Suba em direção à encosta e procure por Lucas"},
 	13: {"name": "Encontrou Lucas",     "objective": "Converse com Lucas sobre Seu Severino"},
 	14: {"name": "Convencer Severino",  "objective": "Convença Seu Severino a sair de casa"},
-	15: {"name": "Rádio de Pilha",      "objective": "Ajude Seu Severino a levar o rádio"},
-	16: {"name": "Chamar Defesa Civil", "objective": "Use o celular para acionar a Defesa Civil"},
-	17: {"name": "Missão 2 — Concluída","objective": "Missão concluída! Vá ao Abrigo Municipal"},
+	15: {"name": "Rádio de Pilha",         "objective": "Pegue o rádio do Seu Severino"},
+	16: {"name": "Conversa Final",          "objective": "Volte falar com Seu Severino"},
+	17: {"name": "Chamar Defesa Civil",     "objective": "Use o celular para acionar a Defesa Civil"},
+	18: {"name": "Missão 2 — Concluída",   "objective": "Missão concluída! Vá ao Abrigo Municipal"},
 }
 
 var time_accumulator: float = 0.0
@@ -199,3 +201,4 @@ func reset_progress() -> void:
 	severino_saved     = false
 	game_completed     = false
 	current_level_path = "res://scenes/levels/rain_street.tscn"
+	radio_collected = false
