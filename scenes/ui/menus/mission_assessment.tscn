@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://naet66aa7acu"]
+
+[ext_resource type="Script" uid="uid://bdd3780f41uft" path="res://scripts/ui/mission_assessment.gd" id="1_assess"]
+[ext_resource type="Texture2D" uid="uid://ct77bd53ahshv" path="res://assets/ui/caderno_2.png" id="2_ut740"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intro"]
+bg_color = Color(0.07, 0.09, 0.14, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.75, 0.95, 0.65)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MissionAssessment" type="CanvasLayer" unique_id=147773811]
+process_mode = 3
+layer = 111
+script = ExtResource("1_assess")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1138737407]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="IntroPanel" type="PanelContainer" parent="." unique_id=1042156204]
+visible = false
+custom_minimum_size = Vector2(520, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -170.0
+offset_right = 260.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_intro")
+
+[node name="Margin" type="MarginContainer" parent="IntroPanel" unique_id=682831058]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="IntroPanel/Margin" unique_id=1667807573]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Badge" type="Label" parent="IntroPanel/Margin/VBox" unique_id=1240044667]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "?"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="IntroPanel/Margin/VBox" unique_id=1213596039]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Avaliacao do Modulo"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="IntroPanel/Margin/VBox" unique_id=830838480]
+custom_minimum_size = Vector2(464, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.9, 0.94, 1)
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="IntroPanel/Margin/VBox" unique_id=683461994]
+custom_minimum_size = Vector2(220, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 15
+text = "Iniciar Avaliacao"
+
+[node name="QuizRoot" type="Control" parent="." unique_id=481260625]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="QuizRoot" unique_id=1709314423]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NotebookPivot" type="Control" parent="QuizRoot/CenterContainer" unique_id=293179717]
+custom_minimum_size = Vector2(820, 820)
+layout_mode = 2
+
+[node name="NotebookImage" type="TextureRect" parent="QuizRoot/CenterContainer/NotebookPivot" unique_id=1137101928]
+layout_mode = 0
+offset_left = -537.0
+offset_top = -306.0
+offset_right = 1459.0
+offset_bottom = 1237.0
+texture = ExtResource("2_ut740")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LeftPage" type="VBoxContainer" parent="QuizRoot/CenterContainer/NotebookPivot" unique_id=1720577200]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 111.0
+offset_right = 363.0
+offset_bottom = 733.0
+theme_override_constants/separation = 10
+
+[node name="ExamTitle" type="Label" parent="QuizRoot/CenterContainer/NotebookPivot/LeftPage" unique_id=766330601]
+custom_minimum_size = Vector2(318, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="ProgressLabel" type="Label" parent="QuizRoot/CenterContainer/NotebookPivot/LeftPage" unique_id=1124532028]
+custom_minimum_size = Vector2(318, 0)
+layout_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="QuizRoot/CenterContainer/NotebookPivot/LeftPage" unique_id=93016135]
+custom_minimum_size = Vector2(318, 88)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="OptionsContainer" type="VBoxContainer" parent="QuizRoot/CenterContainer/NotebookPivot/LeftPage" unique_id=1001238391]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="FeedbackLabel" type="Label" parent="QuizRoot/CenterContainer/NotebookPivot/LeftPage" unique_id=1848206817]
+visible = false
+custom_minimum_size = Vector2(318, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="RightPage" type="VBoxContainer" parent="QuizRoot/CenterContainer/NotebookPivot" unique_id=1720577201]
+layout_mode = 0
+offset_left = 556.0
+offset_top = 102.0
+offset_right = 949.0
+offset_bottom = 747.0
+theme_override_constants/separation = 10
+
+[node name="QuestionLabel" type="Label" parent="QuizRoot/CenterContainer/NotebookPivot/RightPage" unique_id=93016136]
+custom_minimum_size = Vector2(318, 88)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="OptionsContainer" type="VBoxContainer" parent="QuizRoot/CenterContainer/NotebookPivot/RightPage" unique_id=1001238392]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="FeedbackLabel" type="Label" parent="QuizRoot/CenterContainer/NotebookPivot/RightPage" unique_id=1848206818]
+visible = false
+custom_minimum_size = Vector2(318, 0)
+layout_mode = 2
+autowrap_mode = 2

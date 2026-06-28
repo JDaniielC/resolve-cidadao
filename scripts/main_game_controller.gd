@@ -92,8 +92,44 @@ func _open_pause_menu() -> void:
 	MenuController.toggle_pause()
 	add_child(pause_menu_scene.instantiate())
 
+const WRAP_UP_INTRO_TITLE := "Avaliação do Módulo"
+const WRAP_UP_INTRO_MESSAGE := (
+	"Você concluiu este módulo!\n\n"
+	+ "Agora é hora de consolidar o que você aprendeu. Responda à avaliação "
+	+ "para revisar os principais conhecimentos e desbloquear sua próxima jornada."
+)
+const WRAP_UP_INTRO_BUTTON := "Iniciar Avaliação"
+const WRAP_UP_ASSESSMENT_DELAY := 3.5
+
+var _wrap_up_running := false
+
 func swap_level(scene_path: String, outgoing: Node) -> void:
 	_run_level_swap(scene_path, outgoing)
+
+## Diálogo final da missão 1: intro (Popups) -> avaliação -> parabéns.
+func begin_mission_wrap_up() -> void:
+	if _wrap_up_running:
+		return
+	_wrap_up_running = true
+	_run_mission_wrap_up()
+
+func _run_mission_wrap_up() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	# Tempo para ler toasts/popups anteriores (ex.: problema resolvido) antes da avaliacao.
+	await get_tree().create_timer(WRAP_UP_ASSESSMENT_DELAY).timeout
+
+	await Popups.show_alert(WRAP_UP_INTRO_MESSAGE, WRAP_UP_INTRO_BUTTON, WRAP_UP_INTRO_TITLE)
+
+	var mission_complete := get_node_or_null("MissionComplete")
+	var mission_assessment := get_node_or_null("MissionAssessment")
+	if mission_assessment and mission_assessment.has_method("begin_quiz"):
+		mission_assessment.begin_quiz(mission_complete)
+	else:
+		push_error("MainGame: MissionAssessment nao encontrado ou sem begin_quiz().")
+
+	_wrap_up_running = false
 
 func _run_level_swap(scene_path: String, outgoing: Node) -> void:
 	await Cutscene.fade_out(0.5)
@@ -170,7 +206,7 @@ func _get_active_level() -> Node:
 	for child in get_children():
 		if child is CanvasLayer or child is AudioStreamPlayer:
 			continue
-		if child.name in ["HUD", "MissionComplete", "GameCamera2D", "ScreenRain"]:
+		if child.name in ["HUD", "MissionComplete", "MissionAssessment", "GameCamera2D", "ScreenRain"]:
 			continue
 		if child is Node2D:
 			return child
