@@ -44,8 +44,8 @@ const FALLBACK_TITLE := "Prova da Missão 1 - A chuva não para"
 const FALLBACK_QUESTIONS: Array = [
 	{
 		"text": "Durante uma enchente, qual órgão orienta a população e indica locais seguros?",
-		"options": ["A) COMPESA", "B) Defesa Civil", "C) Procon"],
-		"correct_index": 1,
+		"options": ["A) Defesa Civil", "B) COMPESA", "C) Procon"],
+		"correct_index": 0,
 	},
 ]
 
