@@ -105,7 +105,31 @@ func _on_menu_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	_fade_out_and_execute(func(): MenuController.quit_game())
+	_fade_out_and_quit()
+
+
+func _fade_out_and_quit() -> void:
+	if _animating:
+		return
+
+	_animating = true
+
+	var black_overlay := ColorRect.new()
+	black_overlay.color = Color.BLACK
+	black_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	black_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$Control.add_child(black_overlay)
+	black_overlay.modulate.a = 0.0
+
+	var fade_tween := create_tween()
+	fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	fade_tween.set_ease(Tween.EASE_IN)
+	fade_tween.tween_property(black_overlay, "modulate:a", 1.0, FADE_OUT_DURATION)
+	fade_tween.tween_callback(func() -> void:
+		MenuController.set_paused(false)
+		get_tree().paused = false
+		MenuController.quit_game()
+	)
 
 
 ## Helper method to handle fade-out animation and execute callback
