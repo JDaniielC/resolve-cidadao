@@ -18,11 +18,11 @@ const QUESTIONS: Array[Dictionary] = [
 		"option_font_size": 22,
 		"option_line_height": 38,
 		"options": [
-			"A) COMPESA",
-			"B) Defesa Civil",
+			"A) Defesa Civil",
+			"B) COMPESA",
 			"C) Procon",
 		],
-		"correct_index": 1,
+		"correct_index": 0,
 	},
 	{
 		"text": "Qual é a principal função de um \nabrigo temporário em uma emergência?",
@@ -33,10 +33,10 @@ const QUESTIONS: Array[Dictionary] = [
 		"option_line_height": 50,
 		"options": [
 			"A) Servir como moradia definitiva",
-			"B) Oferecer local seguro enquanto as famílias \nrecebem apoio",
-			"C) Distribuir alimentos para toda a \npopulação",
+			"B) Distribuir alimentos para toda a \npopulação",
+			"C) Oferecer local seguro enquanto as famílias \nrecebem apoio",
 		],
-		"correct_index": 1,
+		"correct_index": 2,
 	},
 	{
 		"text": "Qual é o principal objetivo\ndo programa de Aluguel Social?",
@@ -60,10 +60,10 @@ const QUESTIONS: Array[Dictionary] = [
 		"option_font_size": 21,
 		"option_line_height": 40,
 		"options": [
-			"A) Comprar um imóvel para a família",
-			"B) Verificar se a família atende\naos critérios do programa",
+			"A) Verificar se a família atende\naos critérios do programa",
+			"B) Comprar um imóvel para a família",
 			"C) Solicitar indenização pelos danos",
 		],
-		"correct_index": 1,
+		"correct_index": 0,
 	},
 ]
