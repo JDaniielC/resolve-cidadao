@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hgkq0ihytgd7" path="res://scripts/ui/main_menu.gd" id="1_p5k32"]
 [ext_resource type="PackedScene" uid="uid://cafesc3kbe2q1" path="res://scenes/ui/components/menu_button.tscn" id="2_6t8x9"]
-[ext_resource type="Texture2D" uid="uid://7x5ahbeohl8p" path="res://assets/sprites/menu-background.png" id="2_whicr"]
+[ext_resource type="Texture2D" uid="uid://dj65dsf3qv430" path="res://assets/sprites/menu-background.png" id="2_whicr"]
 
 [node name="MainMenu" type="Control" unique_id=406454848]
 layout_mode = 3
@@ -51,7 +51,6 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Jogar"
-
 
 [node name="CreditsButton" parent="VBoxContainer/ButtonsContainer" unique_id=844264282 instance=ExtResource("2_6t8x9")]
 custom_minimum_size = Vector2(300, 50)
