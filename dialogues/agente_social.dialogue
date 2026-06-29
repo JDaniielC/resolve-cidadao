@@ -5,14 +5,14 @@
 
 ~ start
 Agente Social: Olá! Sou assistente social da prefeitura. Estamos aqui prestando apoio às famílias afetadas pelas enchentes.
-Você: Olá. A Dona Maria está com a casa cheia de rachaduras e sem condições de moradia. Ela está desesperada e precisa de ajuda.
-Agente Social: Entendo. É uma situação prioritária. Em casos onde a moradia é condenada ou fica em área de risco, o município oferece um auxílio financeiro chamado Aluguel Social.
-Você: Como funciona esse benefício?
-Agente Social: O Aluguel Social é um auxílio financeiro temporário pago mensalmente para que a família possa alugar uma moradia provisória segura.
-Agente Social: Para acessar, ela precisará de documentos de identificação, comprovante de residência e o laudo de interdição da Defesa Civil. Nós cuidamos do cadastro e da assistência social.
-Você: Entendi. Vou avisar a ela e explicar como funciona.
-Agente Social: Excelente! Agradeço por nos ajudar a identificar essa situação.
-=> END
+- Olá. A Dona Maria está com a casa cheia de rachaduras\n e sem condições de moradia. Ela está \n desesperada e precisa de ajuda.
+	Agente Social: Entendo. É uma situação prioritária. Em casos onde a moradia é condenada ou fica em área de risco, o município oferece um auxílio financeiro chamado Aluguel Social.
+	- Como funciona esse benefício?
+		Agente Social: O Aluguel Social é um auxílio financeiro temporário pago mensalmente para que a família possa alugar uma moradia provisória segura.
+		Agente Social: Para acessar, ela precisará de documentos de identificação, comprovante de residência e o laudo de interdição da Defesa Civil. Nós cuidamos do cadastro e da assistência social.
+		- Entendi. Vou avisar a ela e explicar como funciona.
+			Agente Social: Excelente! Agradeço por nos ajudar a identificar essa situação.
+			=> END
 
 ~ espera
 Agente Social: Olá! Já estamos cuidando do processo do Aluguel Social para Dona Maria.

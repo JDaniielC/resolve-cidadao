@@ -30,15 +30,7 @@ func is_player_near() -> bool:
 	return can_interact
 
 func trigger_dialogue():
-	# Carrega o recurso de diálogo
-	var dialogue_resource = load("res://dialogues/agente_social.dialogue")
-	# Chama o DialogueManager (Autoload global do addon) para mostrar o balão
-	if dialogue_resource:
-		var target_title = "start"
-		if GameManager.current_stage >= 11:
-			target_title = "espera"
-		DialogueManager.show_example_dialogue_balloon(dialogue_resource, target_title)
-		print("SocialAgent: Dialogue started using DialogueManager.")
+	pass
 
 func _on_dialogue_finished(_resource):
 	if _resource and _resource.resource_path.ends_with("agente_social.dialogue"):
@@ -61,7 +53,14 @@ func _update_npc_state():
 	visible = active
 	set_process(active)
 	set_physics_process(active)
-	
+
+	var dialogue_state = get_node_or_null("StateMachine/start_dialogue")
+	if dialogue_state:
+		if GameManager.current_stage >= 11:
+			dialogue_state.title = "espera"
+		else:
+			dialogue_state.title = "intro"
+
 	var collision = get_node_or_null("CollisionShape2D")
 	if collision:
 		collision.disabled = not active
