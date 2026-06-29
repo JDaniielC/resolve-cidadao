@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 	_panel = $Control/Panel
 	_color_rect = $Control/ColorRect
-	_back_button = $Control/Panel/VBoxContainer/BackButton
+	_back_button = $Control/Panel/VBoxContainer/BackButtonRow/BackButton
 
 	if not _panel or not _color_rect or not _back_button:
 		push_error("CreditsMenu: Essential nodes not found!")
