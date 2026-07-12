@@ -1,175 +1,131 @@
 # Resolve Cidadão 🏘️
 
-<img src="https://img.shields.io/badge/Godot_4.6+-blue?logo=godotengine&logoColor=white" alt="Godot 4.6+">
+<img src="https://img.shields.io/badge/Godot_4.6-blue?logo=godotengine&logoColor=white" alt="Godot 4.6">
 <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
 
-Um jogo educacional que simula decisões cívicas e direitos sociais em contextos de desastres naturais. Desenvolvido em Godot 4, **Resolve Cidadão** busca ensinar à população urbana como acessar seus direitos e serviços públicos durante crises.
+Jogo educacional narrativo (top-down 2D) sobre acesso a direitos sociais durante enchentes
+urbanas no Recife. O jogador é um cidadão comum: explora ruas alagadas, conversa com
+vizinhos, usa o celular para descobrir quais órgãos procurar, e toma decisões cujas
+consequências aparecem no medidor de satisfação da cidade.
 
-## 🎮 Sobre o Jogo
+Feito em **Godot 4.6**, exporta para **web** e é publicado no GitHub Pages a cada push na
+`main`.
 
-**Resolve Cidadão** é um jogo narrativo em perspectiva top-down inspirado em simuladores sociais. O jogador assume o papel de um cidadão durante eventos climáticos extremos (enchentes, alagamentos) na cidade do Recife e deve descobrir:
+## 🎯 Objetivo pedagógico
 
-- Como acessar direitos sociais e benefícios públicos
-- Quais órgãos procurar em situações de emergência
-- Consequências de decisões cívicas
-- A importância da informação e engajamento comunitário
+Ensinar, na prática e sem sermão:
 
-### 🎯 Objetivo Pedagógico
-
-Ensinar de forma leve e interativa sobre:
 - **Direitos do cidadão** durante desastres naturais
-- **Órgãos públicos** e suas funções (Defesa Civil, Prefeitura, Assistência Social)
-- **Políticas de proteção social** (aluguel social, abrigos de emergência)
-- **Impacto comunitário** e consequências sociais
+- **Órgãos públicos reais** e suas funções — Defesa Civil, COMPESA, Assistência Social
+- **Programas sociais reais** — aluguel social, abrigos de emergência
+- Que informação clara é, ela mesma, um direito
 
-## 📖 Primeira Missão: "A Chuva Não Para"
+O tom é leve e esperançoso, não denuncista. Não há game-over punitivo.
 
-A missão inicial é um tutorial que apresenta os principais sistemas do jogo:
+## 📖 Missões
 
-### Etapas
-1. **Controles básicos** - Movimento em rua alagada
-2. **Primeiro NPC** - Encontro com Dona Maria
-3. **Identificar necessidade** - Responder onde procurar ajuda
-4. **Desbloqueio do celular** - Sistema de menu e informações
-5. **Mapa e navegação** - Encontrar abrigo temporário
-6. **Passagem de tempo** - Clima muda, água baixa
-7. **Pós-enchente** - Lidar com consequências
-8. **Descobrir direito** - Qual programa ajuda?
-9. **Acesso a informações** - Como funciona aluguel social
-10. **Conclusão** - Satisfação aumenta, player aprende
+**Missão 01 — "A Chuva Não Para"** (tutorial). Apresenta movimento, diálogo com escolhas,
+o celular, o mapa, a passagem de tempo e o pós-enchente. NPC central: Dona Maria.
 
-### Mecânicas Apresentadas
-- Movimento e interação
-- Diálogos e escolhas múltiplas
-- Sistema de celular/menu
-- Navegação por mapa
-- Sistema de satisfação da cidade
-- Feedback educacional
+**Missão 02 — "Teimosia que Salva"**. NPCs Lucas e Seu Severino. Fluxo em
+`scripts/mission_02_flow.gd`, diálogos em `dialogues/missao_02/`.
 
-## 🎮 Sistemas Principais
+Roteiro completo em [`roteiro.md`](roteiro.md); os GDDs por missão em
+[`plan_1.md`](plan_1.md) e [`plan_2.md`](plan_2.md).
 
-### **Sistema de Diálogo**
-- Conversas com NPCs
-- Escolhas que afetam a narrativa
-- Banco de dados de diálogos estruturado
+## 🎮 Sistemas
 
-### **Sistema de Celular**
-- Registro de problemas na cidade
-- Contatos de órgãos públicos
-- Mapa interativo
-- Base de conhecimento (conceitos desbloqueáveis)
+| Sistema | Onde |
+| --- | --- |
+| **Diálogo** — conversas e escolhas que afetam a narrativa | `scripts/systems/dialogue_system.gd` + addon Dialogue Manager |
+| **Celular** — órgãos públicos, mapa, base de conhecimento | `scripts/ui/phone_menu.gd`, `scenes/ui/phone_menu.tscn` |
+| **Satisfação da cidade** — medidor que reflete as decisões | `scripts/autoloads/` (GameManager) |
+| **Clima e tempo** — chuva, alagamento, ciclo dia/noite | `scripts/systems/weather_controller.gd`, `screen_rain.gd`, `day_night_controller.gd` |
+| **Missão** — progresso, objetivos, avaliação final | `scripts/ui/mission_*`, `scripts/mission_02_flow.gd` |
+| **Save** | `scripts/SaveFileManager.gd`, `scripts/user_prefs.gd` — arquivo local, sem banco |
 
-### **Sistema de Satisfação**
-- Medidor que reflete qualidade de vida na cidade
-- Aumenta com boas decisões
-- Afeta desbloqueio de conteúdo
+**Mobile:** há joystick virtual (`scripts/ui/virtual_joystick.gd`) e a orientação do projeto
+é retrato.
 
-### **Sistema de Tempo**
-- Ciclo dia/noite
-- Eventos climáticos (chuva, enchentes)
-- Passagem de etapas narrativas
+**Idiomas:** pt-BR (base), en e it — `local/translations.csv`.
 
-## 🎨 Estilo Visual
+## 🏗️ Estrutura
 
-- **Perspectiva:** Top-down 2D
-- **Estilo:** Pixel art/sprites handcrafted
-- **Localização:** Recife (bairros como Coque, Brasília Teimosa)
-- **Tempo visual:** Contexto realista de enchentes urbanas
-
-## 🏗️ Estrutura do Projeto
-
-```tree
-resolve-cidadao/
-├── scenes/              # Cenas do jogo
-│   ├── levels/         # Missões e níveis
-│   ├── npcs/           # Personagens não-jogáveis
-│   ├── ui/             # Interface do usuário
-│   └── menus/          # Menus (start, settings)
-├── scripts/            # Lógica do jogo
-│   ├── characters/     # Scripts de personagens
-│   ├── systems/        # Sistemas principais
-│   ├── ui/             # Scripts de UI
-│   └── autoloads/      # Managers globais
-├── dialogues/          # Banco de diálogos
-├── entities/           # NPCs, inimigos, props
-├── assets/             # Arte e recursos
-├── tilesets/           # Tilesets para mapas
-└── particles/          # Efeitos de partículas
+```
+scenes/
+├── main_game.tscn
+├── levels/           rain_street, rain_street_ray, shelter, destructed_street, Level (template)
+├── npcs/             dona_maria, lucas, seu_severino, agente_social, assistente
+├── ui/               phone_menu, hud, choice_panel, dialogue_box
+│   └── menus/        main_menu, pause, credits, mission_complete, mission_assessment
+└── props/  system/
+scripts/
+├── autoloads/        Globals, GameManager, SceneManager, DataManager, Notifications, Popups
+├── systems/          dialogue_system, weather_controller, day_night_controller, screen_rain
+├── ui/               phone_menu, hud, pause_menu, virtual_joystick, mission_*
+└── state_machine/  characters/  checks/  data/
+dialogues/            missao_01/, missao_02/, agente_social, commons, start; balloons/
+entities/             prefabs reutilizáveis: player/, npcs/, animations/, hit_box, hurt_box
+components/           inventory, jumper, transfer, target_manager
+assets/               sprites/, ui/, fonts/, sfx/, effects/, shaders/
+tilesets/             abrigo, bairro-1, casas-1/2, pos-enchente, city_asset
+local/                translations.csv
 ```
 
-## 🚀 Começar a Jogar
+## 🚀 Rodar
 
-### Requisitos
-- Godot 4.4 ou superior (testado em 4.6.1)
-- Compatibilidade com GL
+Requisitos: **Godot 4.6** (CI usa 4.6.3), renderer **GL Compatibility**.
 
-### Instruções
 1. Clone o repositório
-2. Abra o projeto em Godot 4.6+
-3. Pressione Play (F5) ou use o botão Run
-4. A cena inicial é `main_game.tscn`
+2. Abra a pasta no Godot 4.6
+3. F5
 
-### Configuração
-- Adapte `project.godot` conforme necessário
-- Configure o nível inicial em `start_screen.tscn`
-- Diálogos estão em `dialogues/` (formato compatível com Dialogue Manager)
+A cena inicial é `scenes/ui/menus/main_menu.tscn` (definida em `project.godot`), **não**
+`main_game.tscn`.
 
-## 📋 Features Implementadas
+### Build web
 
-- ✅ Sistema de movimento e controles
-- ✅ Sistema de diálogo com múltiplas escolhas
-- ✅ HUD com objetivos e satisfação
-- ✅ Panel de escolhas
-- ✅ Interação com NPCs (proximidade)
-- ✅ Cenas de nível estruturadas
-- ✅ Animações básicas
+```bash
+godot --headless --path . --export-release "Web" dist/web/index.html
+```
 
-## 🔧 Em Desenvolvimento
+É o comando que a CI roda. `.github/workflows/deploy-web.yml` publica no GitHub Pages a
+cada push na `main`, e corta um release zipado nas tags `v*`.
 
-- UI do celular (mapa, órgãos públicos)
-- Sistema completo de missões
-- Mais NPCs e diálogos
-- Efeitos de clima e partículas
-- Sistema de satisfação funcional
-- Fase pós-enchente
+## 🎨 Estilo
 
-## 👨‍💻 Desenvolvimento
+Top-down 2D, pixel art, viewport 1280x720. Ambientação realista do Recife — os tilesets são
+de bairro alagado, casas e abrigo.
 
-**Autor:** José Daniel Silva do Carmo  
-**Licença:** MIT  
-**Engine:** Godot 4.6+  
-**Linguagem:** GDScript  
+## 🛠️ Base técnica
 
-## 🤝 Contribuições
+Fork do **Godot 2D Top-Down Template** de Stefano Mercadante (máquina de estados, áreas de
+interação, gerenciador de cenas). Addons: **Godot Dialogue Manager** (nathanhoad) e
+**Tile Bit Tools** (dandeliondino).
 
-Contribuições são bem-vindas! Se encontrar bugs, tiver sugestões de features educacionais ou quiser contribuir com arte/narrativa:
+Só GDScript — sem C#/.NET.
 
-1. Abra uma issue descrevendo a sugestão
-2. Faça fork e crie uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch e abra um Pull Request
+## 📌 Estado
 
-## 📚 Recursos Pedagógicos
+Duas missões jogáveis. Versionamento drifou: `project.godot` ainda diz `1.9.1` e o
+`CHANGELOG.md` para em 2025-05-25, apesar de um ano de commits desde então.
 
-Este jogo foi desenvolvido com foco em educação cidadã. Conceitos abordados:
+Documentação interna (`CLAUDE.md`, `DEVELOPMENT.md`) também está desatualizada em pontos —
+descreve o celular e o clima como não implementados, e uma árvore de diretórios
+(`assets/recife/`, `assets/characters/`, `scenes/levels/missao_01/`) que não existe. Confie
+neste README e no código.
 
-- Direitos constitucionais em situações de emergência
-- Acessibilidade a políticas sociais
-- Importância de informação clara para cidadãos
-- Responsabilidades do poder público
-- Solidariedade comunitária
+## 🤝 Contribuir
+
+Fluxo por PR. Abra uma issue descrevendo a ideia, faça fork, branch, PR.
+
+Commits: `feat:`, `fix:`, `docs:`, `refactor:`.
 
 ## 🙏 Créditos
 
-- **Godot Engine** - Engine
-- **Godot Dialogue Manager** by nathanhoad - Sistema de diálogos
-- **Godot 2D Top-Down Template** by Stefano Mercadante - Base arquitetural
-- **Tile Bit Tools** by dandeliondino - Ferramentas de tilemap
+- **Godot Engine**
+- **Godot Dialogue Manager** — nathanhoad
+- **Godot 2D Top-Down Template** — Stefano Mercadante
+- **Tile Bit Tools** — dandeliondino
 
-## 📝 Notas
-
-Este é um projeto em desenvolvimento ativo. A visão é criar uma série de missões educacionais que cobrem diferentes temas de cidadania e direitos sociais.
-
----
-
-**Sugestões, críticas e feedback são muito bem-vindos!**
+**Autor:** José Daniel Silva do Carmo · **Licença:** MIT
