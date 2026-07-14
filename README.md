@@ -22,16 +22,12 @@ Ensinar, na prática e sem sermão:
 
 O tom é leve e esperançoso, não denuncista. Não há game-over punitivo.
 
-## 📖 Missões
+## 📖 Missão
 
 **Missão 01 — "A Chuva Não Para"** (tutorial). Apresenta movimento, diálogo com escolhas,
 o celular, o mapa, a passagem de tempo e o pós-enchente. NPC central: Dona Maria.
 
-**Missão 02 — "Teimosia que Salva"**. NPCs Lucas e Seu Severino. Fluxo em
-`scripts/mission_02_flow.gd`, diálogos em `dialogues/missao_02/`.
-
-Roteiro completo em [`roteiro.md`](roteiro.md); os GDDs por missão em
-[`plan_1.md`](plan_1.md) e [`plan_2.md`](plan_2.md).
+Roteiro completo em [`roteiro.md`](roteiro.md); o GDD em [`plan_1.md`](plan_1.md).
 
 ## 🎮 Sistemas
 
@@ -41,7 +37,7 @@ Roteiro completo em [`roteiro.md`](roteiro.md); os GDDs por missão em
 | **Celular** — órgãos públicos, mapa, base de conhecimento | `scripts/ui/phone_menu.gd`, `scenes/ui/phone_menu.tscn` |
 | **Satisfação da cidade** — medidor que reflete as decisões | `scripts/autoloads/` (GameManager) |
 | **Clima e tempo** — chuva, alagamento, ciclo dia/noite | `scripts/systems/weather_controller.gd`, `screen_rain.gd`, `day_night_controller.gd` |
-| **Missão** — progresso, objetivos, avaliação final | `scripts/ui/mission_*`, `scripts/mission_02_flow.gd` |
+| **Missão** — progresso, objetivos, avaliação final | `scripts/ui/mission_*` |
 | **Save** | `scripts/SaveFileManager.gd`, `scripts/user_prefs.gd` — arquivo local, sem banco |
 
 **Mobile:** há joystick virtual (`scripts/ui/virtual_joystick.gd`) e a orientação do projeto
@@ -55,7 +51,7 @@ Roteiro completo em [`roteiro.md`](roteiro.md); os GDDs por missão em
 scenes/
 ├── main_game.tscn
 ├── levels/           rain_street, rain_street_ray, shelter, destructed_street, Level (template)
-├── npcs/             dona_maria, lucas, seu_severino, agente_social, assistente
+├── npcs/             dona_maria, agente_social, assistente
 ├── ui/               phone_menu, hud, choice_panel, dialogue_box
 │   └── menus/        main_menu, pause, credits, mission_complete, mission_assessment
 └── props/  system/
@@ -64,7 +60,7 @@ scripts/
 ├── systems/          dialogue_system, weather_controller, day_night_controller, screen_rain
 ├── ui/               phone_menu, hud, pause_menu, virtual_joystick, mission_*
 └── state_machine/  characters/  checks/  data/
-dialogues/            missao_01/, missao_02/, agente_social, commons, start; balloons/
+dialogues/            missao_01/, agente_social, commons, start; balloons/
 entities/             prefabs reutilizáveis: player/, npcs/, animations/, hit_box, hurt_box
 components/           inventory, jumper, transfer, target_manager
 assets/               sprites/, ui/, fonts/, sfx/, effects/, shaders/
@@ -105,16 +101,6 @@ interação, gerenciador de cenas). Addons: **Godot Dialogue Manager** (nathanho
 
 Só GDScript — sem C#/.NET.
 
-## 📌 Estado
-
-Duas missões jogáveis. Versionamento drifou: `project.godot` ainda diz `1.9.1` e o
-`CHANGELOG.md` para em 2025-05-25, apesar de um ano de commits desde então.
-
-Documentação interna (`CLAUDE.md`, `DEVELOPMENT.md`) também está desatualizada em pontos —
-descreve o celular e o clima como não implementados, e uma árvore de diretórios
-(`assets/recife/`, `assets/characters/`, `scenes/levels/missao_01/`) que não existe. Confie
-neste README e no código.
-
 ## 🤝 Contribuir
 
 Fluxo por PR. Abra uma issue descrevendo a ideia, faça fork, branch, PR.
@@ -123,9 +109,16 @@ Commits: `feat:`, `fix:`, `docs:`, `refactor:`.
 
 ## 🙏 Créditos
 
+- Hannah Rocha Masri
+- Flávio Henrique Miranda Junior
+- Rayhene Ranúzia Dantas de Arruda
+- José Daniel Silva do Carmo
+
+### Ferramentas e bases
+
 - **Godot Engine**
 - **Godot Dialogue Manager** — nathanhoad
 - **Godot 2D Top-Down Template** — Stefano Mercadante
 - **Tile Bit Tools** — dandeliondino
 
-**Autor:** José Daniel Silva do Carmo · **Licença:** MIT
+**Licença:** MIT
